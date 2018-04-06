@@ -1,4 +1,4 @@
 package presentation.frames;
 
-public class PacManPanel {
+public class GamePanel {
 }

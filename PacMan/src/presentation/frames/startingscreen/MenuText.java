@@ -1,4 +1,4 @@
-package presentation.frames.startingscreen1;
+package presentation.frames.startingscreen;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;

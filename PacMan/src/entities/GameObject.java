@@ -19,11 +19,7 @@ public abstract class GameObject {
     public void draw(Graphics2D g2d) {
         AffineTransform at = new AffineTransform();
         at.translate(position.getX(), position.getY());
-        at.scale((double)Game.getInstance().getMap().getTileWidth()/image.getWidth(),(double)Game.getInstance().getMap().getTileHeight()/image.getHeight());
-       /*
-        at.scale((double) Game.getInstance().getScreenWidth() / (Game.getInstance().getMap().getMapWidth() * Game.getInstance().getMap().getTileWidth()),
-                (double) Game.getInstance().getScreenHeight() / (Game.getInstance().getMap().getMapHeight() * Game.getInstance().getMap().getTileHeight()));
-     */
+        at.scale((double) Game.getInstance().getMap().getTileWidth() / image.getWidth(), (double) Game.getInstance().getMap().getTileHeight() / image.getHeight());
         g2d.drawImage(image, at, null);
     }
 

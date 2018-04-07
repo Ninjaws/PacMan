@@ -2,6 +2,7 @@ package presentation.frames;
 
 import data.Game;
 import entities.GameObject;
+import presentation.components.Camera;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,10 +14,14 @@ import java.awt.*;
 public class GamePanel extends JPanel {
 
     Game game;
+    Camera camera;
 
 
     public GamePanel() {
         game = Game.getInstance();
+        camera = new Camera();
+
+
         setBackground(Color.BLACK);
 
     }
@@ -26,9 +31,10 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
+        g2d.setTransform(camera.getTransform());
+
         game.getMap().draw(g2d);
 
-        g2d.setColor(Color.YELLOW);
         for (GameObject gameObject : game.getGameObjects()) {
             gameObject.draw(g2d);
         }

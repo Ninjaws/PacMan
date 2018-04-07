@@ -76,10 +76,6 @@ public class TileLayer extends Layer {
     public void draw(Graphics2D g2d) {
         if (isVisible()) {
             AffineTransform at = new AffineTransform();
-            /*
-            at.scale((double) Game.getInstance().getScreenWidth() / (map.getMapWidth() * map.getTileWidth()),
-                    (double) Game.getInstance().getScreenHeight() / (map.getMapHeight() * map.getTileHeight()));
-            */
             g2d.drawImage(image, at, null);
         }
     }

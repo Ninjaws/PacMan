@@ -1,5 +1,6 @@
 package tiled;
 
+import javax.json.JsonObject;
 import java.awt.*;
 
 /**
@@ -7,10 +8,14 @@ import java.awt.*;
  */
 
 public abstract class Layer {
-    private String name;
-    private String type;
-    private int x;
-    private int y;
+  private boolean visible;
+    protected Layer(JsonObject layer){
+    visible = layer.getBoolean("visible");
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
 
     public abstract void draw(Graphics2D g2d);
 

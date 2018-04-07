@@ -14,7 +14,7 @@ public class PacManFrame extends JFrame {
 
         buildPanel();
 
-        setSize(800, 80);
+        setSize(800, 800);
         setVisible(true);
     }
 

@@ -16,6 +16,7 @@ public class GamePanel extends JPanel {
 
     public GamePanel(){
         game = Game.getInstance();
+        setBackground(Color.BLACK);
     }
 
 

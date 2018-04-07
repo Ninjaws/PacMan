@@ -16,7 +16,7 @@ public class StartUpScreen extends JPanel {
     private Font standardPacManFont2;
     public StartUpScreen() {
         try {
-            standardPacManFont = Font.createFont(Font.TRUETYPE_FONT, new File("Resources\\Fonts\\crackman front.ttf"));
+            standardPacManFont = Font.createFont(Font.TRUETYPE_FONT, new File("Resources\\fonts\\crackman front.ttf"));
             GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
             graphicsEnvironment.registerFont(standardPacManFont);
         } catch (Exception e) {

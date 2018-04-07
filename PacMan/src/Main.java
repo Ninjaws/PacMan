@@ -1,5 +1,21 @@
+import data.Game;
+import presentation.frames.PacManFrame;
+import tiled.Map;
+
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("We've been expecting you.");
+
+        try{
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+        Game.getInstance().setMap(new Map("/maps/testMap.json"));
+
+        PacManFrame pacManFrame = new PacManFrame();
     }
 }

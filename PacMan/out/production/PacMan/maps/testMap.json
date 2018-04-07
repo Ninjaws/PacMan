@@ -2,13 +2,144 @@
  "infinite":false,
  "layers":[
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 69, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 66, 65, 65, 65, 65, 0, 0, 65, 0, 69, 67, 69, 0, 65, 0, 0, 65, 65, 65, 65, 66, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 65, 65, 65, 0, 0, 65, 0, 0, 65, 65, 65, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 65, 65, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 65, 65, 65, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 69, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 65, 65, 65, 65, 65, 0, 0, 65, 0, 69, 69, 69, 0, 65, 0, 0, 65, 65, 65, 65, 65, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 65, 65, 65, 0, 0, 65, 0, 0, 65, 65, 65, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 65, 65, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 65, 65, 65, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":21,
          "name":"data",
          "opacity":1,
          "type":"tilelayer",
          "visible":false,
          "width":21,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "name":"objects layer",
+         "objects":[
+                {
+                 "height":32,
+                 "id":2,
+                 "name":"Start Ghost 1",
+                 "rotation":0,
+                 "type":"Start Ghost",
+                 "visible":true,
+                 "width":32,
+                 "x":320,
+                 "y":256
+                }, 
+                {
+                 "height":32,
+                 "id":3,
+                 "name":"Start Ghost 3",
+                 "rotation":0,
+                 "type":"Start Ghost",
+                 "visible":true,
+                 "width":32,
+                 "x":320,
+                 "y":320
+                }, 
+                {
+                 "height":32,
+                 "id":4,
+                 "name":"Start Ghost 4",
+                 "rotation":0,
+                 "type":"Start Ghost",
+                 "visible":true,
+                 "width":32,
+                 "x":352,
+                 "y":320
+                }, 
+                {
+                 "height":32,
+                 "id":5,
+                 "name":"Start Ghost 2",
+                 "rotation":0,
+                 "type":"Start Ghost",
+                 "visible":true,
+                 "width":32,
+                 "x":288,
+                 "y":320
+                }, 
+                {
+                 "height":32,
+                 "id":6,
+                 "name":"Start PacMan",
+                 "rotation":0,
+                 "type":"Start PacMan",
+                 "visible":true,
+                 "width":32,
+                 "x":320,
+                 "y":384
+                }, 
+                {
+                 "height":32,
+                 "id":7,
+                 "name":"Loop 1 Entrance",
+                 "rotation":0,
+                 "type":"Loop",
+                 "visible":true,
+                 "width":32,
+                 "x":0,
+                 "y":320
+                }, 
+                {
+                 "height":32,
+                 "id":8,
+                 "name":"Loop 1 Exit",
+                 "rotation":0,
+                 "type":"Loop",
+                 "visible":true,
+                 "width":32,
+                 "x":640,
+                 "y":320
+                }, 
+                {
+                 "height":32,
+                 "id":10,
+                 "name":"Scatter Corner 1",
+                 "rotation":0,
+                 "type":"Scatter Corner",
+                 "visible":true,
+                 "width":32,
+                 "x":32,
+                 "y":32
+                }, 
+                {
+                 "height":32,
+                 "id":11,
+                 "name":"Scatter Corner 2",
+                 "rotation":0,
+                 "type":"Scatter Corner",
+                 "visible":true,
+                 "width":32,
+                 "x":608,
+                 "y":32
+                }, 
+                {
+                 "height":32,
+                 "id":12,
+                 "name":"Scatter Corner 3",
+                 "rotation":0,
+                 "type":"Scatter Corner",
+                 "visible":true,
+                 "width":32,
+                 "x":32,
+                 "y":608
+                }, 
+                {
+                 "height":32,
+                 "id":13,
+                 "name":"Scatter Corner 4",
+                 "rotation":0,
+                 "type":"Scatter Corner",
+                 "visible":true,
+                 "width":32,
+                 "x":608,
+                 "y":608
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -23,7 +154,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1,
+ "nextobjectid":14,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.1.4",
@@ -65,202 +196,127 @@
             {
              "0":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":true
                 },
              "1":
                 {
-                 "loop1":true,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "10":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "11":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "12":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "13":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "14":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "15":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "16":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "17":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "18":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "19":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "2":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":true,
                  "walkable":false
                 },
              "20":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "21":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "22":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "23":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "24":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "3":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "4":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":true,
-                 "starttile":false,
                  "walkable":false
                 },
              "5":
                 {
-                 "loop1":false,
-                 "loop2":true,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "6":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "7":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "8":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 },
              "9":
                 {
-                 "loop1":false,
-                 "loop2":false,
                  "startarea":false,
-                 "starttile":false,
                  "walkable":false
                 }
             },
@@ -268,202 +324,127 @@
             {
              "0":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "1":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "10":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "11":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "12":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "13":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "14":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "15":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "16":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "17":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "18":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "19":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "2":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "20":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "21":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "22":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "23":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "24":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "3":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "4":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "5":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "6":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "7":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "8":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 },
              "9":
                 {
-                 "loop1":"bool",
-                 "loop2":"bool",
                  "startarea":"bool",
-                 "starttile":"bool",
                  "walkable":"bool"
                 }
             },

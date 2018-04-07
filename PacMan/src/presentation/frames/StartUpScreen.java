@@ -3,6 +3,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
+/**
+ * @author Jordy van Raalte
+ */
+
 public class StartUpScreen extends JPanel {
     public static void main(String[] args) {
         JFrame frame = new JFrame();

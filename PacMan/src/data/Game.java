@@ -12,6 +12,9 @@ public class Game {
 
     private Map map;
 
+    private int screenWidth;
+    private int screenHeight;
+
     private Game(){
 
     }
@@ -32,5 +35,18 @@ public class Game {
 
     public void setMap(Map map) {
         this.map = map;
+    }
+
+    public void setScreenDimensions(int width, int height){
+        this.screenHeight = height;
+        this.screenWidth = width;
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
     }
 }

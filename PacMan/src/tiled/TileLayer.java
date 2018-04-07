@@ -1,5 +1,8 @@
 package tiled;
 
+import data.Game;
+import javafx.stage.Screen;
+
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import java.awt.*;
@@ -71,8 +74,11 @@ public class TileLayer extends Layer {
 
     @Override
     public void draw(Graphics2D g2d) {
-      //  if (isVisible()) {
-            g2d.drawImage(image, new AffineTransform(), null);
-     //   }
+        if (isVisible()) {
+            AffineTransform at = new AffineTransform();
+            at.scale((double) Game.getInstance().getScreenWidth() / (map.getMapWidth() * map.getTileWidth()),
+                    (double) Game.getInstance().getScreenHeight() / (map.getMapHeight() * map.getTileHeight()));
+            g2d.drawImage(image, at, null);
+        }
     }
 }

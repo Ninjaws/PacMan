@@ -17,6 +17,7 @@ public class GamePanel extends JPanel {
     public GamePanel(){
         game = Game.getInstance();
         setBackground(Color.BLACK);
+
     }
 
 
@@ -25,7 +26,5 @@ public class GamePanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
 
         game.getMap().draw(g2d);
-
-
     }
 }

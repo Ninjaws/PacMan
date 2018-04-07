@@ -21,7 +21,7 @@ public class Map {
     private int tileWidth;
 
     private java.util.Map<Integer, Tile> tiles = new TreeMap<>();
-    private ArrayList<Layer> layers = new ArrayList();
+    private ArrayList<Layer> layers = new ArrayList<>();
 
     private boolean[][] collisionlayer;
 

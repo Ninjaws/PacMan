@@ -41,7 +41,7 @@ public class TileLayer extends Layer {
 
                 if (index > 0) {
                     Tile tile = map.getTiles().get(index);
-                    if (tile.isWalkable()) {
+                    if (tile.isWalkable() || tile.isStartArea()) {
                         map.getCollisionlayer()[y][x] = true;
                     }
                 }

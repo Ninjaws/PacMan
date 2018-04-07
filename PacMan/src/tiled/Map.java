@@ -67,10 +67,10 @@ public class Map {
                         if (properties != null) {
                             Tile tile = tiles.get(index);
                             if (properties.containsKey("walkable")) {
-                                tile.setWalkable(true);
+                                tile.setWalkable(properties.getBoolean("walkable"));
                             }
                             if (properties.containsKey("startarea")) {
-                                tile.setStartArea(true);
+                                tile.setStartArea(properties.getBoolean("startarea"));
                             }
                         }
                         index++;
@@ -93,6 +93,18 @@ public class Map {
             }
 
         }
+/*
+        for(int row = 0; row < mapHeight; row ++){
+            for(int col = 0; col < mapWidth; col++){
+
+                if(collisionlayer[row][col])
+                    System.out.print(0);
+                else
+                    System.out.print(1);
+            }
+            System.out.println("");
+        }
+*/
 
 
     }

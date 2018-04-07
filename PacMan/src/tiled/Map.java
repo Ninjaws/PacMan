@@ -1,7 +1,5 @@
 package tiled;
-
 import javax.json.*;
-
 public class Map {
 
 
@@ -19,8 +17,4 @@ public class Map {
     private int tileWidth;
     private String type;
     private int width;
-
-    public Map() {
-        Json.createArrayBuilder();
-    }
 }

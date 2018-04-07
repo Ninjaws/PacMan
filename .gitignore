@@ -11,6 +11,7 @@
 .mtj.tmp/
 
 # Package Files #
+*.jar
 *.war
 *.ear
 *.zip
@@ -18,11 +19,9 @@
 *.rar
 
 # Project Files 
-out/
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/**/uiDesigner.xml
-.idea/dictionaries
+*.out/
+workspace.xml
+tasks.xml
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*

@@ -5,6 +5,7 @@ import entities.PacMan;
 import tiled.Map;
 
 import javax.imageio.ImageIO;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        GameObject pacMan = new PacMan(image);
+        GameObject pacMan = new PacMan(image, 52,52, new Point2D.Double(10*32,12*32));
 
         gameObjects.add(pacMan);
     }

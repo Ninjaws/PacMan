@@ -1,4 +1,4 @@
-package presentation.frames.startingscreen;
+package presentation.frames.startingscreen1;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

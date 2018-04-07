@@ -1,4 +1,12 @@
 package entities.ghosts;
 
-public abstract class Ghost {
+import entities.GameObject;
+
+import java.awt.image.BufferedImage;
+
+public abstract class Ghost extends GameObject {
+
+    public Ghost(BufferedImage image) {
+        super(image);
+    }
 }

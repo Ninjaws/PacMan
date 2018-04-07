@@ -1,6 +1,7 @@
 package presentation.frames;
 
 import data.Game;
+import entities.GameObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,17 +15,23 @@ public class GamePanel extends JPanel {
     Game game;
 
 
-    public GamePanel(){
+    public GamePanel() {
         game = Game.getInstance();
         setBackground(Color.BLACK);
 
     }
 
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
 
         game.getMap().draw(g2d);
+
+        g2d.setColor(Color.YELLOW);
+        for (GameObject gameObject : game.getGameObjects()) {
+            gameObject.draw(g2d);
+        }
+
     }
 }

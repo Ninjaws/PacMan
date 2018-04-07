@@ -23,7 +23,6 @@ public class PacManFrame extends JFrame {
         addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent ev) {
                 Game.getInstance().setScreenDimensions(getContentPane().getSize().width, getContentPane().getSize().height);
-                repaint();
             }
         });
 

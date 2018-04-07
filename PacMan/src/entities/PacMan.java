@@ -1,4 +1,10 @@
 package entities;
 
-public class PacMan {
+import java.awt.image.BufferedImage;
+
+public class PacMan extends GameObject {
+    public PacMan(BufferedImage image) {
+        super(image);
+    }
+
 }

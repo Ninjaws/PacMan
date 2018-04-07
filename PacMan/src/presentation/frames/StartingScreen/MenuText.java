@@ -1,6 +1,4 @@
-package presentation.frames.StartingScreen;
-
-import javafx.scene.paint.Color;
+package presentation.frames.startingscreen;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;

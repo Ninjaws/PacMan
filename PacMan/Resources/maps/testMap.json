@@ -24,8 +24,8 @@
                  "type":"Start Ghost",
                  "visible":true,
                  "width":32,
-                 "x":32,
-                 "y":32
+                 "x":320,
+                 "y":256
                 }, 
                 {
                  "height":32,
@@ -35,8 +35,8 @@
                  "type":"Start Ghost",
                  "visible":true,
                  "width":32,
-                 "x":32,
-                 "y":608
+                 "x":320,
+                 "y":320
                 }, 
                 {
                  "height":32,
@@ -46,8 +46,8 @@
                  "type":"Start Ghost",
                  "visible":true,
                  "width":32,
-                 "x":608,
-                 "y":608
+                 "x":352,
+                 "y":320
                 }, 
                 {
                  "height":32,
@@ -57,8 +57,8 @@
                  "type":"Start Ghost",
                  "visible":true,
                  "width":32,
-                 "x":608,
-                 "y":32
+                 "x":288,
+                 "y":320
                 }, 
                 {
                  "height":32,
@@ -69,7 +69,7 @@
                  "visible":true,
                  "width":32,
                  "x":320,
-                 "y":320
+                 "y":384
                 }, 
                 {
                  "height":32,
@@ -92,6 +92,50 @@
                  "width":32,
                  "x":640,
                  "y":320
+                }, 
+                {
+                 "height":32,
+                 "id":10,
+                 "name":"Scatter Corner 1",
+                 "rotation":0,
+                 "type":"Scatter Corner",
+                 "visible":true,
+                 "width":32,
+                 "x":32,
+                 "y":32
+                }, 
+                {
+                 "height":32,
+                 "id":11,
+                 "name":"Scatter Corner 2",
+                 "rotation":0,
+                 "type":"Scatter Corner",
+                 "visible":true,
+                 "width":32,
+                 "x":608,
+                 "y":32
+                }, 
+                {
+                 "height":32,
+                 "id":12,
+                 "name":"Scatter Corner 3",
+                 "rotation":0,
+                 "type":"Scatter Corner",
+                 "visible":true,
+                 "width":32,
+                 "x":32,
+                 "y":608
+                }, 
+                {
+                 "height":32,
+                 "id":13,
+                 "name":"Scatter Corner 4",
+                 "rotation":0,
+                 "type":"Scatter Corner",
+                 "visible":true,
+                 "width":32,
+                 "x":608,
+                 "y":608
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -110,7 +154,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":10,
+ "nextobjectid":14,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.1.4",

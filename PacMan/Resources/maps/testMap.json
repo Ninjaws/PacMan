@@ -2,7 +2,7 @@
  "infinite":false,
  "layers":[
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 69, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 65, 65, 65, 65, 65, 0, 0, 65, 0, 69, 69, 69, 0, 65, 0, 0, 65, 65, 65, 65, 65, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 65, 65, 65, 0, 0, 65, 0, 0, 65, 65, 65, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 65, 65, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 65, 65, 65, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 69, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 70, 65, 65, 65, 65, 0, 0, 65, 0, 69, 69, 69, 0, 65, 0, 0, 65, 65, 65, 65, 70, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 65, 65, 65, 0, 0, 65, 0, 0, 65, 65, 65, 65, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 65, 65, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 65, 65, 65, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 65, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 65, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 65, 0, 0, 65, 0, 0, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":21,
          "name":"data",
          "opacity":1,
@@ -196,126 +196,151 @@
             {
              "0":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":true
                 },
              "1":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "10":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "11":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "12":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "13":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "14":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "15":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "16":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "17":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "18":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "19":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "2":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "20":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "21":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "22":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "23":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "24":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "3":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "4":
                 {
+                 "loop":false,
                  "startarea":true,
                  "walkable":false
                 },
              "5":
                 {
+                 "loop":true,
                  "startarea":false,
                  "walkable":false
                 },
              "6":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "7":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "8":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 },
              "9":
                 {
+                 "loop":false,
                  "startarea":false,
                  "walkable":false
                 }
@@ -324,126 +349,151 @@
             {
              "0":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "1":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "10":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "11":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "12":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "13":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "14":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "15":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "16":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "17":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "18":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "19":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "2":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "20":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "21":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "22":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "23":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "24":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "3":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "4":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "5":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "6":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "7":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "8":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "9":
                 {
+                 "loop":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 }

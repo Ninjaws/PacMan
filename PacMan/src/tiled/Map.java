@@ -91,8 +91,12 @@ public class Map {
             if (layers.getJsonObject(i).getString("type").equals("tilelayer")) {
                 this.layers.add(new TileLayer(layers.getJsonObject(i), this));
             }
+            if(layers.getJsonObject(i).getString("type").equals("objectgroup")){
+                this.layers.add(new ObjectLayer(layers.getJsonObject(i), this));
+            }
 
         }
+        System.out.println(layers.size());
 /*
         for(int row = 0; row < mapHeight; row ++){
             for(int col = 0; col < mapWidth; col++){
@@ -139,4 +143,7 @@ public class Map {
         }
     }
 
+    public ArrayList<Layer> getLayers() {
+        return layers;
+    }
 }

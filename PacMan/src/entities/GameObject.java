@@ -7,13 +7,17 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
+/**
+ * @author Ian Vink
+ */
+
 public abstract class GameObject {
     private BufferedImage image;
     private Point2D position;
 
-    public GameObject(BufferedImage image) {
+    public GameObject(BufferedImage image, Point2D position) {
         this.image = image;
-        position = new Point2D.Double(0, 0);
+        this.position = position;
     }
 
     public void draw(Graphics2D g2d) {

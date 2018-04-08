@@ -1,14 +1,11 @@
 package entities;
 
-import data.Game;
+import entities.GameObject;
 
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
-
-
-public class PacMan extends ActiveGameObject {
-
+public class Ghost extends ActiveGameObject {
 
     /**
      * This constructor also contains de sprite width and height, used for spritecycling
@@ -18,7 +15,7 @@ public class PacMan extends ActiveGameObject {
      * @param spriteWidth  The width of the individual sprites
      * @param spriteHeight The height of the individual sprites
      */
-    public PacMan(BufferedImage image, Point2D position, int spriteWidth, int spriteHeight) {
+    public Ghost(BufferedImage image, Point2D position, int spriteWidth, int spriteHeight) {
         super(image, position, spriteWidth, spriteHeight);
     }
 }

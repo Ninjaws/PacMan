@@ -2,10 +2,12 @@ package data;
 
 import entities.GameObject;
 import entities.PacMan;
+import entities.Ghost;
 import tiled.Map;
+import tiled.ObjectLayer;
 
 import javax.imageio.ImageIO;
-import java.awt.geom.Point2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ public class Game {
     private int screenHeight;
 
     private Game() {
-        addGameObjects();
+
     }
 
     public static Game getInstance() {
@@ -37,16 +39,37 @@ public class Game {
     }
 
 
-    private void addGameObjects() {
+    public void setGameObjects() {
+
+        ObjectLayer objLayer = (ObjectLayer) map.getLayers().stream()
+                .filter(layer -> layer instanceof ObjectLayer)
+                .findFirst()
+                .get();
+
+
         BufferedImage image = null;
         try {
             image = ImageIO.read(getClass().getResource("/textures/pacman.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        GameObject pacMan = new PacMan(image, 52,52, new Point2D.Double(10*32,12*32));
+        GameObject pacMan = new PacMan(image, objLayer.getStartPosPacMan(), 52, 52);
 
         gameObjects.add(pacMan);
+
+
+        image = null;
+        try {
+            image = ImageIO.read(getClass().getResource("/textures/ghost.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        for (Point startPosGhost : objLayer.getStartPosGhosts()) {
+            gameObjects.add(new Ghost(image, startPosGhost, 52, 52));
+        }
+
     }
 
 

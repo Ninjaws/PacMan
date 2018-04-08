@@ -14,6 +14,8 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(new Dimension(800,800));
+        frame.setLocation((int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2) - (frame.getWidth() / 2),
+                (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2) - (frame.getHeight() / 2));
         frame.setContentPane(new StartUpScreen());
         frame.setVisible(true);
     }
@@ -22,7 +24,7 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
     private ArrayList<MenuText> menuTexts = new ArrayList<>();
     public StartUpScreen() {
         try {
-            standardPacManFont = Font.createFont(Font.TRUETYPE_FONT, new File(getClass().getResource("/fonts/crackman front.ttf").toURI()));
+            standardPacManFont = Font.createFont(Font.TRUETYPE_FONT, new File(getClass().getResource("/Fonts/crackmanfront.ttf").toURI()));
             GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
             graphicsEnvironment.registerFont(standardPacManFont);
         } catch (Exception e) {

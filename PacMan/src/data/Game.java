@@ -10,6 +10,7 @@ import tiled.TileLayer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -112,7 +113,8 @@ public class Game {
         return gameObjects.stream()
                 .filter(object -> object instanceof PacMan)
                 .map(pacman -> (PacMan) pacman)
-                .findFirst().get();
+                .findFirst()
+                .orElse(null);
     }
 
     public List<Ghost> getGhosts() {
@@ -124,10 +126,27 @@ public class Game {
 
 
     public TileLayer getDataLayer() {
-        return map.getLayers().stream().filter(layer -> layer instanceof TileLayer)
+        return map.getLayers().stream()
+                .filter(layer -> layer instanceof TileLayer)
                 .map(tilelayer -> (TileLayer) tilelayer)
                 .filter(tileLayer -> tileLayer.getName().equals("data"))
                 .findFirst()
-                .get();
+                .orElse(null);
+    }
+
+    private ObjectLayer getObjectsLayer() {
+        return map.getLayers().stream()
+                .filter(layer -> layer instanceof ObjectLayer)
+                .map(objectlayer -> (ObjectLayer) objectlayer)
+                .filter(objectlayer -> objectlayer.getName().equals("objects layer"))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Loop getLoop(Point mapPos) {
+        return getObjectsLayer().getLoops().stream()
+                .filter(loop -> loop.getEntrance().equals(mapPos) || loop.getExit().equals(mapPos))
+                .findFirst()
+                .orElse(null);
     }
 }

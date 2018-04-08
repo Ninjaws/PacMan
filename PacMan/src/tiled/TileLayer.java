@@ -47,13 +47,28 @@ public class TileLayer extends Layer {
 
                 if (index > 0) {
                     Tile tile = map.getTiles().get(index);
-                    if (tile.isWalkable() || tile.isStartArea()) {
+                    if (tile.isWalkable()) {
                         map.getCollisionlayer()[y][x] = true;
+                    }
+                    else if(tile.isStartArea()){
+                        map.getStartArealayer()[y][x] = true;
+                    }
+                    else if(tile.isLoop()){
+                        map.getLooplayer()[y][x] = true;
                     }
                 }
                 i++;
             }
         }
+/*
+        for(int row = 0; row < map.getLooplayer().length;row++){
+            for(int col= 0; col < map.getLooplayer()[0].length; col++){
+                System.out.print(map.getLooplayer()[row][col]);
+            }
+            System.out.println("");
+        }
+        */
+
         image = createImage();
     }
 

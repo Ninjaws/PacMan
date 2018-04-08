@@ -24,6 +24,8 @@ public class TileLayer extends Layer {
 
     private BufferedImage image;
 
+    private String name;
+
     public TileLayer(JsonObject layer, Map map) {
         super(layer);
 
@@ -34,6 +36,7 @@ public class TileLayer extends Layer {
 
         tiles = new int[layerHeight][layerWidth];
 
+        name = layer.getString("name");
 
         int i = 0;
         JsonArray data = layer.getJsonArray("data");
@@ -78,5 +81,13 @@ public class TileLayer extends Layer {
             AffineTransform at = new AffineTransform();
             g2d.drawImage(image, at, null);
         }
+    }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
+    public String getName() {
+        return name;
     }
 }

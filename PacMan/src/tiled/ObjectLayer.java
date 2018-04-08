@@ -29,14 +29,10 @@ public class ObjectLayer extends Layer {
                     startPosGhosts.add(new Point(currentObject.getInt("x"), currentObject.getInt("y")));
                     break;
                 case "Loop":
-                    
+
 
             }
         }
-
-        System.out.println("PacMan start: " + startPosPacMan);
-
-
     }
 
     public Point getStartPosPacMan() {

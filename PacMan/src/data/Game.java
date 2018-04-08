@@ -1,16 +1,20 @@
 package data;
 
+import entities.active_objects.ActiveGameObject;
 import entities.GameObject;
-import entities.PacMan;
-import entities.Ghost;
+import entities.active_objects.PacMan;
+import entities.active_objects.Ghost;
 import tiled.Map;
 import tiled.ObjectLayer;
+import tiled.TileLayer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Ian Vink
@@ -53,7 +57,7 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        GameObject pacMan = new PacMan(image, objLayer.getStartPosPacMan(), 52, 52);
+        GameObject pacMan = new PacMan(image, objLayer.getStartPosPacMan(), 25, 25, 52, 52, 0.1);
 
         gameObjects.add(pacMan);
 
@@ -65,9 +69,8 @@ public class Game {
             e.printStackTrace();
         }
 
-
         for (Point startPosGhost : objLayer.getStartPosGhosts()) {
-            gameObjects.add(new Ghost(image, startPosGhost, 52, 52));
+            gameObjects.add(new Ghost(image, startPosGhost, 25, 25, 52, 52, 0.5));
         }
 
     }
@@ -96,5 +99,35 @@ public class Game {
 
     public ArrayList<GameObject> getGameObjects() {
         return gameObjects;
+    }
+
+    public List<ActiveGameObject> getActiveGameObjects() {
+        return gameObjects.stream()
+                .filter(object -> object instanceof ActiveGameObject)
+                .map(activeobj -> (ActiveGameObject) activeobj)
+                .collect(Collectors.toList());
+    }
+
+    public PacMan getPacMan() {
+        return gameObjects.stream()
+                .filter(object -> object instanceof PacMan)
+                .map(pacman -> (PacMan) pacman)
+                .findFirst().get();
+    }
+
+    public List<Ghost> getGhosts() {
+        return gameObjects.stream()
+                .filter(object -> object instanceof Ghost)
+                .map(ghost -> (Ghost) ghost)
+                .collect(Collectors.toList());
+    }
+
+
+    public TileLayer getDataLayer() {
+        return map.getLayers().stream().filter(layer -> layer instanceof TileLayer)
+                .map(tilelayer -> (TileLayer) tilelayer)
+                .filter(tileLayer -> tileLayer.getName().equals("data"))
+                .findFirst()
+                .get();
     }
 }

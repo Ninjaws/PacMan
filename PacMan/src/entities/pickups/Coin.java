@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 public class Coin extends Pickup {
 
-    public Coin(BufferedImage image, Point2D position) {
-        super(image, position);
+    public Coin(BufferedImage image, Point2D position, int objectWidth, int objectHeight) {
+        super(image, position, objectWidth, objectHeight);
     }
 }

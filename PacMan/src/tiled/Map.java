@@ -3,6 +3,7 @@ package tiled;
 import javax.imageio.ImageIO;
 import javax.json.*;
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -96,21 +97,6 @@ public class Map {
             }
 
         }
-        System.out.println(layers.size());
-/*
-        for(int row = 0; row < mapHeight; row ++){
-            for(int col = 0; col < mapWidth; col++){
-
-                if(collisionlayer[row][col])
-                    System.out.print(0);
-                else
-                    System.out.print(1);
-            }
-            System.out.println("");
-        }
-*/
-
-
     }
 
     public java.util.Map<Integer, Tile> getTiles() {
@@ -145,5 +131,14 @@ public class Map {
 
     public ArrayList<Layer> getLayers() {
         return layers;
+    }
+
+    /**
+     * Takes the actual position and returns the tile you are standing on
+     * @param position The actual position
+     * @return The tile that you are standing on
+     */
+    public Point getTileMapPos(Point2D position){
+        return new Point((int)position.getX()/tileWidth,(int)position.getY()/tileHeight);
     }
 }

@@ -15,6 +15,7 @@ public class ObjectLayer extends Layer {
     private Point startPosPacMan;
     private ArrayList<Point> startPosGhosts = new ArrayList<>();
     private ArrayList<Loop> loops = new ArrayList<Loop>();
+    private ArrayList<Point> scatterCorners = new ArrayList<>();
 
     private String name;
 
@@ -37,14 +38,16 @@ public class ObjectLayer extends Layer {
                 case "Start Ghost":
                     startPosGhosts.add(new Point(currentObject.getInt("x"), currentObject.getInt("y")));
                     break;
+                case "Scatter Corner":
+                    scatterCorners.add(new Point(currentObject.getInt("x"),currentObject.getInt("y")));
+                    break;
                 case "Loop":
                     if (loops.stream()
                             .anyMatch(loop -> loop.getName().equals(currentObject.getString("name").substring(0, 6))))
                         continue;
 
 
-                    JsonObject obj = null;
-                    obj = data.stream()
+                    JsonObject obj = data.stream()
                             .map(object -> (JsonObject) object)
                             .filter(object -> object.getString("type").equals("Loop"))
                             .filter(object -> !object.getString("name").equals(currentObject.getString("name")))
@@ -62,8 +65,6 @@ public class ObjectLayer extends Layer {
                     break;
             }
         }
-
-        loops.forEach(loop -> System.out.println(loop.getEntrance() + " " + loop.getExit()));
     }
 
     public Point getStartPosPacMan() {
@@ -80,6 +81,10 @@ public class ObjectLayer extends Layer {
 
     public ArrayList<Loop> getLoops() {
         return loops;
+    }
+
+    public ArrayList<Point> getScatterCorners() {
+        return scatterCorners;
     }
 
     @Override

@@ -149,4 +149,8 @@ public class Game {
                 .findFirst()
                 .orElse(null);
     }
+
+    public List<Point> getScatterCorners(){
+        return getObjectsLayer().getScatterCorners();
+    }
 }

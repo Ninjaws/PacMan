@@ -11,11 +11,13 @@ public class Tile {
 private BufferedImage image;
 private boolean walkable;
 private boolean startArea;
+private boolean loop;
 
 Tile(BufferedImage image){
     this.image = image;
     this.walkable = false;
     this.startArea = false;
+    this.loop = false;
 }
 
     public BufferedImage getImage() {
@@ -36,5 +38,13 @@ Tile(BufferedImage image){
 
     public void setStartArea(boolean startArea) {
         this.startArea = startArea;
+    }
+
+    public boolean isLoop() {
+        return loop;
+    }
+
+    public void setLoop(boolean loop) {
+        this.loop = loop;
     }
 }

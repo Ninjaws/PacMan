@@ -25,6 +25,8 @@ public class Map {
     private ArrayList<Layer> layers = new ArrayList<>();
 
     private boolean[][] collisionlayer;
+    private boolean[][] startArealayer;
+    private boolean[][] looplayer;
 
 
     public Map(String filename) {
@@ -73,6 +75,9 @@ public class Map {
                             if (properties.containsKey("startarea")) {
                                 tile.setStartArea(properties.getBoolean("startarea"));
                             }
+                            if(properties.containsKey("loop")){
+                                tile.setLoop(properties.getBoolean("loop"));
+                            }
                         }
                         index++;
                     }
@@ -85,6 +90,8 @@ public class Map {
 
 
         collisionlayer = new boolean[mapHeight][mapWidth];
+        startArealayer = new boolean[mapHeight][mapWidth];
+        looplayer = new boolean[mapHeight][mapWidth];
 
         JsonArray layers = map.getJsonArray("layers");
 
@@ -105,6 +112,14 @@ public class Map {
 
     public boolean[][] getCollisionlayer() {
         return collisionlayer;
+    }
+
+    public boolean[][] getStartArealayer() {
+        return startArealayer;
+    }
+
+    public boolean[][] getLooplayer() {
+        return looplayer;
     }
 
     public int getMapHeight() {

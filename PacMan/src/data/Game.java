@@ -58,7 +58,7 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        GameObject pacMan = new PacMan(image, objLayer.getStartPosPacMan(), 25, 25, 52, 52, 0.1);
+        GameObject pacMan = new PacMan(image, objLayer.getStartPosPacMan(), 25, 25, 52, 52, 0.2);
 
         gameObjects.add(pacMan);
 

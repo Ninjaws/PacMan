@@ -75,7 +75,7 @@ public class Map {
                             if (properties.containsKey("startarea")) {
                                 tile.setStartArea(properties.getBoolean("startarea"));
                             }
-                            if(properties.containsKey("loop")){
+                            if (properties.containsKey("loop")) {
                                 tile.setLoop(properties.getBoolean("loop"));
                             }
                         }
@@ -99,7 +99,7 @@ public class Map {
             if (layers.getJsonObject(i).getString("type").equals("tilelayer")) {
                 this.layers.add(new TileLayer(layers.getJsonObject(i), this));
             }
-            if(layers.getJsonObject(i).getString("type").equals("objectgroup")){
+            if (layers.getJsonObject(i).getString("type").equals("objectgroup")) {
                 this.layers.add(new ObjectLayer(layers.getJsonObject(i), this));
             }
 
@@ -150,10 +150,16 @@ public class Map {
 
     /**
      * Takes the actual position and returns the tile you are standing on
+     *
      * @param position The actual position
      * @return The tile that you are standing on
      */
-    public Point getTileMapPos(Point2D position){
-        return new Point((int)position.getX()/tileWidth,(int)position.getY()/tileHeight);
+    public Point getTileMapPos(Point2D position) {
+        return new Point((int) position.getX() / tileWidth, (int) position.getY() / tileHeight);
+    }
+
+    public boolean isInsideMap(Point mapPos) {
+        return (mapPos.x >= 0 && mapPos.x < mapWidth
+                && mapPos.y >= 0 && mapPos.y < mapHeight);
     }
 }

@@ -22,7 +22,7 @@ public class Controls {
             direction = new Point(-1, 0);
         } else if (currentKey.equals(Key.DOWN)) {
             direction = new Point(0, 1);
-        } else if (currentKey.equals(Key.RIGHT)) {
+        } else{// if (currentKey.equals(Key.RIGHT)) {
             direction = new Point(1, 0);
         }
 
@@ -31,7 +31,7 @@ public class Controls {
         //Check if any of the 4 corners is not inside the map or on walkable terrain after adding the direction
         if (Game.getInstance().getPacMan().getCorners().stream()
                 .map(corner -> corner = Game.getInstance().getMap().getTileMapPos(corner))
-                .anyMatch(corner -> !Game.getInstance().getMap().isInsideMap(new Point((int)corner.getX()+testDirection.x, (int)corner.getY()+testDirection.y)) ||
+                .anyMatch(corner -> !Game.getInstance().getMap().isInsideMap(new Point((int) corner.getX() + testDirection.x, (int) corner.getY() + testDirection.y)) ||
                         !Game.getInstance().getMap().getCollisionlayer()[(int) corner.getY() + testDirection.y][(int) corner.getX() + testDirection.x]))
             direction = Game.getInstance().getPacMan().getDirection();
 

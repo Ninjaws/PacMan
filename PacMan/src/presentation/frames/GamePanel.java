@@ -4,6 +4,7 @@ import data.Game;
 import entities.GameObject;
 import javafx.scene.input.KeyCode;
 import presentation.components.Camera;
+import presentation.components.Controls;
 import presentation.components.DebugDraw;
 import sun.awt.SunHints;
 
@@ -13,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.Point2D;
 import java.security.Key;
 
 /**
@@ -24,6 +26,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     private Game game;
     private Camera camera;
     private DebugDraw debugDraw;
+    private Controls controls;
 
     private long startTime;
     private long endTime;
@@ -34,6 +37,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         game = Game.getInstance();
         camera = new Camera();
         debugDraw = new DebugDraw(this);
+        controls = new Controls();
 
 
         setBackground(Color.BLACK);
@@ -67,6 +71,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         deltaTime = endTime - startTime;
         startTime = System.currentTimeMillis();
 
+        controls.update();
+
         game.getPacMan().move(deltaTime);
         repaint();
     }
@@ -79,14 +85,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         String key = KeyEvent.getKeyText(e.getKeyCode());
+
         if (key.equals("W"))
-            game.getPacMan().setDirection(new Point(0, -1));
+            controls.setCurrentKey(Controls.Key.UP);
         else if (key.equals("A"))
-            game.getPacMan().setDirection(new Point(-1, 0));
+            controls.setCurrentKey(Controls.Key.LEFT);
         else if (key.equals("S"))
-            game.getPacMan().setDirection(new Point(0, 1));
+            controls.setCurrentKey(Controls.Key.DOWN);
         else if (key.equals("D"))
-            game.getPacMan().setDirection(new Point(1, 0));
+            controls.setCurrentKey(Controls.Key.RIGHT);
 
     }
 

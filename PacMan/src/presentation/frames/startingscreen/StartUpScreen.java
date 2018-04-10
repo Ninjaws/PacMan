@@ -34,7 +34,7 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
             standardPacManFont = Font.createFont(Font.TRUETYPE_FONT, new File(getClass().getResource("/fonts/crackmanfront.ttf").toURI()));
             GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
             graphicsEnvironment.registerFont(standardPacManFont);
-            BufferedImage spritesheet = ImageIO.read(new File(getClass().getResource("/textures/pacman.png").toURI()));
+            BufferedImage spritesheet = ImageIO.read(new File("resources/textures/pacman.png"));
             for(int i = 0; i < 16; i++){
                 frames[i] = spritesheet.getSubimage(52 * (i % 4),52 * (i / 4), 52,52);
             }

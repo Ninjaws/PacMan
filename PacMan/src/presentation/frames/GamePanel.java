@@ -1,5 +1,6 @@
 package presentation.frames;
 
+import business.SoundPlayer;
 import data.Game;
 import entities.GameObject;
 import javafx.scene.input.KeyCode;
@@ -46,6 +47,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         setFocusable(true);
         new Timer(1000 / 60, this).start();
         startTime = System.currentTimeMillis();
+
+        Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).start();
     }
 
 
@@ -97,6 +100,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         else if (key.equals("D") || key.equals("Right"))
             controls.setCurrentKey(Controls.Key.RIGHT);
 
+        if(game.getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).isActive())
+        game.getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).stop();
+        else
+            game.getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).start();
     }
 
     @Override

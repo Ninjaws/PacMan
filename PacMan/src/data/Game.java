@@ -1,20 +1,26 @@
 package data;
 
 import business.Recoloring;
+import business.SoundPlayer;
 import business.SpriteSheet;
 import entities.active_objects.ActiveGameObject;
 import entities.GameObject;
 import entities.active_objects.PacMan;
 import entities.active_objects.Ghost;
+import sun.audio.AudioPlayer;
 import tiled.Map;
 import tiled.ObjectLayer;
 import tiled.TileLayer;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +36,8 @@ public class Game {
     private static Game instance;
 
     private Map map;
+
+    private SoundPlayer soundPlayer;
 
     private ArrayList<GameObject> gameObjects = new ArrayList<>();
 
@@ -104,9 +112,6 @@ public class Game {
             Graphics2D g2d = combined.createGraphics();
             g2d.drawImage(recoloredImage, new AffineTransform(), null);
             g2d.drawImage(deadImage, new AffineTransform(), null);
-            // AffineTransform at = new AffineTransform();
-            //  at.translate(deadImage.getWidth(),0);
-            //    g2d.drawImage(deadImage,at,null);
 
             g2d.dispose();
 
@@ -122,6 +127,30 @@ public class Game {
 
     public void setMap(Map map) {
         this.map = map;
+    }
+
+    public SoundPlayer getSoundPlayer() {
+        return soundPlayer;
+    }
+
+    public void setSounds(){
+
+        java.util.Map<SoundPlayer.Sound,Clip> sounds = new HashMap<>();
+
+        try{
+            File file = new File(getClass().getResource("/sounds/testSound.wav").toURI());
+            AudioInputStream stream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(stream);
+
+            sounds.put(SoundPlayer.Sound.MAIN_MENU,clip);
+
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        soundPlayer = new SoundPlayer(sounds);
     }
 
     public void setScreenDimensions(int width, int height) {

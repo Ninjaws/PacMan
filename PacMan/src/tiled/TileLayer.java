@@ -1,5 +1,6 @@
 package tiled;
 
+import business.Recoloring;
 import data.Game;
 import javafx.stage.Screen;
 
@@ -86,6 +87,10 @@ public class TileLayer extends Layer {
                 }
             }
         }
+
+        if(isVisible())
+            img = Recoloring.colorImage(img,Color.BLUE);
+
         return img;
     }
 

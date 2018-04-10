@@ -35,6 +35,8 @@ public class SpriteSheet {
 
         this.delayMillis = delayMillis;
 
+        this.currentImage = spriteSheet.getSubimage(0,0,spriteWidth,spriteHeight);
+
         deltaTime = 0;
         startTime = System.currentTimeMillis();
     }

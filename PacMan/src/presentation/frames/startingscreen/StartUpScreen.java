@@ -82,8 +82,10 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
         else
             spawnX = getWidth() + 52;
 
+        if(spawnY > getHeight() - 52)
+            spawnY = spawnY + -52;
 
-        if(random.nextInt(100) >= 99){
+        if(random.nextInt(1000) >= 998){
             animatedPacMans.add(new AnimatedPacMan(new Point2D.Double(spawnX,spawnY),frames));
         }
     }

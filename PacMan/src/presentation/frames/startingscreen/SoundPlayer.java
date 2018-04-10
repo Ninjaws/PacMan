@@ -7,12 +7,18 @@ import javax.swing.*;
 import java.io.File;
 
 public class SoundPlayer {
+    /**
+     * This test runs a audio.
+     * @param args
+     */
     public static void main(String[] args) {
-
         SoundPlayer soundPlayer = new SoundPlayer();
         SoundPlayer.playSound("testsound.wav");
     }
 
+    /**
+     * This constructor is only needed for a test.
+     */
     public SoundPlayer(){
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,6 +27,10 @@ public class SoundPlayer {
         frame.setVisible(true);
     }
 
+    /**
+     * The playSound method plays a wav sound.
+     * @param fileName is the filename which must be a wav file.
+     */
     public static void playSound(String fileName){
         try{
             File file = new File("resources\\sounds\\" + fileName);

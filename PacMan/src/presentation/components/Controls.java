@@ -36,6 +36,8 @@ public class Controls {
             return;
 
         Game.getInstance().getPacMan().setDirection(direction);
+        Game.getInstance().getGhosts().forEach(ghost -> ghost.setDirection(testDirection));
+
     }
 
 

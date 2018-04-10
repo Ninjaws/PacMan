@@ -1,6 +1,7 @@
 package data;
 
 import business.Recoloring;
+import business.SpriteSheet;
 import entities.active_objects.ActiveGameObject;
 import entities.GameObject;
 import entities.active_objects.PacMan;
@@ -16,6 +17,7 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,14 +62,22 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        GameObject pacMan = new PacMan(Recoloring.colorImage(image, Color.YELLOW), objLayer.getStartPosPacMan(), 25, 25, 52, 52, 0.2);
+
+        java.util.Map<SpriteSheet.Animation, Integer> pacManAnimations = new HashMap<>();
+        pacManAnimations.put(SpriteSheet.Animation.MOVE_UP, 2);
+        pacManAnimations.put(SpriteSheet.Animation.MOVE_LEFT, 1);
+        pacManAnimations.put(SpriteSheet.Animation.MOVE_DOWN, 3);
+        pacManAnimations.put(SpriteSheet.Animation.MOVE_RIGHT, 0);
+
+        GameObject pacMan = new PacMan(Recoloring.colorImage(image, Color.YELLOW), objLayer.getStartPosPacMan(), 25, 25,
+                52, 52, pacManAnimations,75, 0.17);
 
         gameObjects.add(pacMan);
 
 
         image = null;
         try {
-            image = ImageIO.read(getClass().getResource("/textures/ghost.png"));
+            image = ImageIO.read(getClass().getResource("/textures/ghostSprites.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,17 +91,24 @@ public class Game {
 
         Color[] ghostColors = {Color.RED, Color.PINK, Color.CYAN, Color.ORANGE};
 
+        java.util.Map<SpriteSheet.Animation, Integer> ghostAnimations = new HashMap<>();
+        ghostAnimations.put(SpriteSheet.Animation.NONE, 0);
+
         for (int i = 0; i < objLayer.getStartPosGhosts().size(); i++) {
 
             BufferedImage recoloredImage = Recoloring.colorImage(image, ghostColors[i]);
-            BufferedImage combined = new BufferedImage(recoloredImage.getWidth(),recoloredImage.getHeight(),BufferedImage.TYPE_INT_ARGB);
+            BufferedImage combined = new BufferedImage(recoloredImage.getWidth(), recoloredImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = combined.createGraphics();
-            g2d.drawImage(recoloredImage, new AffineTransform(),null);
+            g2d.drawImage(recoloredImage, new AffineTransform(), null);
             g2d.drawImage(deadImage, new AffineTransform(), null);
+            AffineTransform at = new AffineTransform();
+            at.translate(deadImage.getWidth(),0);
+            g2d.drawImage(deadImage,at,null);
+
             g2d.dispose();
 
             gameObjects.add(new Ghost(combined, deadImage, objLayer.getStartPosGhosts().get(i),
-                    25, 25, 52, 52, 0.5));
+                    25, 25, 56, 56, ghostAnimations,100, 0.5));
         }
     }
 

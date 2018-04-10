@@ -1,6 +1,7 @@
 package business;
 
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
 public class SpriteSheet {
 
@@ -18,9 +19,13 @@ public class SpriteSheet {
     private long endTime;
     private long deltaTime;
 
-    public SpriteSheet(BufferedImage spriteSheet, int spriteWidth, int spriteHeight, int delayMillis) {
+    // A map with animations and the row that contains them.
+    private Map<Animation, Integer> animations;
+
+    public SpriteSheet(BufferedImage spriteSheet, Map<Animation, Integer> animations, int spriteWidth, int spriteHeight, int delayMillis) {
 
         this.spriteSheet = spriteSheet;
+        this.animations = animations;
 
         this.currentRow = 0;
         this.currentCol = 0;
@@ -50,21 +55,11 @@ public class SpriteSheet {
     }
 
     public void setCurrentAnimation(Animation currentAnimation) {
-        //Depends on the particular spritesheet, not yet modular
-        switch (currentAnimation) {
-            case MOVE_UP:
-                currentRow = 2;
-                break;
-            case MOVE_LEFT:
-                currentRow = 1;
-                break;
-            case MOVE_DOWN:
-                currentRow = 3;
-                break;
-            case MOVE_RIGHT:
-                currentRow = 0;
-                break;
-        }
+
+        if (!animations.containsKey(currentAnimation))
+            return;
+
+        currentRow = animations.get(currentAnimation);
 
         //To prevent a nullpointer when it hasn't yet moved and it wants to draw an image
         currentImage = spriteSheet.getSubimage(currentCol * spriteWidth, currentRow * spriteHeight, spriteWidth, spriteHeight);
@@ -73,15 +68,6 @@ public class SpriteSheet {
     public BufferedImage getCurrentImage() {
         return currentImage;
     }
-
-    /**
-     * The manual way of setting the current animation
-     * @param currentRow The row (which shows an animation)
-     */
-    public void setCurrentRow(int currentRow) {
-        this.currentRow = currentRow;
-    }
-
 
     public enum Animation {
         NONE, MOVE_UP, MOVE_LEFT, MOVE_DOWN, MOVE_RIGHT

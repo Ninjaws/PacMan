@@ -9,21 +9,22 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class PacMan extends ActiveGameObject {
 
 
     private Point direction;
-    private SpriteSheet spriteSheet;
 
-    public PacMan(BufferedImage image, Point2D position, int objectWidth, int objectHeight, int spriteWidth, int spriteHeight, double moveSpeed) {
-        super(image, position, objectWidth, objectHeight, spriteWidth, spriteHeight, moveSpeed);
+
+    public PacMan(BufferedImage image, Point2D position, int objectWidth, int objectHeight,
+                  int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations, int animationDelayMillis, double moveSpeed) {
+
+        super(image, position, objectWidth, objectHeight, spriteWidth, spriteHeight, animations,animationDelayMillis, moveSpeed);
 
         this.direction = new Point(-1, 0);
-        this.spriteSheet = new SpriteSheet(image, spriteWidth, spriteHeight, 50);
-        spriteSheet.setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
-        setImage(spriteSheet.getCurrentImage());
+        getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
 
     }
 
@@ -93,8 +94,8 @@ public class PacMan extends ActiveGameObject {
                 return;
 
 
-        spriteSheet.update();
-        setImage(spriteSheet.getCurrentImage());
+        getSpriteSheet().update();
+        setImage(getSpriteSheet().getCurrentImage());
 
         setPosition(newPos);
     }
@@ -104,22 +105,19 @@ public class PacMan extends ActiveGameObject {
         this.direction = direction;
 
         if (direction.equals(new Point(0, -1)))
-            spriteSheet.setCurrentAnimation(SpriteSheet.Animation.MOVE_UP);
+            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_UP);
         else if (direction.equals(new Point(-1, 0)))
-            spriteSheet.setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
+            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
         else if (direction.equals(new Point(0, 1)))
-            spriteSheet.setCurrentAnimation(SpriteSheet.Animation.MOVE_DOWN);
+            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_DOWN);
         else // new Point(1,0)
-            spriteSheet.setCurrentAnimation(SpriteSheet.Animation.MOVE_RIGHT);
+            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_RIGHT);
     }
 
     public Point getDirection() {
         return direction;
     }
 
-    public SpriteSheet getSpriteSheet() {
-        return spriteSheet;
-    }
 
     public List<Point2D> getCorners() {
         List<Point2D> corners = new ArrayList<>();

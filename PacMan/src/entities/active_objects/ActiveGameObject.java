@@ -30,8 +30,8 @@ public abstract class ActiveGameObject extends GameObject {
         this.spriteHeight = spriteHeight;
 
         this.spriteSheet = new SpriteSheet(image, animations, spriteWidth, spriteHeight, animationDelayMillis);
-        spriteSheet.setCurrentAnimation(SpriteSheet.Animation.NONE);
-        setImage(spriteSheet.getCurrentImage());
+     //   spriteSheet.setCurrentAnimation(SpriteSheet.Animation.NONE);
+     //   setImage(spriteSheet.getCurrentImage());
 
         this.moveSpeed = moveSpeed;
 

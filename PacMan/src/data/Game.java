@@ -70,21 +70,21 @@ public class Game {
         pacManAnimations.put(SpriteSheet.Animation.MOVE_RIGHT, 0);
 
         GameObject pacMan = new PacMan(Recoloring.colorImage(image, Color.YELLOW), objLayer.getStartPosPacMan(), 25, 25,
-                52, 52, pacManAnimations,75, 0.17);
+                52, 52, pacManAnimations, 75, 0.17);
 
         gameObjects.add(pacMan);
 
 
         image = null;
         try {
-            image = ImageIO.read(getClass().getResource("/textures/ghostSprites.png"));
+            image = ImageIO.read(getClass().getResource("/textures/ghostSpriteSheet.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         BufferedImage deadImage = null;
         try {
-            deadImage = ImageIO.read(getClass().getResource("/textures/ghostUnder.png"));
+            deadImage = ImageIO.read(getClass().getResource("/textures/ghostEyesSpriteSheet.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -92,7 +92,10 @@ public class Game {
         Color[] ghostColors = {Color.RED, Color.PINK, Color.CYAN, Color.ORANGE};
 
         java.util.Map<SpriteSheet.Animation, Integer> ghostAnimations = new HashMap<>();
-        ghostAnimations.put(SpriteSheet.Animation.NONE, 0);
+        ghostAnimations.put(SpriteSheet.Animation.MOVE_UP, 2);
+        ghostAnimations.put(SpriteSheet.Animation.MOVE_LEFT, 0);
+        ghostAnimations.put(SpriteSheet.Animation.MOVE_DOWN, 3);
+        ghostAnimations.put(SpriteSheet.Animation.MOVE_RIGHT, 1);
 
         for (int i = 0; i < objLayer.getStartPosGhosts().size(); i++) {
 
@@ -101,14 +104,14 @@ public class Game {
             Graphics2D g2d = combined.createGraphics();
             g2d.drawImage(recoloredImage, new AffineTransform(), null);
             g2d.drawImage(deadImage, new AffineTransform(), null);
-            AffineTransform at = new AffineTransform();
-            at.translate(deadImage.getWidth(),0);
-            g2d.drawImage(deadImage,at,null);
+            // AffineTransform at = new AffineTransform();
+            //  at.translate(deadImage.getWidth(),0);
+            //    g2d.drawImage(deadImage,at,null);
 
             g2d.dispose();
 
             gameObjects.add(new Ghost(combined, deadImage, objLayer.getStartPosGhosts().get(i),
-                    25, 25, 56, 56, ghostAnimations,100, 0.5));
+                    25, 25, 56, 56, ghostAnimations, 100, 0.5));
         }
     }
 

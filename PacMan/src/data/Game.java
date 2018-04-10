@@ -146,6 +146,14 @@ public class Game {
             sounds.put(SoundPlayer.Sound.MAIN_MENU,clip);
 
 
+            file = new File(getClass().getResource("/sounds/pacman_gamemusic.wav").toURI());
+            stream = AudioSystem.getAudioInputStream(file);
+            clip = AudioSystem.getClip();
+            clip.open(stream);
+
+            sounds.put(SoundPlayer.Sound.GAME_MUSIC,clip);
+
+
         }
         catch (Exception e){
             e.printStackTrace();

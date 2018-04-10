@@ -40,6 +40,6 @@ public class SoundPlayer {
 
 
     public enum Sound {
-        MAIN_MENU
+        MAIN_MENU, GAME_MUSIC
     }
 }

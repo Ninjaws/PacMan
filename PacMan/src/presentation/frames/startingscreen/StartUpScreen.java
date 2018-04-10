@@ -56,6 +56,7 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
 
 
         animatedPacMans.add(new AnimatedPacMan(new Point2D.Double(-5,300),frames));
+        SoundPlayer.playSound("testsound.wav");
         Timer timer = new Timer(1000/60, this);
         timer.start();
 

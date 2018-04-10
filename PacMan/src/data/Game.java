@@ -82,8 +82,15 @@ public class Game {
         Color[] ghostColors = {Color.RED, Color.PINK, Color.CYAN, Color.ORANGE};
 
         for (int i = 0; i < objLayer.getStartPosGhosts().size(); i++) {
-            
-            gameObjects.add(new Ghost(Recoloring.colorImage(image, ghostColors[i]), deadImage, objLayer.getStartPosGhosts().get(i),
+
+            BufferedImage recoloredImage = Recoloring.colorImage(image, ghostColors[i]);
+            BufferedImage combined = new BufferedImage(recoloredImage.getWidth(),recoloredImage.getHeight(),BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g2d = combined.createGraphics();
+            g2d.drawImage(recoloredImage, new AffineTransform(),null);
+            g2d.drawImage(deadImage, new AffineTransform(), null);
+            g2d.dispose();
+
+            gameObjects.add(new Ghost(combined, deadImage, objLayer.getStartPosGhosts().get(i),
                     25, 25, 52, 52, 0.5));
         }
     }

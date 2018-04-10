@@ -74,6 +74,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         controls.update();
 
         game.getPacMan().move(deltaTime);
+        game.getGhosts().forEach(ghost -> ghost.move(deltaTime));
+
         repaint();
     }
 

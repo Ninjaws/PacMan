@@ -1,5 +1,6 @@
 package entities.active_objects;
 
+import business.SpriteSheet;
 import data.Game;
 import data.Loop;
 
@@ -14,11 +15,16 @@ public class PacMan extends ActiveGameObject {
 
 
     private Point direction;
+    private SpriteSheet spriteSheet;
 
     public PacMan(BufferedImage image, Point2D position, int objectWidth, int objectHeight, int spriteWidth, int spriteHeight, double moveSpeed) {
         super(image, position, objectWidth, objectHeight, spriteWidth, spriteHeight, moveSpeed);
 
         this.direction = new Point(-1, 0);
+        this.spriteSheet = new SpriteSheet(image, spriteWidth, spriteHeight, 50);
+        spriteSheet.setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
+        setImage(spriteSheet.getCurrentImage());
+
     }
 
     @Override
@@ -86,16 +92,33 @@ public class PacMan extends ActiveGameObject {
             if (!foundLoop)
                 return;
 
+
+        spriteSheet.update();
+        setImage(spriteSheet.getCurrentImage());
+
         setPosition(newPos);
     }
 
 
     public void setDirection(Point direction) {
         this.direction = direction;
+
+        if (direction.equals(new Point(0, -1)))
+            spriteSheet.setCurrentAnimation(SpriteSheet.Animation.MOVE_UP);
+        else if (direction.equals(new Point(-1, 0)))
+            spriteSheet.setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
+        else if (direction.equals(new Point(0, 1)))
+            spriteSheet.setCurrentAnimation(SpriteSheet.Animation.MOVE_DOWN);
+        else // new Point(1,0)
+            spriteSheet.setCurrentAnimation(SpriteSheet.Animation.MOVE_RIGHT);
     }
 
     public Point getDirection() {
         return direction;
+    }
+
+    public SpriteSheet getSpriteSheet() {
+        return spriteSheet;
     }
 
     public List<Point2D> getCorners() {

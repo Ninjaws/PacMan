@@ -24,7 +24,7 @@ public abstract class ActiveGameObject extends GameObject {
 
         this.moveSpeed = moveSpeed;
 
-        setImage(spriteSheet.getSubimage(0, 0, spriteHeight, spriteWidth));
+     //   setImage(spriteSheet.getSubimage(0, 0, spriteHeight, spriteWidth));
 
     }
 

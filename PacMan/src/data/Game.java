@@ -133,32 +133,31 @@ public class Game {
         return soundPlayer;
     }
 
-    public void setSounds(){
+    public void setSounds() {
 
-        java.util.Map<SoundPlayer.Sound,Clip> sounds = new HashMap<>();
+        java.util.Map<SoundPlayer.Sound, Clip> sounds = new HashMap<>();
 
-        try{
-            File file = new File(getClass().getResource("/sounds/testSound.wav").toURI());
+        sounds.put(SoundPlayer.Sound.MAIN_MENU, getClip("/sounds/testSound.wav"));
+        sounds.put(SoundPlayer.Sound.GAME_MUSIC, getClip("/sounds/pacman_gamemusic.wav"));
+
+        soundPlayer = new SoundPlayer(sounds);
+    }
+
+    private Clip getClip(String soundName) {
+        try {
+            File file = new File(getClass().getResource(soundName).toURI());
             AudioInputStream stream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(stream);
 
-            sounds.put(SoundPlayer.Sound.MAIN_MENU,clip);
+            return clip;
 
-
-            file = new File(getClass().getResource("/sounds/pacman_gamemusic.wav").toURI());
-            stream = AudioSystem.getAudioInputStream(file);
-            clip = AudioSystem.getClip();
-            clip.open(stream);
-
-            sounds.put(SoundPlayer.Sound.GAME_MUSIC,clip);
-
-
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
+
+            return null;
         }
-        soundPlayer = new SoundPlayer(sounds);
+
     }
 
     public void setScreenDimensions(int width, int height) {

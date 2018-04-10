@@ -86,13 +86,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void keyPressed(KeyEvent e) {
         String key = KeyEvent.getKeyText(e.getKeyCode());
 
-        if (key.equals("W"))
+        if (key.equals("W") || key.equals("Up"))
             controls.setCurrentKey(Controls.Key.UP);
-        else if (key.equals("A"))
+        else if (key.equals("A") || key.equals("Left"))
             controls.setCurrentKey(Controls.Key.LEFT);
-        else if (key.equals("S"))
+        else if (key.equals("S") || key.equals("Down"))
             controls.setCurrentKey(Controls.Key.DOWN);
-        else if (key.equals("D"))
+        else if (key.equals("D") || key.equals("Right"))
             controls.setCurrentKey(Controls.Key.RIGHT);
 
     }

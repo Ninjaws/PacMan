@@ -1,5 +1,6 @@
 package data;
 
+import business.Recoloring;
 import entities.active_objects.ActiveGameObject;
 import entities.GameObject;
 import entities.active_objects.PacMan;
@@ -10,6 +11,7 @@ import tiled.TileLayer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -58,7 +60,7 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        GameObject pacMan = new PacMan(image, objLayer.getStartPosPacMan(), 25, 25, 52, 52, 0.2);
+        GameObject pacMan = new PacMan(Recoloring.colorImage(image, Color.YELLOW), objLayer.getStartPosPacMan(), 25, 25, 52, 52, 0.2);
 
         gameObjects.add(pacMan);
 
@@ -70,10 +72,20 @@ public class Game {
             e.printStackTrace();
         }
 
-        for (Point startPosGhost : objLayer.getStartPosGhosts()) {
-            gameObjects.add(new Ghost(image, startPosGhost, 25, 25, 52, 52, 0.5));
+        BufferedImage deadImage = null;
+        try {
+            deadImage = ImageIO.read(getClass().getResource("/textures/ghostUnder.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+        Color[] ghostColors = {Color.RED, Color.PINK, Color.CYAN, Color.ORANGE};
+
+        for (int i = 0; i < objLayer.getStartPosGhosts().size(); i++) {
+            
+            gameObjects.add(new Ghost(Recoloring.colorImage(image, ghostColors[i]), deadImage, objLayer.getStartPosGhosts().get(i),
+                    25, 25, 52, 52, 0.5));
+        }
     }
 
 
@@ -150,7 +162,7 @@ public class Game {
                 .orElse(null);
     }
 
-    public List<Point> getScatterCorners(){
+    public List<Point> getScatterCorners() {
         return getObjectsLayer().getScatterCorners();
     }
 }

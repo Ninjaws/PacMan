@@ -6,4 +6,11 @@ Bonk (multiplayer)
 Bomberman (multiplayer)
 Worms (destructible environment)
 Boxhead (2d survival)
+Top-down survival sandbox
+	-> Random generated resources (zoals bomen of stenen die op een random plek ergens op een veld worden neergezet)
+	-> Player-based skills (skills grinden door resources te verzamelen/monsters te doden etc)
+	-> De mogelijkheid om te bouwen (zoals het neerzetten van muren om de monsters weg te houden)
+	-> tools/wapens systeem (upgraden van huidige wapens/tools)
+	-> Minions (voor automatisch zoeken van resources, vector-based pathfinding)
+		
 

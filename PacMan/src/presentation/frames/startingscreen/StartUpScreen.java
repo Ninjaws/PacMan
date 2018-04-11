@@ -1,10 +1,12 @@
 package presentation.frames.startingscreen;
 import business.SoundPlayer;
+import data.Game;
 import entities.active_objects.PacMan;
 import presentation.frames.GamePanel;
 import presentation.frames.PacManFrame;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -72,6 +74,9 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
             for(int i = 0; i < 16; i++){
                 frames[i] = spritesheet.getSubimage(52 * (i % 4),52 * (i / 4), 52,52);
             }
+
+            Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).loop(Clip.LOOP_CONTINUOUSLY);
+
         } catch (Exception e) {
             e.printStackTrace();
        }
@@ -174,9 +179,8 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
         for(MenuText menuText : menuTexts){
             if(menuText.getBounds().contains(e.getPoint())){
                 if(menuText.getText().equals("Singleplayer")){
-                    JPanel panel = new JPanel(new BorderLayout());
-                    panel.add(new GamePanel(), BorderLayout.CENTER);
-                    jFrame.setNextPanel(panel);
+                    Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).stop();
+                    jFrame.setNextPanel(new GamePanel());
                 }
             }
         }

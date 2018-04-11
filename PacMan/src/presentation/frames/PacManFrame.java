@@ -36,16 +36,23 @@ public class PacManFrame extends JFrame {
         setMinimumSize(new Dimension(Game.getInstance().getMap().getMapWidth() * Game.getInstance().getMap().getTileWidth() / 2, Game.getInstance().getMap().getMapHeight() * Game.getInstance().getMap().getTileHeight() / 2));
 
         StartUpScreen startUpScreen = new StartUpScreen(this);
-        content.add(startUpScreen, BorderLayout.CENTER);;
+        content.add(startUpScreen, BorderLayout.CENTER);
 
-        super.setContentPane(content);
+        super.getContentPane().add(content);
         pack();
     }
 
-    public void setNextPanel(JPanel panel){
-        super.setContentPane(panel);
+    public void setNextPanel(JPanel panel) {
+
+        panel.setPreferredSize(new Dimension(Game.getInstance().getScreenWidth(), Game.getInstance().getScreenHeight()));
+
+        super.getContentPane().removeAll();
+        super.getContentPane().add(panel);
+
+        pack();
         revalidate();
         repaint();
-        invalidate();
+
+        panel.requestFocusInWindow();
     }
 }

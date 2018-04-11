@@ -2,6 +2,10 @@ package data;
 
 import java.awt.*;
 
+/**
+ * @author Ian Vink
+ */
+
 public class Loop {
 
     private String name;

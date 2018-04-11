@@ -3,6 +3,7 @@ package data;
 import business.Recoloring;
 import business.SoundPlayer;
 import business.SpriteSheet;
+import com.sun.scenario.Settings;
 import entities.active_objects.ActiveGameObject;
 import entities.GameObject;
 import entities.active_objects.PacMan;
@@ -16,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
@@ -137,19 +139,23 @@ public class Game {
 
         java.util.Map<SoundPlayer.Sound, Clip> sounds = new HashMap<>();
 
-        sounds.put(SoundPlayer.Sound.MAIN_MENU, getClip("/sounds/testSound.wav"));
-        sounds.put(SoundPlayer.Sound.GAME_MUSIC, getClip("/sounds/pacman_gamemusic.wav"));
+        sounds.put(SoundPlayer.Sound.MAIN_MENU, getClip("/sounds/testSound.wav", 0.5f));
+        sounds.put(SoundPlayer.Sound.GAME_MUSIC, getClip("/sounds/pacman_gamemusic.wav", 0.03f));
+        sounds.put(SoundPlayer.Sound.PACMAN_MOVEMENT, getClip("/sounds/pacman_eatingsound.wav", 0.6f));
 
         soundPlayer = new SoundPlayer(sounds);
     }
 
-    private Clip getClip(String soundName) {
+    private Clip getClip(String soundName, float volume) {
         try {
             File file = new File(getClass().getResource(soundName).toURI());
             AudioInputStream stream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(stream);
 
+            FloatControl clipVolume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            clipVolume.setValue(floatToDecibel(volume));
+            System.out.println(clipVolume.getValue());
             return clip;
 
         } catch (Exception e) {
@@ -158,6 +164,23 @@ public class Game {
             return null;
         }
 
+    }
+
+    /**
+     * Converts a value from 0 to 1 to decibels
+     *
+     * @param volume A value from 0 to 1
+     * @return The amount of decibels that match with the given number
+     */
+    private float floatToDecibel(float volume) {
+        if (volume < 0)
+            volume = 0;
+        else if (volume > 1)
+            volume = 1;
+
+        float decibelVolume = 20f * (float) Math.log10(volume);
+
+        return decibelVolume;
     }
 
     public void setScreenDimensions(int width, int height) {

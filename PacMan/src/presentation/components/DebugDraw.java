@@ -6,6 +6,10 @@ import presentation.frames.GamePanel;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
+/**
+ * @author Ian Vink
+ */
+
 public class DebugDraw {
 
     private Game game;

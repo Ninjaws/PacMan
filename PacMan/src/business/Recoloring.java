@@ -5,6 +5,10 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 
+/**
+ * @author Ian Vink
+ */
+
 public class Recoloring {
 
     public static BufferedImage colorImage(BufferedImage image, Color color) {

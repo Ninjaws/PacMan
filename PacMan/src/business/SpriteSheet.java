@@ -3,6 +3,10 @@ package business;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 
+/**
+ * @author Ian Vink
+ */
+
 public class SpriteSheet {
 
     private BufferedImage spriteSheet;

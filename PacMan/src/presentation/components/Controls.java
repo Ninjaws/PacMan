@@ -4,6 +4,10 @@ import data.Game;
 
 import java.awt.*;
 
+/**
+ * @author Ian Vink
+ */
+
 public class Controls {
     private Key currentKey;
 
@@ -14,6 +18,7 @@ public class Controls {
     public void update() {
         if (currentKey.equals(Key.NONE))
             return;
+
 
         Point direction = null;
         if (currentKey.equals(Key.UP)) {

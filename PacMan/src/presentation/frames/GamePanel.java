@@ -9,6 +9,7 @@ import presentation.components.Controls;
 import presentation.components.DebugDraw;
 import sun.awt.SunHints;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,14 +44,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
         setBackground(Color.BLACK);
 
+
         addKeyListener(this);
-        setFocusable(true);
+
         new Timer(1000 / 60, this).start();
         startTime = System.currentTimeMillis();
 
-      //  Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).start();
-        Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.GAME_MUSIC).loop(Integer.MAX_VALUE);
-      //  Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.GAME_MUSIC).start();
+        Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.GAME_MUSIC).loop(Clip.LOOP_CONTINUOUSLY);
     }
 
 
@@ -102,10 +102,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         else if (key.equals("D") || key.equals("Right"))
             controls.setCurrentKey(Controls.Key.RIGHT);
 
-        if (game.getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).isActive())
-            game.getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).stop();
-        else
-            game.getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).start();
     }
 
     @Override

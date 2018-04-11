@@ -5,6 +5,10 @@ import data.Game;
 import javax.swing.*;
 import java.awt.geom.AffineTransform;
 
+/**
+ * @author Ian Vink
+ */
+
 public class Camera {
 
 

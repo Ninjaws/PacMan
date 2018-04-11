@@ -1,9 +1,11 @@
 package entities.active_objects;
 
+import business.SoundPlayer;
 import business.SpriteSheet;
 import data.Game;
 import data.Loop;
 
+import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
@@ -11,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Ian Vink
+ */
 
 public class PacMan extends ActiveGameObject {
 
@@ -21,7 +26,7 @@ public class PacMan extends ActiveGameObject {
     public PacMan(BufferedImage image, Point2D position, int objectWidth, int objectHeight,
                   int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations, int animationDelayMillis, double moveSpeed) {
 
-        super(image, position, objectWidth, objectHeight, spriteWidth, spriteHeight, animations,animationDelayMillis, moveSpeed);
+        super(image, position, objectWidth, objectHeight, spriteWidth, spriteHeight, animations, animationDelayMillis, moveSpeed);
 
         this.direction = new Point(-1, 0);
         getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
@@ -90,13 +95,15 @@ public class PacMan extends ActiveGameObject {
 
         }
         if (!walkable)
-            if (!foundLoop)
+            if (!foundLoop) {
+                Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.PACMAN_MOVEMENT).stop();
                 return;
+            }
 
 
         getSpriteSheet().update();
         setImage(getSpriteSheet().getCurrentImage());
-
+        Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.PACMAN_MOVEMENT).loop(Clip.LOOP_CONTINUOUSLY);
         setPosition(newPos);
     }
 

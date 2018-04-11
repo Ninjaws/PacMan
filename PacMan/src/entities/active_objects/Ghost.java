@@ -7,6 +7,10 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 
+/**
+ * @author Ian Vink
+ */
+
 public class Ghost extends ActiveGameObject {
 
     private BufferedImage deadImage;

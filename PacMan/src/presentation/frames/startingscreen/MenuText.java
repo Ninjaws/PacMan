@@ -93,4 +93,8 @@ public class MenuText {
     public Rectangle2D getBounds() {
         return bounds;
     }
+
+    public String getText() {
+        return text;
+    }
 }

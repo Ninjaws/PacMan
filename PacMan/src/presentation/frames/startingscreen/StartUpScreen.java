@@ -1,5 +1,8 @@
 package presentation.frames.startingscreen;
 import business.SoundPlayer;
+import entities.active_objects.PacMan;
+import presentation.frames.GamePanel;
+import presentation.frames.PacManFrame;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -24,12 +27,12 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
      * @param args required for a main.
      */
     public static void main(String[] args) {
-        JFrame frame = new JFrame();
+        PacManFrame frame = new PacManFrame();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(new Dimension(800,800));
         frame.setLocation((int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2) - (frame.getWidth() / 2),
                 (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2) - (frame.getHeight() / 2));
-        frame.setContentPane(new StartUpScreen());
+        frame.setContentPane(new StartUpScreen(frame));
         frame.setVisible(true);
     }
 
@@ -53,10 +56,13 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
      */
     private BufferedImage[] frames = new BufferedImage[16];
 
+    private PacManFrame jFrame;
+
     /**
      * The constructor of the StartUpScreen loads the standard pacman font. Also it loads the the spritesheet of the pacman.
      */
-    public StartUpScreen() {
+    public StartUpScreen(PacManFrame frame) {
+        this.jFrame = frame;
         //loads needed files
         try {
             standardPacManFont = Font.createFont(Font.TRUETYPE_FONT, new File(getClass().getResource("/fonts/crackmanfront.ttf").toURI()));
@@ -68,7 +74,7 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+       }
 
         //sets graphical options
         setBackground(Color.BLACK);
@@ -86,14 +92,9 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
         animatedPacMans.add(new AnimatedPacMan(new Point2D.Double(-5,300),frames));
 
         //plays sound.
-        SoundPlayer.playSound("testsound.wav");
-        SoundPlayer.playSound("testsound.wav");
-        SoundPlayer.playSound("testsound.wav");
+        
 
-        SoundPlayer.playSound("testsound.wav");
-        SoundPlayer.playSound("testsound.wav");
-        SoundPlayer.playSound("testsound.wav");
-
+        addMouseListener(this);
         //starts timer
         Timer timer = new Timer(1000/60, this);
         timer.start();
@@ -121,7 +122,13 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
     private void randomlySpawn(){
         Random random = new Random();
         int spawnX = random.nextInt(100);
-        int spawnY = random.nextInt(getWidth());
+        int spawnY;
+        try{
+            spawnY = random.nextInt(getWidth());
+        }
+        catch (Exception e){
+            spawnY = 900;
+        }
         if(spawnX >= 50)
             spawnX = -1 * frames[0].getWidth();
         else
@@ -144,7 +151,7 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
             animatedPacMan.draw(g2d);
 
         for(MenuText menuText : menuTexts)
-            menuText.debugDraw(g2d);
+            menuText.draw(g2d);
 
     }
 
@@ -166,7 +173,11 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
     public void mouseClicked(MouseEvent e) {
         for(MenuText menuText : menuTexts){
             if(menuText.getBounds().contains(e.getPoint())){
-                System.out.println(true);
+                if(menuText.getText().equals("Singleplayer")){
+                    JPanel panel = new JPanel(new BorderLayout());
+                    panel.add(new GamePanel(), BorderLayout.CENTER);
+                    jFrame.setNextPanel(panel);
+                }
             }
         }
     }
@@ -182,6 +193,7 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
     }
 
     @Override
+
     public void mouseEntered(MouseEvent e) {
 
     }

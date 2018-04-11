@@ -1,6 +1,7 @@
 package presentation.frames;
 
 import data.Game;
+import presentation.frames.startingscreen.StartUpScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,10 +35,17 @@ public class PacManFrame extends JFrame {
         content.setPreferredSize(new Dimension(Game.getInstance().getScreenWidth(), Game.getInstance().getScreenHeight()));
         setMinimumSize(new Dimension(Game.getInstance().getMap().getMapWidth() * Game.getInstance().getMap().getTileWidth() / 2, Game.getInstance().getMap().getMapHeight() * Game.getInstance().getMap().getTileHeight() / 2));
 
-        GamePanel gamePanel = new GamePanel();
-        content.add(gamePanel, BorderLayout.CENTER);
+        StartUpScreen startUpScreen = new StartUpScreen(this);
+        content.add(startUpScreen, BorderLayout.CENTER);;
 
         super.setContentPane(content);
         pack();
+    }
+
+    public void setNextPanel(JPanel panel){
+        super.setContentPane(panel);
+        revalidate();
+        repaint();
+        invalidate();
     }
 }

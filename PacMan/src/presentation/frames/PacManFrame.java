@@ -53,7 +53,6 @@ public class PacManFrame extends JFrame {
         pack();
         revalidate();
         repaint();
-
         panel.requestFocusInWindow();
     }
 }

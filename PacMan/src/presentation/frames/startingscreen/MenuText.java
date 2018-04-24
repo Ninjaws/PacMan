@@ -94,7 +94,15 @@ public class MenuText {
         return bounds;
     }
 
+    /**
+     * gets the text of a MenuText
+     * @return the text which is displayed on the screen.
+     */
     public String getText() {
         return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

@@ -10,6 +10,7 @@ import java.awt.event.ComponentEvent;
 
 /**
  * @author Ian Vink
+ * @author Jordy van Raalte
  */
 
 public class PacManFrame extends JFrame {

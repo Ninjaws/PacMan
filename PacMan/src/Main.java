@@ -19,6 +19,6 @@ public class Main {
         Game.getInstance().setSounds();
         Game.getInstance().setGameObjects();
 
-        PacManFrame pacManFrame = new PacManFrame();
+        PacManFrame pacManFrame = PacManFrame.getInstance();
     }
 }

@@ -1,9 +1,9 @@
 package presentation.frames.startingscreen;
 import business.SoundPlayer;
 import data.Game;
-import entities.active_objects.PacMan;
 import presentation.frames.GamePanel;
 import presentation.frames.PacManFrame;
+import presentation.frames.multiplayer.MultiplayerPanel;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
@@ -22,20 +22,6 @@ import java.util.Random;
  * The StartUpScreen class represents the titel screen if the game.
  */
 public class StartUpScreen extends JPanel implements ActionListener, MouseListener {
-    /**
-     * This main is the test method for the titel screen.
-     * @param args required for a main.
-     */
-    public static void main(String[] args) {
-        PacManFrame frame = new PacManFrame();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(800,800));
-        frame.setLocation((int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2) - (frame.getWidth() / 2),
-                (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2) - (frame.getHeight() / 2));
-        frame.setContentPane(new StartUpScreen(frame));
-        frame.setVisible(true);
-    }
-
     /**
      * The standardPacManFont attribute is a font which will be drawn on the titel screen.
      */
@@ -57,17 +43,9 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
     private BufferedImage[] frames = new BufferedImage[16];
 
     /**
-     * This is the mainframe which the game is running on.
-     */
-    private PacManFrame jFrame;
-
-    /**
      * The constructor of the StartUpScreen loads the standard pacman font. Also it loads the the spritesheet of the pacman.
-     * @param frame is the main frame were the game is running on.
      */
-    public StartUpScreen(PacManFrame frame) {
-        this.jFrame = frame;
-
+    public StartUpScreen() {
         //loads needed files
         try {
             standardPacManFont = Font.createFont(Font.TRUETYPE_FONT, new File(getClass().getResource("/fonts/crackmanfront.ttf").toURI()));
@@ -86,6 +64,7 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
 
         //sets graphical options
         setBackground(Color.BLACK);
+
         //adds menu items.
         menuTexts.add(new MenuText("Pac man", standardPacManFont.deriveFont(136f),
                 1));
@@ -165,7 +144,6 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
         ifPassedBorder();
         randomlySpawn();
 
-
         repaint();
     }
 
@@ -175,7 +153,12 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
             if(menuText.getBounds().contains(e.getPoint())) {
                 if(menuText.getText().equals("Singleplayer")) {
                     Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).stop();
-                    jFrame.setNextPanel(new GamePanel());
+                    PacManFrame.setNextPanel(new GamePanel());
+                    animatedPacMans.clear();
+                }
+                else if(menuText.getText().equals("Multiplayer")) {
+                    Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).stop();
+                    PacManFrame.setNextPanel(new MultiplayerPanel());
                     animatedPacMans.clear();
                 }
             }

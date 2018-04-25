@@ -1,6 +1,7 @@
 package presentation.frames.multiplayer.serverlist;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 public class OnlineGame {
@@ -26,7 +27,9 @@ public class OnlineGame {
     }
 
     public void draw(Graphics2D g2d) {
-
+        g2d.setColor(Color.blue);
+        g2d.draw(new Rectangle2D.Double(frameWidth/8, positionInSort *32, 32,32));
+        g2d.drawString(name,frameWidth/8,positionInSort * 32);
     }
 
     public void update(int frameWidth, int frameHeight, ArrayList<OnlineGame> onlineGames) {

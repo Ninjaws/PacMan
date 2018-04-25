@@ -11,11 +11,19 @@ import java.awt.event.ComponentEvent;
 /**
  * @author Ian Vink
  * @author Jordy van Raalte
+ * The PacManFrame class is the frame where the game will be played. This class is a singleton which can be called from any class.
  */
-
 public class PacManFrame extends JFrame {
 
-    public PacManFrame() {
+    /**
+     * The instance attribute is an instance of the PacManFrame. This frame will have the same object reference in the memory.
+     */
+    private static PacManFrame instance;
+
+    /**
+     * The PacManFrame constructor creates the frame which content is set the the StartUpScreen(also known as the titel screen).
+     */
+    private PacManFrame() {
         super("PacMan");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -31,28 +39,41 @@ public class PacManFrame extends JFrame {
         setVisible(true);
     }
 
-    public void buildPanel() {
+    /**
+     * The buildPanel method creates the content which the frame will be holding.
+     */
+    private void buildPanel() {
         JPanel content = new JPanel(new BorderLayout());
         content.setPreferredSize(new Dimension(Game.getInstance().getScreenWidth(), Game.getInstance().getScreenHeight()));
         setMinimumSize(new Dimension(Game.getInstance().getMap().getMapWidth() * Game.getInstance().getMap().getTileWidth() / 2, Game.getInstance().getMap().getMapHeight() * Game.getInstance().getMap().getTileHeight() / 2));
 
-        StartUpScreen startUpScreen = new StartUpScreen(this);
+        StartUpScreen startUpScreen = new StartUpScreen();
         content.add(startUpScreen, BorderLayout.CENTER);
 
         super.getContentPane().add(content);
         pack();
     }
 
-    public void setNextPanel(JPanel panel) {
+    /**
+     * The setNextPanel sets the next panel of the Frame.
+     * @param panel is the next panel of the frame.
+     */
+    public static void setNextPanel(JPanel panel) {
+        if(instance != null){
+            instance.setContentPane(panel);
+            instance.revalidate();
+            panel.requestFocus();
+        }
+    }
 
-        panel.setPreferredSize(new Dimension(Game.getInstance().getScreenWidth(), Game.getInstance().getScreenHeight()));
+    /**
+     * The getInstance method creates an instance of this class if the instance doesn't exist.
+     * @return return an instance of the PacManFrame
+     */
+    public static PacManFrame getInstance() {
+        if(instance == null)
+            instance = new PacManFrame();
 
-        super.getContentPane().removeAll();
-        super.getContentPane().add(panel);
-
-        pack();
-        revalidate();
-        repaint();
-        panel.requestFocusInWindow();
+        return instance;
     }
 }

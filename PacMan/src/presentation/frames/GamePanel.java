@@ -53,7 +53,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.GAME_MUSIC).loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;

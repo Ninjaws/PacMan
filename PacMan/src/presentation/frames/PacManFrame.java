@@ -76,4 +76,16 @@ public class PacManFrame extends JFrame {
 
         return instance;
     }
+
+    /**
+     * The getFrameSize method gets the size of the frame
+     * @return size of the frame.
+     */
+    public static Dimension getFrameSize() {
+        if(instance == null)
+            return new Dimension(0,0);
+        else {
+            return instance.getSize();
+        }
+    }
 }

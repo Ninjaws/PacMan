@@ -27,7 +27,7 @@ public class ObjectLayer extends Layer {
 
         JsonArray data = layer.getJsonArray("objects");
         for (int i = 0; i < data.size(); i++) {
-            System.out.println(data.getJsonObject(i));
+           // System.out.println(data.getJsonObject(i));
 
             JsonObject currentObject = data.getJsonObject(i);
 
@@ -59,8 +59,8 @@ public class ObjectLayer extends Layer {
                             new Point(currentObject.getInt("x") / map.getTileWidth(), currentObject.getInt("y") / map.getTileHeight()),
                             new Point(obj.getInt("x") / map.getTileWidth(), obj.getInt("y") / map.getTileHeight())));
 
-                    System.out.println("Current: " + currentObject);
-                    System.out.println("Match: " + obj);
+                  //  System.out.println("Current: " + currentObject);
+                  //  System.out.println("Match: " + obj);
 
                     break;
             }

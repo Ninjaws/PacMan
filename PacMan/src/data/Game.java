@@ -155,7 +155,6 @@ public class Game {
 
             FloatControl clipVolume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             clipVolume.setValue(floatToDecibel(volume));
-            System.out.println(clipVolume.getValue());
             return clip;
 
         } catch (Exception e) {

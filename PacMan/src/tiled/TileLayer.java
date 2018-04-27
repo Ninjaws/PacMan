@@ -1,8 +1,6 @@
 package tiled;
 
 import business.Recoloring;
-import data.Game;
-import javafx.stage.Screen;
 
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -49,7 +47,7 @@ public class TileLayer extends Layer {
                 if (index > 0) {
                     Tile tile = map.getTiles().get(index);
                     if (tile.isWalkable()) {
-                        map.getCollisionlayer()[y][x] = true;
+                        map.getCollisionLayer()[y][x] = true;
                     }
                     else if(tile.isStartArea()){
                         map.getStartArealayer()[y][x] = true;

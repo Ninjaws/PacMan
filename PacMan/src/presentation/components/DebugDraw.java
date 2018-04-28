@@ -22,6 +22,10 @@ public class DebugDraw {
 
     public void draw(Graphics2D g2d) {
         AffineTransform at = new AffineTransform();
-        g2d.drawImage(game.getDataLayer().getImage(), at, null);
+     //   g2d.drawImage(game.getDataLayer().getImage(), at, null);
+
+        game.getScatterCorners().get(0).getDistanceMap().drawHeatMap(g2d);
+        game.getScatterCorners().get(0).getDistanceMap().drawDistanceMap(g2d);
+        game.getScatterCorners().get(0).getDistanceMap().drawVectorField(g2d);
     }
 }

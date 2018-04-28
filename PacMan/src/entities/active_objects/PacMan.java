@@ -65,7 +65,7 @@ public class PacMan extends ActiveGameObject {
         for (Point2D corner : corners) {
             //Checking if the tile is walkable
             Point tileMapPos = Game.getInstance().getMap().getTileMapPos(corner);
-            if (!Game.getInstance().getMap().getCollisionlayer()[tileMapPos.y][tileMapPos.x])
+            if (!Game.getInstance().getMap().getCollisionLayer()[tileMapPos.y][tileMapPos.x])
                 walkable = false;
             //Check if you are looping
             if (Game.getInstance().getMap().getLooplayer()[tileMapPos.y][tileMapPos.x]) {

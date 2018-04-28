@@ -4,6 +4,7 @@ import business.Recoloring;
 import business.SoundPlayer;
 import business.SpriteSheet;
 import com.sun.scenario.Settings;
+import data.pathfinding.Target;
 import entities.active_objects.ActiveGameObject;
 import entities.GameObject;
 import entities.active_objects.PacMan;
@@ -247,7 +248,7 @@ public class Game {
                 .orElse(null);
     }
 
-    public List<Point> getScatterCorners() {
+    public List<Target> getScatterCorners() {
         return getObjectsLayer().getScatterCorners();
     }
 }

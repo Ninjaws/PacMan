@@ -37,7 +37,7 @@ public class Controls {
         if (Game.getInstance().getPacMan().getCorners().stream()
                 .map(corner -> corner = Game.getInstance().getMap().getTileMapPos(corner))
                 .anyMatch(corner -> !Game.getInstance().getMap().isInsideMap(new Point((int) corner.getX() + testDirection.x, (int) corner.getY() + testDirection.y)) ||
-                        !Game.getInstance().getMap().getCollisionlayer()[(int) corner.getY() + testDirection.y][(int) corner.getX() + testDirection.x]))
+                        !Game.getInstance().getMap().getCollisionLayer()[(int) corner.getY() + testDirection.y][(int) corner.getX() + testDirection.x]))
             return;
 
         Game.getInstance().getPacMan().setDirection(direction);

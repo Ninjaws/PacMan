@@ -105,7 +105,7 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
     private void randomlySpawn() {
         Random random = new Random();
         int spawnX = random.nextInt(100);
-        int spawnY = random.nextInt(getWidth());
+        int spawnY = random.nextInt(Game.getInstance().getScreenWidth());
 
         if(spawnX >= 50)
             spawnX = -1 * frames[0].getWidth();

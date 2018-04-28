@@ -110,7 +110,7 @@ public class Map {
         return tiles;
     }
 
-    public boolean[][] getCollisionlayer() {
+    public boolean[][] getCollisionLayer() {
         return collisionlayer;
     }
 

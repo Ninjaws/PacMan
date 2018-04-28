@@ -1,6 +1,7 @@
 package tiled;
 
 import data.Loop;
+import data.pathfinding.Target;
 
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -15,7 +16,7 @@ public class ObjectLayer extends Layer {
     private Point startPosPacMan;
     private ArrayList<Point> startPosGhosts = new ArrayList<>();
     private ArrayList<Loop> loops = new ArrayList<Loop>();
-    private ArrayList<Point> scatterCorners = new ArrayList<>();
+    private ArrayList<Target> scatterCorners = new ArrayList<>();
 
     private String name;
 
@@ -39,14 +40,14 @@ public class ObjectLayer extends Layer {
                     startPosGhosts.add(new Point(currentObject.getInt("x"), currentObject.getInt("y")));
                     break;
                 case "Scatter Corner":
-                    scatterCorners.add(new Point(currentObject.getInt("x"),currentObject.getInt("y")));
+                    scatterCorners.add(new Target(map,new Point(currentObject.getInt("x"),currentObject.getInt("y"))));
                     break;
                 case "Loop":
                     if (loops.stream()
                             .anyMatch(loop -> loop.getName().equals(currentObject.getString("name").substring(0, 6))))
                         continue;
 
-
+                    //Get the exit that matches with the entrance
                     JsonObject obj = data.stream()
                             .map(object -> (JsonObject) object)
                             .filter(object -> object.getString("type").equals("Loop"))
@@ -83,7 +84,7 @@ public class ObjectLayer extends Layer {
         return loops;
     }
 
-    public ArrayList<Point> getScatterCorners() {
+    public ArrayList<Target> getScatterCorners() {
         return scatterCorners;
     }
 

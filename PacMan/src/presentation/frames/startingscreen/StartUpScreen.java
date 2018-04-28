@@ -3,7 +3,7 @@ import business.SoundPlayer;
 import data.Game;
 import presentation.frames.GamePanel;
 import presentation.frames.PacManFrame;
-import presentation.frames.multiplayer.MultiplayerPanel;
+import presentation.frames.multiplayer.serverlist.ServerPanel;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
@@ -158,7 +158,7 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
                 }
                 else if(menuText.getText().equals("Multiplayer")) {
                     Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).stop();
-                    PacManFrame.setNextPanel(new MultiplayerPanel());
+                    PacManFrame.setNextPanel(new ServerPanel());
                     animatedPacMans.clear();
                 }
             }

@@ -119,7 +119,7 @@ public class Game {
             g2d.dispose();
 
             gameObjects.add(new Ghost(combined, deadImage, objLayer.getStartPosGhosts().get(i),
-                    25, 25, 56, 56, ghostAnimations, 100, 0.5));
+                    25, 25, 56, 56, ghostAnimations, 100, 0.1));
         }
     }
 

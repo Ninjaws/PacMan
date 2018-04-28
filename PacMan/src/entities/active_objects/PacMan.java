@@ -4,6 +4,7 @@ import business.SoundPlayer;
 import business.SpriteSheet;
 import data.Game;
 import data.Loop;
+import data.pathfinding.Target;
 
 import javax.sound.sampled.Clip;
 import java.awt.*;
@@ -19,16 +20,16 @@ import java.util.Map;
 
 public class PacMan extends ActiveGameObject {
 
-
+    private Target target;
 
     public PacMan(BufferedImage image, Point2D position, int objectWidth, int objectHeight,
                   int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations, int animationDelayMillis, double moveSpeed) {
 
         super(image, position, objectWidth, objectHeight, spriteWidth, spriteHeight, animations, animationDelayMillis, moveSpeed);
 
-        setDirection(new Point(-1,0));
+        setDirection(new Point(-1, 0));
         getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
-
+        target = new Target(Game.getInstance().getMap(), Game.getInstance().getMap().getTileMapPos(position));
     }
 
     @Override
@@ -103,6 +104,7 @@ public class PacMan extends ActiveGameObject {
         setImage(getSpriteSheet().getCurrentImage());
         Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.PACMAN_MOVEMENT).loop(Clip.LOOP_CONTINUOUSLY);
         setPosition(newPos);
+        target.getDistanceMap().calculateDistance(getPosition());
     }
 
 
@@ -114,5 +116,9 @@ public class PacMan extends ActiveGameObject {
         corners.add(new Point2D.Double(getPosition().getX() + getObjectWidth(), getPosition().getY() + getObjectHeight()));
 
         return corners;
+    }
+
+    public Target getTarget() {
+        return target;
     }
 }

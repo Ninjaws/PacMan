@@ -54,9 +54,7 @@ public class DistanceMap {
         int x = (int) position.getX() / map.getTileWidth();
         int y = (int) position.getY() / map.getTileHeight();
 
-
         resetTiles();
-
 
         int maxDistance = 0;
 

@@ -3,6 +3,7 @@ package entities.active_objects;
 import business.SpriteSheet;
 import entities.GameObject;
 
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.Map;
@@ -16,6 +17,8 @@ public abstract class ActiveGameObject extends GameObject {
     private BufferedImage spriteSheetImage;
     private int spriteWidth;
     private int spriteHeight;
+
+    private Point direction;
 
     private SpriteSheet spriteSheet;
 
@@ -47,7 +50,24 @@ public abstract class ActiveGameObject extends GameObject {
         return moveSpeed;
     }
 
+    public Point getDirection() {
+        return direction;
+    }
+
     public void setMoveSpeed(double moveSpeed) {
         this.moveSpeed = moveSpeed;
+    }
+
+    public void setDirection(Point direction) {
+        this.direction = direction;
+
+        if (direction.equals(new Point(0, -1)))
+            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_UP);
+        else if (direction.equals(new Point(-1, 0)))
+            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
+        else if (direction.equals(new Point(0, 1)))
+            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_DOWN);
+        else // new Point(1,0)
+            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_RIGHT);
     }
 }

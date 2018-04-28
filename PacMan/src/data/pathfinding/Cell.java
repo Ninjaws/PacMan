@@ -9,7 +9,7 @@ import java.awt.geom.Point2D;
 
 public class Cell {
     private int distance;
-    private Point2D vector;
+    private Point vector;
 
     //Only for heatmap
     private Color color;
@@ -26,11 +26,11 @@ public class Cell {
         this.distance = distance;
     }
 
-    public Point2D getVector() {
+    public Point getVector() {
         return vector;
     }
 
-    public void setVector(Point2D vector) {
+    public void setVector(Point vector) {
         this.vector = vector;
     }
 

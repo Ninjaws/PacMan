@@ -6,6 +6,8 @@ import entities.GameObject;
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -52,6 +54,16 @@ public abstract class ActiveGameObject extends GameObject {
 
     public Point getDirection() {
         return direction;
+    }
+
+    public java.util.List<Point2D> getCorners() {
+        List<Point2D> corners = new ArrayList<>();
+        corners.add(new Point2D.Double(getPosition().getX(), getPosition().getY()));
+        corners.add(new Point2D.Double(getPosition().getX() + getObjectWidth(), getPosition().getY()));
+        corners.add(new Point2D.Double(getPosition().getX(), getPosition().getY() + getObjectHeight()));
+        corners.add(new Point2D.Double(getPosition().getX() + getObjectWidth(), getPosition().getY() + getObjectHeight()));
+
+        return corners;
     }
 
     public void setMoveSpeed(double moveSpeed) {

@@ -50,7 +50,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         new Timer(1000 / 60, this).start();
         startTime = System.currentTimeMillis();
 
-        Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.GAME_MUSIC).loop(Clip.LOOP_CONTINUOUSLY);
+        Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.GAME_MUSIC).start();
     }
 
     @Override

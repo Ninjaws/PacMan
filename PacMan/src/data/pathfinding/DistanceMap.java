@@ -137,7 +137,7 @@ public class DistanceMap {
 
                 //The target location has no vector
                 if (currentCell.getDistance() == 0) {
-                    currentCell.setVector(new Point2D.Double(0.0, 0.0));
+                    currentCell.setVector(new Point(0, 0));
                     continue;
                 }
 
@@ -175,22 +175,41 @@ public class DistanceMap {
                     //Discard vertical vector
                     vector.setLocation(vector.getX(), 0);
                 }
+
                 //All directions have the same value (are equally close to the target)
                 else if (vector.getX() == 0 && vector.getY() == 0) {
 
-                    // Walls on both horizontal sides (checking the actual value rather than the local value, because that one has been changed by the wall check above)
-                    if (cells[neighbours[0].y][neighbours[0].x].getDistance() == -2 && cells[neighbours[1].y][neighbours[1].x].getDistance() == -2) {//values[0] == -2 && values[1] == -2) {
-
-                        vector = new Point2D.Double(0, -1);
-                    } else {
-
-                        vector = new Point2D.Double(-1, 0);
+                    // Out-of-bounds on a horizontal side
+                    if (!map.isInsideMap(neighbours[0]) || !map.isInsideMap(neighbours[1])) {
+                        vector = new Point2D.Double(0, 0); // Only happens with loops so 0 works, not a clean solution though
                     }
+                    // Out-of-bounds on a vertical side
+                    else if (!map.isInsideMap(neighbours[2]) || !map.isInsideMap(neighbours[3])) {
+                        vector = new Point2D.Double(0, 0);
+                    }
+
+                    // Walls on both horizontal sides (checking the actual value rather than the local value, because that one has been changed by the wall check above)
+                    else if (cells[neighbours[0].y][neighbours[0].x].getDistance() == -2 && cells[neighbours[1].y][neighbours[1].x].getDistance() == -2)
+                        vector = new Point(0, -1);
+
+                        // Walls on both vertical sides
+                    else if (cells[neighbours[2].y][neighbours[2].x].getDistance() == -2 && cells[neighbours[3].y][neighbours[3].x].getDistance() == -2)
+                        vector = new Point(-1, 0);
+
+
+                    else {
+                        //The pair with the lowest value becomes the direction
+                        if (values[0] < values[3]) // Left (horizontal) neighbour is lower in value than top (vertical) neighbour
+                            vector = new Point(-1, 0);
+                        else
+                            vector = new Point(0, -1);
+                    }
+
                 }
 
 
                 Point2D normalizedVector = VecMath.getNormalized(vector);
-                currentCell.setVector(normalizedVector);
+                currentCell.setVector(new Point((int) normalizedVector.getX(), (int) normalizedVector.getY()));
             }
         }
 
@@ -264,13 +283,14 @@ public class DistanceMap {
      */
 
     private boolean isTileAvailable(Point p) {
-        return (isInsideMap(p) && map.getCollisionLayer()[p.y][p.x] == true);//!Simulator.getInstance().getTiledMap().isAWall(p));
+        return (map.isInsideMap(p) && map.getCollisionLayer()[p.y][p.x] == true);//!Simulator.getInstance().getTiledMap().isAWall(p));
     }
 
-
+/*
     public boolean isInsideMap(Point p) {
         return !(p.x <= 0 || p.x >= cells[0].length || p.y <= 0 || p.y >= cells.length);
     }
+    */
 
 
     public boolean isNotInitialized(Point p) {

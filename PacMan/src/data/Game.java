@@ -119,7 +119,7 @@ public class Game {
             g2d.dispose();
 
             gameObjects.add(new Ghost(combined, deadImage, objLayer.getStartPosGhosts().get(i),
-                    25, 25, 56, 56, ghostAnimations, 100, 0.1));
+                    28, 28, 56, 56, ghostAnimations, 100, 0.1));
         }
     }
 
@@ -141,8 +141,8 @@ public class Game {
         java.util.Map<SoundPlayer.Sound, Clip> sounds = new HashMap<>();
 
         sounds.put(SoundPlayer.Sound.MAIN_MENU, getClip("/sounds/testSound.wav", 0.5f));
-        sounds.put(SoundPlayer.Sound.GAME_MUSIC, getClip("/sounds/pacman_gamemusic.wav", 0.03f));
-        sounds.put(SoundPlayer.Sound.PACMAN_MOVEMENT, getClip("/sounds/pacman_eatingsound.wav", 0.6f));
+        sounds.put(SoundPlayer.Sound.GAME_MUSIC, getClip("/sounds/pacman_startsound.wav", 0.1f));
+        sounds.put(SoundPlayer.Sound.PACMAN_MOVEMENT, getClip("/sounds/pacman_eatingsound.wav", 0.1f));
 
         soundPlayer = new SoundPlayer(sounds);
     }

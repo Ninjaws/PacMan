@@ -108,15 +108,7 @@ public class PacMan extends ActiveGameObject {
     }
 
 
-    public List<Point2D> getCorners() {
-        List<Point2D> corners = new ArrayList<>();
-        corners.add(new Point2D.Double(getPosition().getX(), getPosition().getY()));
-        corners.add(new Point2D.Double(getPosition().getX() + getObjectWidth(), getPosition().getY()));
-        corners.add(new Point2D.Double(getPosition().getX(), getPosition().getY() + getObjectHeight()));
-        corners.add(new Point2D.Double(getPosition().getX() + getObjectWidth(), getPosition().getY() + getObjectHeight()));
 
-        return corners;
-    }
 
     public Target getTarget() {
         return target;

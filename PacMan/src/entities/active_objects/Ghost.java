@@ -36,14 +36,35 @@ public class Ghost extends ActiveGameObject {
         if (target == null)
             target = Game.getInstance().getPacMan().getTarget();//Game.getInstance().getScatterCorners().get(3);
 
-        Point mapPos = Game.getInstance().getMap().getTileMapPos(getPosition());
 
-        Point direction = target.getDistanceMap().getCells()[mapPos.y][mapPos.x].getVector();
+        //Checking if all 4 corners are inside 1 tile (to make sure they don't walk over the walls)
+        int distance = -5;
+        boolean insideTile = true;
+        for (Point2D corner : getCorners()) {
+            Point tileCorner = Game.getInstance().getMap().getTileMapPos(corner);
 
-        Point2D deltaPos = new Point2D.Double(direction.getX() * getMoveSpeed() * deltaTime, direction.getY() * getMoveSpeed() * deltaTime);
+            //The first element becomes the starting distance
+            if (distance == -5)
+                distance = target.getDistanceMap().getCells()[tileCorner.y][tileCorner.x].getDistance();
+            else {
+                if (distance != target.getDistanceMap().getCells()[tileCorner.y][tileCorner.x].getDistance()) {
+                    insideTile = false;
+                    break;
+                }
+            }
+        }
+
+        if (insideTile){
+            Point mapPos = Game.getInstance().getMap().getTileMapPos(getPosition());
+
+            setDirection(target.getDistanceMap().getCells()[mapPos.y][mapPos.x].getVector());
+        }
 
 
-        setDirection(direction);
+        Point2D deltaPos = new Point2D.Double(getDirection().getX() * getMoveSpeed() * deltaTime, getDirection().getY() * getMoveSpeed() * deltaTime);
+
+
+       // setDirection(direction);
         setPosition(new Point2D.Double(getPosition().getX() + deltaPos.getX(), getPosition().getY() + deltaPos.getY()));
 
 

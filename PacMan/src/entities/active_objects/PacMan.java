@@ -20,15 +20,13 @@ import java.util.Map;
 public class PacMan extends ActiveGameObject {
 
 
-    private Point direction;
-
 
     public PacMan(BufferedImage image, Point2D position, int objectWidth, int objectHeight,
                   int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations, int animationDelayMillis, double moveSpeed) {
 
         super(image, position, objectWidth, objectHeight, spriteWidth, spriteHeight, animations, animationDelayMillis, moveSpeed);
 
-        this.direction = new Point(-1, 0);
+        setDirection(new Point(-1,0));
         getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
 
     }
@@ -38,7 +36,7 @@ public class PacMan extends ActiveGameObject {
 
         Point2D oldPos = getPosition();
 
-        Point2D deltaPos = new Point2D.Double(direction.getX() * getMoveSpeed() * deltaTime, direction.getY() * getMoveSpeed() * deltaTime);
+        Point2D deltaPos = new Point2D.Double(getDirection().getX() * getMoveSpeed() * deltaTime, getDirection().getY() * getMoveSpeed() * deltaTime);
 
         Point2D newPos = new Point2D.Double(oldPos.getX() + deltaPos.getX(), oldPos.getY() + deltaPos.getY());
 
@@ -50,13 +48,13 @@ public class PacMan extends ActiveGameObject {
         List<Point2D> corners = new ArrayList<>();
 
 
-        if (direction.x != 0) {
-            int x = Math.max(0, direction.x);
+        if (getDirection().x != 0) {
+            int x = Math.max(0, getDirection().x);
             corners.add(new Point2D.Double(newPos.getX() + x * getObjectWidth(), newPos.getY() + 0 * getObjectHeight()));
             corners.add(new Point2D.Double(newPos.getX() + x * getObjectWidth(), newPos.getY() + 1 * getObjectHeight()));
 
-        } else if (direction.y != 0) {
-            int y = Math.max(0, direction.y);
+        } else if (getDirection().y != 0) {
+            int y = Math.max(0, getDirection().y);
             corners.add(new Point2D.Double(newPos.getX() + 0 * getObjectWidth(), newPos.getY() + y * getObjectHeight()));
             corners.add(new Point2D.Double(newPos.getX() + 1 * getObjectWidth(), newPos.getY() + y * getObjectHeight()));
 
@@ -79,9 +77,9 @@ public class PacMan extends ActiveGameObject {
                 //Used to make sure pacman spawns against the tile edge, and not inside of it when you spawn on the left of top
                 Point2D correctionValue = new Point2D.Double(0, 0);
 
-                if (direction.x == 1)
+                if (getDirection().x == 1)
                     correctionValue.setLocation(Game.getInstance().getMap().getTileWidth() - getObjectWidth(), 0);
-                else if (direction.y == 1)
+                else if (getDirection().y == 1)
                     correctionValue.setLocation(0, Game.getInstance().getMap().getTileHeight() - getObjectHeight());
 
 
@@ -105,24 +103,6 @@ public class PacMan extends ActiveGameObject {
         setImage(getSpriteSheet().getCurrentImage());
         Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.PACMAN_MOVEMENT).loop(Clip.LOOP_CONTINUOUSLY);
         setPosition(newPos);
-    }
-
-
-    public void setDirection(Point direction) {
-        this.direction = direction;
-
-        if (direction.equals(new Point(0, -1)))
-            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_UP);
-        else if (direction.equals(new Point(-1, 0)))
-            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
-        else if (direction.equals(new Point(0, 1)))
-            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_DOWN);
-        else // new Point(1,0)
-            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_RIGHT);
-    }
-
-    public Point getDirection() {
-        return direction;
     }
 
 

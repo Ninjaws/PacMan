@@ -27,9 +27,9 @@ public abstract class ActiveGameObject extends GameObject {
     private double moveSpeed;
 
     public ActiveGameObject(BufferedImage image, Point2D position, int objectWidth, int objectHeight,
-                            int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations,int animationDelayMillis, double moveSpeed) {
+                            int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations,int animationDelayMillis, double moveSpeed, boolean active) {
 
-        super(image, position, objectWidth, objectHeight);
+        super(image, position, objectWidth, objectHeight, active);
         this.spriteSheetImage = image;
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;

@@ -82,7 +82,7 @@ public class DistanceMap {
                     continue;
 
                 //If it's a wall
-                if (!map.getCollisionLayer()[neighbour.y][neighbour.x] && !map.getStartArealayer()[neighbour.y][neighbour.x] && !map.getLooplayer()[neighbour.y][neighbour.x]) {
+                if (!map.getCollisionLayer()[neighbour.y][neighbour.x] && !map.getStartAreaLayer()[neighbour.y][neighbour.x] && !map.getLoopLayer()[neighbour.y][neighbour.x]) {
                     cells[neighbour.y][neighbour.x].setDistance(-2);
                     continue;
                 }
@@ -220,7 +220,7 @@ public class DistanceMap {
         for (int row = 0; row < cells.length; row++) {
             for (int col = 0; col < cells[row].length; col++) {
 
-                if ((map.getCollisionLayer()[row][col] || map.getStartArealayer()[row][col] || map.getLooplayer()[row][col]) && cells[row][col].getDistance() != -1) {
+                if ((map.getCollisionLayer()[row][col] || map.getStartAreaLayer()[row][col] || map.getLoopLayer()[row][col]) && cells[row][col].getDistance() != -1) {
 
                     g2d.setColor(cells[row][col].getColor());
                     g2d.fill(new Rectangle2D.Double(col * map.getTileWidth(), row * map.getTileHeight(),
@@ -258,7 +258,7 @@ public class DistanceMap {
 
         for (int row = 0; row < cells.length; row++) {
             for (int col = 0; col < cells[row].length; col++) {
-                if ((map.getCollisionLayer()[row][col] || map.getStartArealayer()[row][col] || map.getLooplayer()[row][col]) && cells[row][col].getDistance() != -1) {
+                if ((map.getCollisionLayer()[row][col] || map.getStartAreaLayer()[row][col] || map.getLoopLayer()[row][col]) && cells[row][col].getDistance() != -1) {
                     int centerX = col * tileSize + tileSize / 2;
                     int centerY = row * tileSize + tileSize / 2;
 

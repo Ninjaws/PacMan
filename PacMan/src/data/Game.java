@@ -9,6 +9,9 @@ import entities.active_objects.ActiveGameObject;
 import entities.GameObject;
 import entities.active_objects.PacMan;
 import entities.active_objects.Ghost;
+import entities.pickups.Coin;
+import entities.pickups.Pickup;
+import entities.pickups.Powerup;
 import sun.audio.AudioPlayer;
 import tiled.Map;
 import tiled.ObjectLayer;
@@ -26,6 +29,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,6 +51,10 @@ public class Game {
     private int screenWidth;
     private int screenHeight;
 
+    private int maxScore;
+    private int currentScore;
+
+
     private Game() {
 
     }
@@ -66,6 +74,17 @@ public class Game {
                 .findFirst()
                 .get();
 
+        //Pickups
+        for (int row = 0; row < map.getPickupLayer().length; row++) {
+            for (int col = 0; col < map.getPickupLayer()[row].length; col++) {
+                Pickup p = map.getPickupLayer()[row][col];
+                if (p instanceof Coin || p instanceof Powerup) {
+                 maxScore += p.getPoints();
+                    gameObjects.add(p);
+                }
+            }
+        }
+
 
         BufferedImage image = null;
         try {
@@ -81,7 +100,7 @@ public class Game {
         pacManAnimations.put(SpriteSheet.Animation.MOVE_RIGHT, 0);
 
         GameObject pacMan = new PacMan(Recoloring.colorImage(image, Color.YELLOW), objLayer.getStartPosPacMan(), 25, 25,
-                52, 52, pacManAnimations, 75, 0.17);
+                52, 52, pacManAnimations, 75, 0.17, true);
 
         gameObjects.add(pacMan);
 
@@ -119,8 +138,10 @@ public class Game {
             g2d.dispose();
 
             gameObjects.add(new Ghost(combined, deadImage, objLayer.getStartPosGhosts().get(i),
-                    28, 28, 56, 56, ghostAnimations, 100, 0.1));
+                    28, 28, 56, 56, ghostAnimations, 100, 0.1, true));
         }
+
+
     }
 
 
@@ -194,6 +215,18 @@ public class Game {
 
     public int getScreenHeight() {
         return screenHeight;
+    }
+
+    public int getMaxScore() {
+        return maxScore;
+    }
+
+    public void setCurrentScore(int currentScore) {
+        this.currentScore = currentScore;
+    }
+
+    public int getCurrentScore() {
+        return currentScore;
     }
 
     public ArrayList<GameObject> getGameObjects() {

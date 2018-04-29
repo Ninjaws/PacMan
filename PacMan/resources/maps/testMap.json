@@ -139,7 +139,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -208,200 +208,200 @@
              "0":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":true
                 },
              "1":
                 {
                  "coin":false,
-                 "doner":true,
                  "loop":false,
+                 "powerup":true,
                  "startarea":false,
                  "walkable":false
                 },
              "10":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "11":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "12":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "13":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "14":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "15":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "16":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "17":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "18":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "19":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "2":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "20":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "21":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "22":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "23":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "24":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "3":
                 {
                  "coin":true,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "4":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":true,
                  "walkable":false
                 },
              "5":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":true,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "6":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "7":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "8":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "9":
                 {
                  "coin":false,
-                 "doner":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 }
@@ -411,200 +411,200 @@
              "0":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "1":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "10":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "11":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "12":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "13":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "14":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "15":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "16":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "17":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "18":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "19":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "2":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "20":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "21":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "22":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "23":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "24":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "3":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "4":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "5":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "6":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "7":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "8":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "9":
                 {
                  "coin":"bool",
-                 "doner":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 }

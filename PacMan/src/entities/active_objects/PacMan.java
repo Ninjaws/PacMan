@@ -5,6 +5,7 @@ import business.SpriteSheet;
 import data.Game;
 import data.Loop;
 import data.pathfinding.Target;
+import entities.pickups.Pickup;
 
 import javax.sound.sampled.Clip;
 import java.awt.*;
@@ -23,9 +24,9 @@ public class PacMan extends ActiveGameObject {
     private Target target;
 
     public PacMan(BufferedImage image, Point2D position, int objectWidth, int objectHeight,
-                  int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations, int animationDelayMillis, double moveSpeed) {
+                  int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations, int animationDelayMillis, double moveSpeed, boolean active) {
 
-        super(image, position, objectWidth, objectHeight, spriteWidth, spriteHeight, animations, animationDelayMillis, moveSpeed);
+        super(image, position, objectWidth, objectHeight, spriteWidth, spriteHeight, animations, animationDelayMillis, moveSpeed, active);
 
         setDirection(new Point(-1, 0));
         getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
@@ -66,8 +67,10 @@ public class PacMan extends ActiveGameObject {
             Point tileMapPos = Game.getInstance().getMap().getTileMapPos(corner);
             if (!Game.getInstance().getMap().getCollisionLayer()[tileMapPos.y][tileMapPos.x])
                 walkable = false;
+
+
             //Check if you are looping
-            if (Game.getInstance().getMap().getLooplayer()[tileMapPos.y][tileMapPos.x]) {
+            if (Game.getInstance().getMap().getLoopLayer()[tileMapPos.y][tileMapPos.x]) {
 
                 Loop loop = Game.getInstance().getLoop(tileMapPos);
                 if (loop == null)
@@ -99,15 +102,36 @@ public class PacMan extends ActiveGameObject {
                 return;
             }
 
+        //Obtain pickups
+        for (Point2D corner : corners) {
+            Point tileMapPos = Game.getInstance().getMap().getTileMapPos(corner);
+
+            Pickup p = Game.getInstance().getMap().getPickupLayer()[tileMapPos.y][tileMapPos.x];
+
+            //Skip if it is not a pickup
+            if (p == null)
+                continue;
+
+            //Check if the pickup has already been taken
+            if (p.isActive()) {
+                p.setActive(false);// = null;//.setActive(false);
+
+                Game.getInstance().setCurrentScore(Game.getInstance().getCurrentScore() + p.getPoints());
+                System.out.println("Current score: " + Game.getInstance().getCurrentScore());
+                if (Game.getInstance().getCurrentScore() == Game.getInstance().getMaxScore()) {
+                    System.out.println("You win!");
+                }
+            }
+        }
+
 
         getSpriteSheet().update();
         setImage(getSpriteSheet().getCurrentImage());
         Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.PACMAN_MOVEMENT).loop(Clip.LOOP_CONTINUOUSLY);
         setPosition(newPos);
         target.getDistanceMap().calculateDistance(getPosition());
+
     }
-
-
 
 
     public Target getTarget() {

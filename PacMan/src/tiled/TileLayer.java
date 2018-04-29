@@ -1,12 +1,17 @@
 package tiled;
 
 import business.Recoloring;
+import entities.pickups.Coin;
+import entities.pickups.Powerup;
 
+import javax.imageio.ImageIO;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * @author Ian Vink
@@ -48,21 +53,37 @@ public class TileLayer extends Layer {
                     Tile tile = map.getTiles().get(index);
                     if (tile.isWalkable()) {
                         map.getCollisionLayer()[y][x] = true;
+                    } else if (tile.isStartArea()) {
+                        map.getStartAreaLayer()[y][x] = true;
+                    } else if (tile.isLoop()) {
+                        map.getLoopLayer()[y][x] = true;
                     }
-                    else if(tile.isStartArea()){
-                        map.getStartArealayer()[y][x] = true;
-                    }
-                    else if(tile.isLoop()){
-                        map.getLooplayer()[y][x] = true;
+
+                    if (tile.isCoin()) {
+                        BufferedImage image = null;
+                        try {
+                            image = ImageIO.read(getClass().getResource("/textures/ghostUnder.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        map.getPickupLayer()[y][x] = new Coin(image, new Point2D.Double(x*map.getTileWidth(),y*map.getTileHeight()),32,32,10, true);
+                    } else if (tile.isPowerup()) {
+                        BufferedImage image = null;
+                        try {
+                            image = ImageIO.read(getClass().getResource("/textures/donerSprite.png"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        map.getPickupLayer()[y][x] = new Powerup(image, new Point2D.Double(x*map.getTileWidth(),y*map.getTileHeight()),32,32,50, true);
                     }
                 }
                 i++;
             }
         }
 /*
-        for(int row = 0; row < map.getLooplayer().length;row++){
-            for(int col= 0; col < map.getLooplayer()[0].length; col++){
-                System.out.print(map.getLooplayer()[row][col]);
+        for(int row = 0; row < map.getLoopLayer().length;row++){
+            for(int col= 0; col < map.getLoopLayer()[0].length; col++){
+                System.out.print(map.getLoopLayer()[row][col]);
             }
             System.out.println("");
         }
@@ -86,8 +107,8 @@ public class TileLayer extends Layer {
             }
         }
 
-        if(isVisible())
-            img = Recoloring.colorImage(img,Color.BLUE);
+        if (isVisible())
+            img = Recoloring.colorImage(img, Color.BLUE);
 
         return img;
     }

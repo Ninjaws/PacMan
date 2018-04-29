@@ -9,6 +9,7 @@ import entities.active_objects.ActiveGameObject;
 import entities.GameObject;
 import entities.active_objects.PacMan;
 import entities.active_objects.Ghost;
+import entities.active_objects.ghosts.Pinky;
 import sun.audio.AudioPlayer;
 import tiled.Map;
 import tiled.ObjectLayer;
@@ -118,7 +119,7 @@ public class Game {
 
             g2d.dispose();
 
-            gameObjects.add(new Ghost(combined, deadImage, objLayer.getStartPosGhosts().get(i),
+            gameObjects.add(new Pinky(combined, deadImage, objLayer.getStartPosGhosts().get(i),
                     28, 28, 56, 56, ghostAnimations, 100, 0.1));
         }
     }

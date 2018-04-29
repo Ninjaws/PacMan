@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 
+/**
+ * @author Jordy van Raalte
+ */
 public class ServerPanel extends JPanel implements ActionListener {
 
     private int width = 0;

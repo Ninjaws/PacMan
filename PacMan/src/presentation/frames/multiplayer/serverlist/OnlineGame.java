@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
+/**
+ * @author Jordy van Raalte
+ */
 public class OnlineGame {
     private String name;
     private int playerCount;

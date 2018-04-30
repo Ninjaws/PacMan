@@ -22,6 +22,7 @@ import java.util.Map;
 public class PacMan extends ActiveGameObject {
 
     private Target target;
+    private SoundTimer timer;
 
     public PacMan(BufferedImage image, Point2D position, int objectWidth, int objectHeight,
                   int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations, int animationDelayMillis, double moveSpeed, boolean active) {
@@ -30,11 +31,16 @@ public class PacMan extends ActiveGameObject {
 
         setDirection(new Point(-1, 0));
         getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
+        setImage(getSpriteSheet().getCurrentImage());
         target = new Target(Game.getInstance().getMap(), Game.getInstance().getMap().getTileMapPos(position));
+        timer = new SoundTimer(0);
+        timer.setActive(false);
     }
 
     @Override
     public void move(long deltaTime) {
+
+        timer.update(deltaTime);
 
         Point2D oldPos = getPosition();
 
@@ -115,19 +121,30 @@ public class PacMan extends ActiveGameObject {
             //Check if the pickup has already been taken
             if (p.isActive()) {
                 p.setActive(false);// = null;//.setActive(false);
-
+                if (!timer.isActive()) {
+                    Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.PACMAN_MOVEMENT).loop(Clip.LOOP_CONTINUOUSLY);
+                    timer.setDuration(500);
+                    timer.setActive(true);
+                }
                 Game.getInstance().setCurrentScore(Game.getInstance().getCurrentScore() + p.getPoints());
                 System.out.println("Current score: " + Game.getInstance().getCurrentScore());
                 if (Game.getInstance().getCurrentScore() == Game.getInstance().getMaxScore()) {
                     System.out.println("You win!");
                 }
+            } else {
+                if (timer.durationFinished()) {
+                    timer.resetTime();
+                    timer.setActive(false);
+                    Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.PACMAN_MOVEMENT).stop();//.loop(Clip.LOOP_CONTINUOUSLY);
+                }
             }
+
         }
 
 
         getSpriteSheet().update();
         setImage(getSpriteSheet().getCurrentImage());
-        Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.PACMAN_MOVEMENT).loop(Clip.LOOP_CONTINUOUSLY);
+
         setPosition(newPos);
         target.getDistanceMap().calculateDistance(getPosition());
 
@@ -136,5 +153,47 @@ public class PacMan extends ActiveGameObject {
 
     public Target getTarget() {
         return target;
+    }
+
+
+    private class SoundTimer {
+        private int timePassed;
+        private int duration;
+        private boolean active;
+
+        private SoundTimer(int duration) {
+            this.duration = duration;
+            this.timePassed = 0;
+
+        }
+
+        private void update(long deltaTime) {
+            if (active)
+                timePassed += deltaTime;
+        }
+
+        private void resetTime() {
+            timePassed = 0;
+        }
+
+        private boolean durationFinished() {
+            return timePassed >= duration;
+        }
+
+        public int getDuration() {
+            return duration;
+        }
+
+        public void setDuration(int duration) {
+            this.duration = duration;
+        }
+
+        public boolean isActive() {
+            return active;
+        }
+
+        public void setActive(boolean active) {
+            this.active = active;
+        }
     }
 }

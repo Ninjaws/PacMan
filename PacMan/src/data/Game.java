@@ -54,6 +54,9 @@ public class Game {
     private int maxScore;
     private int currentScore;
 
+    private boolean paused;
+    private int lives;
+
 
     private Game() {
 
@@ -79,7 +82,7 @@ public class Game {
             for (int col = 0; col < map.getPickupLayer()[row].length; col++) {
                 Pickup p = map.getPickupLayer()[row][col];
                 if (p instanceof Coin || p instanceof Powerup) {
-                 maxScore += p.getPoints();
+                    maxScore += p.getPoints();
                     gameObjects.add(p);
                 }
             }
@@ -141,7 +144,8 @@ public class Game {
                     28, 28, 56, 56, ghostAnimations, 100, 0.1, true));
         }
 
-
+        paused = true;
+        lives = 3;
     }
 
 
@@ -227,6 +231,22 @@ public class Game {
 
     public int getCurrentScore() {
         return currentScore;
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
     public ArrayList<GameObject> getGameObjects() {

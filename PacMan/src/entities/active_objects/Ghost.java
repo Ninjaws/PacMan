@@ -27,6 +27,8 @@ public class Ghost extends ActiveGameObject {
 
         this.deadImage = deadImage;
         setDirection(new Point(0, 0));
+        getSpriteSheet().update();
+        setImage(getSpriteSheet().getCurrentImage());
         target = null;
     }
 

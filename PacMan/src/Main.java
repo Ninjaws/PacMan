@@ -11,7 +11,6 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         int screenWidth = 900;
         int screenHeight = 900;
         Game.getInstance().setScreenDimensions(screenWidth, screenHeight);

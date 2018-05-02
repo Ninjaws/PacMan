@@ -72,17 +72,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        if (game.isPaused()) {
-            deltaTime = System.currentTimeMillis() - startTime;
-            //3 Seconds  before you can start
-            if (deltaTime >= 3000) {
-                game.setPaused(false);
-                startTime = System.currentTimeMillis();
-            }
-            return;
-        }
-
         endTime = System.currentTimeMillis();
         deltaTime = endTime - startTime;
         startTime = System.currentTimeMillis();

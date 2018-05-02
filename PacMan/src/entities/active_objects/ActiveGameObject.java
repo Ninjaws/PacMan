@@ -72,7 +72,6 @@ public abstract class ActiveGameObject extends GameObject {
 
     public void setDirection(Point direction) {
         this.direction = direction;
-
         if (direction.equals(new Point(0, -1)))
             getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_UP);
         else if (direction.equals(new Point(-1, 0)))

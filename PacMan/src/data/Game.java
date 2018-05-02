@@ -8,7 +8,10 @@ import data.pathfinding.Target;
 import entities.active_objects.ActiveGameObject;
 import entities.GameObject;
 import entities.active_objects.PacMan;
-import entities.active_objects.Ghost;
+import entities.active_objects.ghosts.Blinky;
+import entities.active_objects.ghosts.Clyde;
+import entities.active_objects.ghosts.Inky;
+import entities.active_objects.ghosts.Pinky;
 import entities.pickups.Coin;
 import entities.pickups.Pickup;
 import entities.pickups.Powerup;
@@ -130,19 +133,44 @@ public class Game {
         ghostAnimations.put(SpriteSheet.Animation.MOVE_DOWN, 3);
         ghostAnimations.put(SpriteSheet.Animation.MOVE_RIGHT, 1);
 
-        for (int i = 0; i < objLayer.getStartPosGhosts().size(); i++) {
 
-            BufferedImage recoloredImage = Recoloring.colorImage(image, ghostColors[i]);
-            BufferedImage combined = new BufferedImage(recoloredImage.getWidth(), recoloredImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2d = combined.createGraphics();
-            g2d.drawImage(recoloredImage, new AffineTransform(), null);
-            g2d.drawImage(deadImage, new AffineTransform(), null);
+        BufferedImage recoloredImage = Recoloring.colorImage(image, ghostColors[0]);
+        BufferedImage combined = new BufferedImage(recoloredImage.getWidth(), recoloredImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = combined.createGraphics();
+        g2d.drawImage(recoloredImage, new AffineTransform(), null);
+        g2d.drawImage(deadImage,
+                new AffineTransform(), null);
+        g2d.dispose();
+        gameObjects.add(new Blinky(combined, deadImage, objLayer.getStartPosGhosts().get(0),
+                    28, 28, 56, 56, ghostAnimations, 100, 0.1));
 
-            g2d.dispose();
+        recoloredImage = Recoloring.colorImage(image, ghostColors[1]);
+        combined = new BufferedImage(recoloredImage.getWidth(), recoloredImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        g2d = combined.createGraphics();
+        g2d.drawImage(recoloredImage, new AffineTransform(), null);
+        g2d.drawImage(deadImage, new AffineTransform(), null);
+        g2d.dispose();
+        gameObjects.add(new Pinky(combined, deadImage, objLayer.getStartPosGhosts().get(1),
+                28, 28, 56, 56, ghostAnimations, 100, 0.1));
 
-            gameObjects.add(new Ghost(combined, deadImage, objLayer.getStartPosGhosts().get(i),
-                    28, 28, 56, 56, ghostAnimations, 100, 0.1, true));
-        }
+        recoloredImage = Recoloring.colorImage(image, ghostColors[3]);
+        combined = new BufferedImage(recoloredImage.getWidth(), recoloredImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        g2d = combined.createGraphics();
+        g2d.drawImage(recoloredImage, new AffineTransform(), null);
+        g2d.drawImage(deadImage, new AffineTransform(), null);
+        g2d.dispose();
+        gameObjects.add(new Inky(combined, deadImage, objLayer.getStartPosGhosts().get(3),
+                28, 28, 56, 56, ghostAnimations, 100, 0.1));
+
+        recoloredImage = Recoloring.colorImage(image, ghostColors[2]);
+        combined = new BufferedImage(recoloredImage.getWidth(), recoloredImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        g2d = combined.createGraphics();
+        g2d.drawImage(recoloredImage, new AffineTransform(), null);
+        g2d.drawImage(deadImage, new AffineTransform(), null);
+        g2d.dispose();
+        gameObjects.add(new Clyde(combined, deadImage, objLayer.getStartPosGhosts().get(2),
+                28, 28, 56, 56, ghostAnimations, 100, 0.1));
+
 
         paused = true;
         lives = 3;
@@ -268,10 +296,10 @@ public class Game {
                 .orElse(null);
     }
 
-    public List<Ghost> getGhosts() {
+    public List<entities.active_objects.ghosts.Ghost> getGhosts() {
         return gameObjects.stream()
-                .filter(object -> object instanceof Ghost)
-                .map(ghost -> (Ghost) ghost)
+                .filter(object -> object instanceof entities.active_objects.ghosts.Ghost)
+                .map(ghost -> (entities.active_objects.ghosts.Ghost) ghost)
                 .collect(Collectors.toList());
     }
 

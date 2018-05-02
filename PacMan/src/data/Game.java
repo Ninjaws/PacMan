@@ -160,7 +160,7 @@ public class Game {
         g2d.drawImage(deadImage, new AffineTransform(), null);
         g2d.dispose();
         gameObjects.add(new Inky(combined, deadImage, objLayer.getStartPosGhosts().get(3),
-                28, 28, 56, 56, ghostAnimations, 100, 0.1));
+                28, 28, 56, 56, ghostAnimations, 100, 0.16));
 
         recoloredImage = Recoloring.colorImage(image, ghostColors[2]);
         combined = new BufferedImage(recoloredImage.getWidth(), recoloredImage.getHeight(), BufferedImage.TYPE_INT_ARGB);

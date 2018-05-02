@@ -5,50 +5,66 @@ import data.Game;
 import data.pathfinding.Target;
 import entities.GameObject;
 import entities.active_objects.PacMan;
+import tiled.ObjectLayer;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
 public class Inky extends Ghost{
 
+    private Target scatterdTarget = Game.getInstance().getScatterCorners().get(3);
+    private int index = 3;
+    private ArrayList<Target> targets;
     public Inky(BufferedImage image, BufferedImage deadImage, Point2D position, int objectWidth, int objectHeight, int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations, int animationDelayMillis, double moveSpeed) {
         super(image, deadImage, position, objectWidth, objectHeight, spriteWidth, spriteHeight, animations, animationDelayMillis, moveSpeed);
         target = Game.getInstance().getPacMan().getTarget();
+        targets = (ArrayList)Game.getInstance().getScatterCorners();
+        ObjectLayer objLayer = (ObjectLayer) Game.getInstance().getMap().getLayers().stream()
+                .filter(layer -> layer instanceof ObjectLayer)
+                .findFirst()
+                .get();
+        targets.add(new Target(Game.getInstance().getMap(), objLayer.getStartPosPacMan()));
+        targets.add(new Target(Game.getInstance().getMap(), objLayer.getStartPosGhosts().get(0)));
     }
 
     @Override
     public void setNextTarget() {
-            if(Game.getInstance().getPacMan().getPosition().distance(this.getPosition()) < 160) {
-                this.setMoveSpeed(0.125);
+            if(chase) {
                 target = Game.getInstance().getPacMan().getTarget();
             }
-            else {
-                this.setMoveSpeed(0.1);
-                Random random = new Random();
-                int index = 0;
-                for(GameObject gameObject : Game.getInstance().getGameObjects()){
-                    if(gameObject instanceof Ghost) {
-                        int i = random.nextInt(4);
-                        if(i == 2) {
-                            target = ((Ghost) gameObject).getTarget();
+            else if(scatterd) {
+                if(this.getPosition().distance(target.getPosition()) < 64 && scatterd) {
+                    while (true){
+                        target = targets.get(index);
+                        Random random = new Random();
+                        index = random.nextInt(5);
+                        if(!target.equals(targets.get(index)))
                             break;
-                        }
-                        else if(index == 3) {
-                            target = ((Ghost) gameObject).getTarget();
-                            break;
-                        }
-                        index++;
                     }
                 }
             }
     }
 
+
     @Override
     public void update() {
+        if(Game.getInstance().getPacMan().getPosition().distance(this.getPosition()) >= 160 && chase) {
+            chase = false;
+            scatterd = true;
+            target = targets.get(index);
+            setNextTarget();
+        }
+        else if((Game.getInstance().getPacMan().getPosition().distance(this.getPosition()) < 160 && scatterd)) {
+            scatterd = false;
+            chase = true;
+            setNextTarget();
+        }
+
         setNextTarget();
     }
 

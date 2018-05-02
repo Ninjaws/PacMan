@@ -33,6 +33,11 @@ public class Clyde extends Ghost {
                 scatterd = false;
                 setNextTarget();
             }
+            else if(target.getPosition().distance(scatterdTarget.getPosition()) < 64){
+                chase = true;
+                scatterd = false;
+                setNextTarget();
+            }
         }
         else if(chase) {
             if(Game.getInstance().getPacMan().getPosition().distance(this.getPosition()) <= 192) {

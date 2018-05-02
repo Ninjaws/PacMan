@@ -144,6 +144,17 @@
          "y":0
         }, 
         {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 68, 68, 68, 68, 68, 68, 68, 0, 0, 0, 68, 68, 68, 68, 68, 68, 68, 68, 0, 0, 68, 0, 0, 0, 68, 0, 0, 68, 0, 0, 0, 68, 0, 0, 68, 0, 0, 0, 68, 0, 0, 66, 0, 0, 0, 68, 0, 0, 68, 0, 0, 0, 68, 0, 0, 68, 0, 0, 0, 66, 0, 0, 68, 0, 0, 0, 68, 0, 0, 68, 68, 68, 68, 68, 0, 0, 68, 0, 0, 0, 68, 0, 0, 68, 68, 68, 68, 68, 68, 68, 68, 0, 0, 0, 68, 68, 68, 68, 68, 68, 68, 68, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 68, 68, 68, 68, 0, 0, 68, 0, 0, 68, 68, 68, 68, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 68, 68, 68, 68, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 68, 68, 68, 68, 0, 0, 68, 0, 0, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 0, 0, 68, 0, 0, 66, 0, 0, 68, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 68, 0, 0, 66, 0, 0, 68, 0, 0, 68, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 68, 0, 0, 68, 0, 0, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":21,
+         "name":"pickup layer",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":false,
+         "width":21,
+         "x":0,
+         "y":0
+        }, 
+        {
          "data":[1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 4, 5, 2, 2, 2, 2, 2, 2, 2, 2, 6, 9, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 14, 9, 0, 7, 34, 8, 0, 7, 8, 0, 11, 0, 13, 0, 7, 8, 0, 7, 34, 8, 0, 14, 9, 0, 13, 0, 11, 0, 13, 11, 0, 31, 34, 35, 0, 13, 11, 0, 13, 0, 11, 0, 14, 9, 0, 15, 18, 16, 0, 15, 16, 0, 0, 0, 0, 0, 15, 16, 0, 15, 18, 16, 0, 14, 9, 0, 0, 0, 0, 0, 0, 0, 0, 7, 34, 8, 0, 0, 0, 0, 0, 0, 0, 0, 14, 41, 42, 42, 24, 0, 7, 34, 34, 34, 32, 0, 31, 34, 34, 34, 8, 0, 23, 42, 42, 46, 0, 0, 0, 9, 0, 15, 18, 18, 18, 18, 18, 18, 18, 18, 18, 16, 0, 14, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 2, 2, 2, 32, 0, 23, 24, 0, 1, 2, 0, 2, 6, 0, 23, 24, 0, 31, 2, 2, 2, 0, 0, 0, 0, 0, 11, 13, 0, 9, 0, 0, 0, 14, 0, 11, 13, 0, 0, 0, 0, 0, 42, 42, 42, 24, 0, 11, 13, 0, 41, 42, 42, 42, 46, 0, 11, 13, 0, 23, 42, 42, 42, 0, 0, 0, 9, 0, 31, 32, 0, 0, 0, 0, 0, 0, 0, 31, 32, 0, 14, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 7, 8, 0, 7, 8, 0, 0, 0, 0, 14, 0, 0, 0, 1, 2, 2, 32, 0, 7, 34, 34, 32, 11, 0, 13, 31, 34, 34, 8, 0, 31, 2, 2, 6, 9, 0, 0, 0, 0, 15, 18, 18, 18, 16, 0, 15, 18, 18, 18, 16, 0, 0, 0, 0, 14, 9, 0, 23, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 8, 0, 14, 9, 0, 11, 13, 0, 23, 18, 18, 18, 24, 0, 23, 18, 18, 18, 24, 0, 13, 11, 0, 14, 9, 0, 31, 32, 0, 31, 34, 34, 34, 32, 0, 31, 34, 34, 34, 32, 0, 15, 16, 0, 14, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 41, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 46],
          "height":21,
          "name":"walls layer",
@@ -196,151 +207,201 @@
             {
              "0":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":true
                 },
              "1":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":true,
                  "startarea":false,
                  "walkable":false
                 },
              "10":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "11":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "12":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "13":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "14":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "15":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "16":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "17":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "18":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "19":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "2":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "20":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "21":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "22":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "23":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "24":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "3":
                 {
+                 "coin":true,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "4":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":true,
                  "walkable":false
                 },
              "5":
                 {
+                 "coin":false,
                  "loop":true,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "6":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "7":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "8":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 },
              "9":
                 {
+                 "coin":false,
                  "loop":false,
+                 "powerup":false,
                  "startarea":false,
                  "walkable":false
                 }
@@ -349,151 +410,201 @@
             {
              "0":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "1":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "10":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "11":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "12":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "13":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "14":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "15":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "16":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "17":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "18":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "19":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "2":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "20":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "21":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "22":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "23":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "24":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "3":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "4":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "5":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "6":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "7":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "8":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 },
              "9":
                 {
+                 "coin":"bool",
                  "loop":"bool",
+                 "powerup":"bool",
                  "startarea":"bool",
                  "walkable":"bool"
                 }

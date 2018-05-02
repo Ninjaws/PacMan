@@ -25,7 +25,7 @@ public class DebugDraw {
         //   g2d.drawImage(game.getDataLayer().getImage(), at, null);
 
       //  game.getPacMan().getTarget().getDistanceMap().drawHeatMap(g2d);
-        game.getPacMan().getTarget().getDistanceMap().drawDistanceMap(g2d);
-        game.getPacMan().getTarget().getDistanceMap().drawVectorField(g2d);
+      //  game.getPacMan().getTarget().getDistanceMap().drawDistanceMap(g2d);
+      //  game.getPacMan().getTarget().getDistanceMap().drawVectorField(g2d);
     }
 }

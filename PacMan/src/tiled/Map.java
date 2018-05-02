@@ -1,7 +1,5 @@
 package tiled;
 
-import entities.pickups.Pickup;
-
 import javax.imageio.ImageIO;
 import javax.json.*;
 import java.awt.*;
@@ -26,10 +24,9 @@ public class Map {
     private java.util.Map<Integer, Tile> tiles = new TreeMap<>();
     private ArrayList<Layer> layers = new ArrayList<>();
 
-    private boolean[][] collisioLayer;
-    private boolean[][] startAreaLayer;
-    private boolean[][] loopLayer;
-    private Pickup[][] pickupLayer;
+    private boolean[][] collisionlayer;
+    private boolean[][] startArealayer;
+    private boolean[][] looplayer;
 
 
     public Map(String filename) {
@@ -81,10 +78,6 @@ public class Map {
                             if (properties.containsKey("loop")) {
                                 tile.setLoop(properties.getBoolean("loop"));
                             }
-                            if (properties.containsKey("coin"))
-                                tile.setCoin(properties.getBoolean("coin"));
-                            if (properties.containsKey("powerup"))
-                                tile.setPowerup(properties.getBoolean("powerup"));
                         }
                         index++;
                     }
@@ -96,10 +89,9 @@ public class Map {
         }
 
 
-        collisioLayer = new boolean[mapHeight][mapWidth];
-        startAreaLayer = new boolean[mapHeight][mapWidth];
-        loopLayer = new boolean[mapHeight][mapWidth];
-        pickupLayer = new Pickup[mapHeight][mapWidth];
+        collisionlayer = new boolean[mapHeight][mapWidth];
+        startArealayer = new boolean[mapHeight][mapWidth];
+        looplayer = new boolean[mapHeight][mapWidth];
 
         JsonArray layers = map.getJsonArray("layers");
 
@@ -119,19 +111,15 @@ public class Map {
     }
 
     public boolean[][] getCollisionLayer() {
-        return collisioLayer;
+        return collisionlayer;
     }
 
-    public boolean[][] getStartAreaLayer() {
-        return startAreaLayer;
+    public boolean[][] getStartArealayer() {
+        return startArealayer;
     }
 
-    public boolean[][] getLoopLayer() {
-        return loopLayer;
-    }
-
-    public Pickup[][] getPickupLayer() {
-        return pickupLayer;
+    public boolean[][] getLooplayer() {
+        return looplayer;
     }
 
     public int getMapHeight() {

@@ -5,7 +5,6 @@ import business.SpriteSheet;
 import data.Game;
 import data.Loop;
 import data.pathfinding.Target;
-import entities.pickups.Pickup;
 
 import javax.sound.sampled.Clip;
 import java.awt.*;
@@ -22,25 +21,19 @@ import java.util.Map;
 public class PacMan extends ActiveGameObject {
 
     private Target target;
-    private SoundTimer timer;
 
     public PacMan(BufferedImage image, Point2D position, int objectWidth, int objectHeight,
-                  int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations, int animationDelayMillis, double moveSpeed, boolean active) {
+                  int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations, int animationDelayMillis, double moveSpeed) {
 
-        super(image, position, objectWidth, objectHeight, spriteWidth, spriteHeight, animations, animationDelayMillis, moveSpeed, active);
+        super(image, position, objectWidth, objectHeight, spriteWidth, spriteHeight, animations, animationDelayMillis, moveSpeed);
 
         setDirection(new Point(-1, 0));
         getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
-        setImage(getSpriteSheet().getCurrentImage());
         target = new Target(Game.getInstance().getMap(), Game.getInstance().getMap().getTileMapPos(position));
-        timer = new SoundTimer(0);
-        timer.setActive(false);
     }
 
     @Override
     public void move(long deltaTime) {
-
-        timer.update(deltaTime);
 
         Point2D oldPos = getPosition();
 
@@ -73,10 +66,8 @@ public class PacMan extends ActiveGameObject {
             Point tileMapPos = Game.getInstance().getMap().getTileMapPos(corner);
             if (!Game.getInstance().getMap().getCollisionLayer()[tileMapPos.y][tileMapPos.x])
                 walkable = false;
-
-
             //Check if you are looping
-            if (Game.getInstance().getMap().getLoopLayer()[tileMapPos.y][tileMapPos.x]) {
+            if (Game.getInstance().getMap().getLooplayer()[tileMapPos.y][tileMapPos.x]) {
 
                 Loop loop = Game.getInstance().getLoop(tileMapPos);
                 if (loop == null)
@@ -108,92 +99,18 @@ public class PacMan extends ActiveGameObject {
                 return;
             }
 
-        //Obtain pickups
-        for (Point2D corner : corners) {
-            Point tileMapPos = Game.getInstance().getMap().getTileMapPos(corner);
-
-            Pickup p = Game.getInstance().getMap().getPickupLayer()[tileMapPos.y][tileMapPos.x];
-
-            //Skip if it is not a pickup
-            if (p == null)
-                continue;
-
-            //Check if the pickup has already been taken
-            if (p.isActive()) {
-                p.setActive(false);// = null;//.setActive(false);
-                if (!timer.isActive()) {
-                    Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.PACMAN_MOVEMENT).loop(Clip.LOOP_CONTINUOUSLY);
-                    timer.setDuration(500);
-                    timer.setActive(true);
-                }
-                Game.getInstance().setCurrentScore(Game.getInstance().getCurrentScore() + p.getPoints());
-                System.out.println("Current score: " + Game.getInstance().getCurrentScore());
-                if (Game.getInstance().getCurrentScore() == Game.getInstance().getMaxScore()) {
-                    System.out.println("You win!");
-                }
-            } else {
-                if (timer.durationFinished()) {
-                    timer.resetTime();
-                    timer.setActive(false);
-                    Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.PACMAN_MOVEMENT).stop();//.loop(Clip.LOOP_CONTINUOUSLY);
-                }
-            }
-
-        }
-
 
         getSpriteSheet().update();
         setImage(getSpriteSheet().getCurrentImage());
-
+        Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.PACMAN_MOVEMENT).loop(Clip.LOOP_CONTINUOUSLY);
         setPosition(newPos);
         target.getDistanceMap().calculateDistance(getPosition());
-
     }
+
+
 
 
     public Target getTarget() {
         return target;
-    }
-
-
-    private class SoundTimer {
-        private int timePassed;
-        private int duration;
-        private boolean active;
-
-        private SoundTimer(int duration) {
-            this.duration = duration;
-            this.timePassed = 0;
-
-        }
-
-        private void update(long deltaTime) {
-            if (active)
-                timePassed += deltaTime;
-        }
-
-        private void resetTime() {
-            timePassed = 0;
-        }
-
-        private boolean durationFinished() {
-            return timePassed >= duration;
-        }
-
-        public int getDuration() {
-            return duration;
-        }
-
-        public void setDuration(int duration) {
-            this.duration = duration;
-        }
-
-        public boolean isActive() {
-            return active;
-        }
-
-        public void setActive(boolean active) {
-            this.active = active;
-        }
     }
 }

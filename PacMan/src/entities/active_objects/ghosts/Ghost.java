@@ -38,6 +38,8 @@ public abstract class Ghost extends ActiveGameObject implements ActionListener {
         super(image, position, objectWidth, objectHeight, spriteWidth, spriteHeight, animations, animationDelayMillis, moveSpeed, true);
         this.deadImage = deadImage;
         setDirection(new Point(0, 0));
+        getSpriteSheet().update();
+        setImage(getSpriteSheet().getCurrentImage());
 
         scatterdLevels.put(1,7.0);
         scatterdLevels.put(2,7.0);

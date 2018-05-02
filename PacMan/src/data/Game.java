@@ -3,7 +3,6 @@ package data;
 import business.Recoloring;
 import business.SoundPlayer;
 import business.SpriteSheet;
-import com.sun.scenario.Settings;
 import data.pathfinding.Target;
 import entities.active_objects.ActiveGameObject;
 import entities.GameObject;
@@ -24,7 +23,6 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -130,23 +128,44 @@ public class Game {
         ghostAnimations.put(SpriteSheet.Animation.MOVE_DOWN, 3);
         ghostAnimations.put(SpriteSheet.Animation.MOVE_RIGHT, 1);
 
-        for (int i = 0; i < objLayer.getStartPosGhosts().size(); i++) {
 
-            BufferedImage recoloredImage = Recoloring.colorImage(image, ghostColors[i]);
-            BufferedImage combined = new BufferedImage(recoloredImage.getWidth(), recoloredImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2d = combined.createGraphics();
-            g2d.drawImage(recoloredImage, new AffineTransform(), null);
-            g2d.drawImage(deadImage, new AffineTransform(), null);
+        int i = 0;
+        BufferedImage recoloredImage = Recoloring.colorImage(image, ghostColors[1]);
+        BufferedImage combined = new BufferedImage(recoloredImage.getWidth(), recoloredImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = combined.createGraphics();
+        g2d.drawImage(recoloredImage, new AffineTransform(), null);
+        g2d.drawImage(deadImage, new AffineTransform(), null);
 
-            g2d.dispose();
+        g2d.dispose();
 
-            gameObjects.add(new Ghost(combined, deadImage, objLayer.getStartPosGhosts().get(i),
-                    28, 28, 56, 56, ghostAnimations, 100, 0.1, true));
-        }
+        gameObjects.add(new Pinky(combined, deadImage, objLayer.getStartPosGhosts().get(1),
+                    28, 28, 56, 56, ghostAnimations, 100, 0.1));
 
-        paused = true;
-        lives = 3;
+        recoloredImage = Recoloring.colorImage(image, ghostColors[0]);
+        combined = new BufferedImage(recoloredImage.getWidth(), recoloredImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        g2d = combined.createGraphics();
+        g2d.drawImage(recoloredImage, new AffineTransform(), null);
+        g2d.drawImage(deadImage, new AffineTransform(), null);
+        gameObjects.add(new Blinky(combined, deadImage, objLayer.getStartPosGhosts().get(0),
+                28, 28, 56, 56, ghostAnimations, 100, 0.1));
+
+        recoloredImage = Recoloring.colorImage(image, ghostColors[2]);
+        combined = new BufferedImage(recoloredImage.getWidth(), recoloredImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        g2d = combined.createGraphics();
+        g2d.drawImage(recoloredImage, new AffineTransform(), null);
+        g2d.drawImage(deadImage, new AffineTransform(), null);
+        gameObjects.add(new Clyde(combined, deadImage, objLayer.getStartPosGhosts().get(2),
+                28, 28, 56, 56, ghostAnimations, 100, 0.1));
+
+        recoloredImage = Recoloring.colorImage(image, ghostColors[3]);
+        combined = new BufferedImage(recoloredImage.getWidth(), recoloredImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        g2d = combined.createGraphics();
+        g2d.drawImage(recoloredImage, new AffineTransform(), null);
+        g2d.drawImage(deadImage, new AffineTransform(), null);
+        gameObjects.add(new Inky(combined, deadImage, objLayer.getStartPosGhosts().get(3),
+                28, 28, 56, 56, ghostAnimations, 100, 0.1));
     }
+
 
 
     public Map getMap() {

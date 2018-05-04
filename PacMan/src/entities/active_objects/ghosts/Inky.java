@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Inky walks to random places and charges pacman if he is in a specific range.
+ */
 public class Inky extends Ghost{
 
     private Target scatterdTarget = Game.getInstance().getScatterCorners().get(3);

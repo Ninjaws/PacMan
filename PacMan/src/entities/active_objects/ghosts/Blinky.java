@@ -34,6 +34,12 @@ public class Blinky extends Ghost {
                 chase = true;
                 setNextTarget();
             }
+            else if(scatterdTarget.getPosition().distance(this.getPosition()) < 128) {
+                seconds = 0;
+                scatterd = false;
+                chase = true;
+                setNextTarget();
+            }
         }
         else if(chase) {
             if((double)(seconds) % chaseLevels.get(levelIndex) == 0){

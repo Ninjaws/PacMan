@@ -28,6 +28,12 @@ public class Pinky extends Ghost {
                 chase = true;
                 setNextTarget();
             }
+            else if(scatterdTarget.getPosition().distance(this.getPosition()) < 64) {
+                seconds = 0;
+                scatterd = false;
+                chase = true;
+                setNextTarget();
+            }
         }
         else if(chase) {
             if((double)(seconds) % chaseLevels.get(levelIndex) == 0){
@@ -37,6 +43,9 @@ public class Pinky extends Ghost {
                 levelIndex++;
                 setNextTarget();
             }
+            else if(target.getPosition().distance(this.getPosition()) < 64) {
+                setNextTarget();
+            }
         }
 
     }
@@ -44,6 +53,7 @@ public class Pinky extends Ghost {
     @Override
     public void setNextTarget() {
         if(chase) {
+            Target preTarget = target;
             int index = 4;
             try {
                 while(true) {
@@ -60,21 +70,17 @@ public class Pinky extends Ghost {
                         index--;
                     }
                 }
+                if(target.getPosition().distance(preTarget.getPosition()) < 16 && !target.equals(Game.getInstance().getPacMan().getTarget())) {
+                    target = Game.getInstance().getPacMan().getTarget();
+                }
             }
             catch (Exception e) {
                 target = Game.getInstance().getPacMan().getTarget();
                 //e.printStackTrace();
             }
-
-            if(target.getPosition().distance(this.getPosition()) < 32)
-                target = Game.getInstance().getPacMan().getTarget();
         }
-        else if(scatterd) {
+        else if(scatterd)
             target = scatterdTarget;
-            if(target.getPosition().distance(this.getPosition()) < 32) {
-                target = Game.getInstance().getScatterCorners().get(2);
-            }
-        }
     }
 
     @Override
@@ -85,7 +91,6 @@ public class Pinky extends Ghost {
 
         else if(target.getPosition().distance(Game.getInstance().getPacMan().getPosition()) > 92 && chase)
             setNextTarget();
-
         update();
     }
 }

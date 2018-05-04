@@ -23,6 +23,7 @@ public class Clyde extends Ghost {
             target = Game.getInstance().getPacMan().getTarget();
         else if(scatterd)
             target = scatterdTarget;
+
     }
 
     @Override

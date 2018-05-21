@@ -1,24 +1,44 @@
 package client;
 
-import client.data.Storage;
-import client.presentation.frames.LauncherFrame;
-import client.presentation.dialogs.LogInDialog;
+import client.presentation.panes.LauncherPane;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class ClientMain {
+public class ClientMain extends Application {
 
     public static void main(String[] args) throws Exception {
-
-        LogInDialog logInDialog = new LogInDialog("Log In");
-        LogInDialog.DialogResult result = logInDialog.getResult();
-
-        Storage.getInstance().setUsername(result.getName());
-        Storage.getInstance().getObjectToServer().writeObject(result.getName());
-        System.out.println(Storage.getInstance().getObjectFromServer().readObject());
-        LauncherFrame.getInstance();
-
-        Storage.getInstance().startThreads();
-
-
+        launch(args);
     }
 
+    private static Scene mainScene;
+    private static ClientMain instance;
+    public ClientMain() {
+        instance = this;
+        mainScene = new Scene(new LauncherPane(),0,0);
+        addStyle("css_files/launcher.css");
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("PacMan");
+        primaryStage.setWidth(1000);
+        primaryStage.setHeight(800);
+        primaryStage.setScene(mainScene);
+        primaryStage.show();
+    }
+
+    public static void clearStyles() {
+        mainScene.getStylesheets().clear();
+    }
+
+    public static void addStyle(String fileName) {
+        mainScene.getStylesheets().add(getInstance().getClass().getResource("/" + fileName).toExternalForm());
+    }
+
+    public static ClientMain getInstance() {
+        if(instance == null)
+            instance = new ClientMain();
+        return instance;
+    }
 }

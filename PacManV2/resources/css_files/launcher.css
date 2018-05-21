@@ -1,0 +1,34 @@
+#launcher-pane {
+    -fx-background-color: black;
+}
+
+#top-pane {
+    -fx-background-color: black;
+}
+
+#user-name-text {
+    -fx-fill: whitesmoke;
+    -fx-font-family: monospace;
+    -fx-font-size: 30px;
+}
+
+#user-name-field {
+    -fx-text-fill: whitesmoke;
+    -fx-background-color: #23272a;
+    -fx-font-family: monospace;
+    -fx-font-size: 20px;
+    -fx-min-width: 300px;
+}
+
+#title {
+    -fx-fill: yellow;
+    -fx-font-size: 125px;
+    -fx-font-family: monospace;
+}
+
+#connect-button {
+    -fx-background-color: orange;
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: monospace;
+    -fx-font-size: 20px;
+}

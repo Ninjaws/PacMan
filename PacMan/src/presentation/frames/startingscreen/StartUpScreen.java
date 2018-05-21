@@ -3,7 +3,7 @@ import business.SoundPlayer;
 import data.Game;
 import presentation.frames.GamePanel;
 import presentation.frames.PacManFrame;
-import presentation.frames.multiplayer.MultiplayerPanel;
+import presentation.frames.multiplayer.serverlist.ServerPanel;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
@@ -105,7 +105,7 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
     private void randomlySpawn() {
         Random random = new Random();
         int spawnX = random.nextInt(100);
-        int spawnY = random.nextInt(getWidth());
+        int spawnY = random.nextInt(Game.getInstance().getScreenWidth());
 
         if(spawnX >= 50)
             spawnX = -1 * frames[0].getWidth();
@@ -158,7 +158,7 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
                 }
                 else if(menuText.getText().equals("Multiplayer")) {
                     Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).stop();
-                    PacManFrame.setNextPanel(new MultiplayerPanel());
+                    PacManFrame.setNextPanel(new ServerPanel());
                     animatedPacMans.clear();
                 }
             }

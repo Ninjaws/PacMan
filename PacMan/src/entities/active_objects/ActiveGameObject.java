@@ -3,8 +3,11 @@ package entities.active_objects;
 import business.SpriteSheet;
 import entities.GameObject;
 
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,14 +20,16 @@ public abstract class ActiveGameObject extends GameObject {
     private int spriteWidth;
     private int spriteHeight;
 
+    private Point direction;
+
     private SpriteSheet spriteSheet;
 
     private double moveSpeed;
 
     public ActiveGameObject(BufferedImage image, Point2D position, int objectWidth, int objectHeight,
-                            int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations,int animationDelayMillis, double moveSpeed) {
+                            int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations,int animationDelayMillis, double moveSpeed, boolean active) {
 
-        super(image, position, objectWidth, objectHeight);
+        super(image, position, objectWidth, objectHeight, active);
         this.spriteSheetImage = image;
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;
@@ -47,7 +52,34 @@ public abstract class ActiveGameObject extends GameObject {
         return moveSpeed;
     }
 
+    public Point getDirection() {
+        return direction;
+    }
+
+    public java.util.List<Point2D> getCorners() {
+        List<Point2D> corners = new ArrayList<>();
+        corners.add(new Point2D.Double(getPosition().getX(), getPosition().getY()));
+        corners.add(new Point2D.Double(getPosition().getX() + getObjectWidth(), getPosition().getY()));
+        corners.add(new Point2D.Double(getPosition().getX(), getPosition().getY() + getObjectHeight()));
+        corners.add(new Point2D.Double(getPosition().getX() + getObjectWidth(), getPosition().getY() + getObjectHeight()));
+
+        return corners;
+    }
+
     public void setMoveSpeed(double moveSpeed) {
         this.moveSpeed = moveSpeed;
+    }
+
+    public void setDirection(Point direction) {
+        this.direction = direction;
+
+        if (direction.equals(new Point(0, -1)))
+            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_UP);
+        else if (direction.equals(new Point(-1, 0)))
+            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_LEFT);
+        else if (direction.equals(new Point(0, 1)))
+            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_DOWN);
+        else // new Point(1,0)
+            getSpriteSheet().setCurrentAnimation(SpriteSheet.Animation.MOVE_RIGHT);
     }
 }

@@ -32,3 +32,26 @@
     -fx-font-family: monospace;
     -fx-font-size: 20px;
 }
+
+.list-view {
+    -fx-background-color: #23272a;
+    -fx-min-width: 700px;
+}
+
+#refresh-button {
+    -fx-background-color: orange;
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: monospace;
+    -fx-font-size: 30px;
+    -fx-min-width: 300px;
+    -fx-min-height: 75px;
+}
+
+#join-button {
+    -fx-background-color: deepskyblue;
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: monospace;
+    -fx-font-size: 30px;
+    -fx-min-width: 300px;
+    -fx-min-height: 75px;
+}

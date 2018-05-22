@@ -1,27 +1,34 @@
 package client.presentation.panes;
 
+import client.presentation.lobby.Lobby;
 import com.jfoenix.controls.JFXButton;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
+
 public class LobbiesPane extends HBox {
+    private ArrayList<Lobby> lobbies = new ArrayList<>();
+    private ListView sessions;
+    private Lobby selectedLobby = null;
     public LobbiesPane() {
-        ListView sessions = new ListView();
-        sessions.getItems().addAll();
+        sessions = new ListView();
+        lobbies.add(new Lobby("IAN"));
+        lobbies.add(new Lobby("JORDY"));
+
+        sessions.getItems().addAll(lobbies);
 
         VBox buttons = new VBox();
         JFXButton refresh = new JFXButton("Refresh");
-        JFXButton join = new JFXButton("Join");
 
         refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> System.out.println(true));
-        join.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> System.out.println(true));
 
-        join.setId("join-button");
+
         refresh.setId("refresh-button");
 
-        buttons.getChildren().addAll(refresh,join);
+        buttons.getChildren().addAll(refresh);
         this.getChildren().addAll(sessions, buttons);
     }
 }

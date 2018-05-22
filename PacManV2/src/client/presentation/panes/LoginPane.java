@@ -32,15 +32,15 @@ public class LoginPane extends HBox {
             public void handle(MouseEvent event) {
                 LauncherPane.setNewCenter(new LobbiesPane());
 
-                /*try {
-                    *//*Storage.getInstance().getObjectToServer().writeObject(textField.getText());
+                try {
+                    Storage.getInstance().getObjectToServer().writeObject(textField.getText());
                     System.out.println(Storage.getInstance().getObjectFromServer().readObject());
                     Storage.getInstance().setUsername(textField.getText());
-                    Storage.getInstance().startThreads();*//*
+                    Storage.getInstance().startThreads();
 
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
-                }*/
+                }
             }
         });
         connect.setId("connect-button");

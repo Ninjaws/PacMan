@@ -34,7 +34,7 @@
 }
 
 .list-view {
-    -fx-background-color: #23272a;
+    -fx-background: #23272a;
     -fx-min-width: 700px;
 }
 
@@ -51,7 +51,18 @@
     -fx-background-color: deepskyblue;
     -fx-text-fill: whitesmoke;
     -fx-font-family: monospace;
-    -fx-font-size: 30px;
-    -fx-min-width: 300px;
-    -fx-min-height: 75px;
+    -fx-font-size: 15px;
+    -fx-min-width: 75px;
+    -fx-min-height: 25px;
+}
+
+.lobby-text {
+    -fx-background: #23272a;
+    -fx-fill: whitesmoke;
+    -fx-font-size: 15px;
+    -fx-font-family: monospace;
+}
+
+.list-cell {
+    -fx-background-color: #23272a;
 }

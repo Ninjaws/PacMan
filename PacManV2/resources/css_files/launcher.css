@@ -66,3 +66,30 @@
 .list-cell {
     -fx-background-color: #23272a;
 }
+
+#lobby-pane .jfx-button {
+    -fx-background-color: orange;
+    -fx-font-family: monospace;
+    -fx-text-fill: whitesmoke;
+    -fx-min-width: 300px;
+    -fx-font-size: 15px;
+}
+
+.text-area {
+    -fx-background-color: #23272a;
+    -fx-control-inner-background: #23272a;
+    -fx-text-fill: whitesmoke;
+    -fx-min-width: 1000px;
+    -fx-min-height: 500px;
+    -fx-font-family: monospace;
+    -fx-font-size: 15px;
+}
+
+
+#lobby-pane .text-field {
+    -fx-background-color: #23272a;
+    -fx-text-fill: whitesmoke;
+    -fx-min-width: 700px;
+    -fx-font-family: monospace;
+    -fx-font-size: 15px;
+}

@@ -2,7 +2,7 @@ package client.presentation.panes;
 
 import client.presentation.entities.Lobby;
 import com.jfoenix.controls.JFXButton;
-import data.StateManager;
+import managers.StateManager;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;

@@ -1,7 +1,6 @@
 package client.presentation.entities;
 
 import com.jfoenix.controls.JFXButton;
-import data.StateManager;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -26,7 +25,6 @@ public class Lobby extends VBox {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println(name);
-                StateManager.getInstance().setCurrentState(StateManager.State.REQUESTINGJOININGLOBBY);
             }
         });
 

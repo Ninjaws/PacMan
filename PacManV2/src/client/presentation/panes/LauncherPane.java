@@ -1,6 +1,6 @@
 package client.presentation.panes;
 
-import data.StateManager;
+import managers.StateManager;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 

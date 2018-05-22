@@ -10,7 +10,9 @@ public class LauncherPane extends BorderPane {
     public LauncherPane() {
         instace = this;
         StateManager.getInstance();
+
         setId("launcher-pane");
+
         this.setTop(new TopPane());
         this.setCenter(new LoginPane());
     }

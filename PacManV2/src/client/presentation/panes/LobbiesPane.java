@@ -2,7 +2,6 @@ package client.presentation.panes;
 
 import client.presentation.entities.Lobby;
 import com.jfoenix.controls.JFXButton;
-import managers.StateManager;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -26,10 +25,14 @@ public class LobbiesPane extends HBox {
         VBox buttons = new VBox();
 
         JFXButton refresh = new JFXButton("Refresh");
-        refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> StateManager.getInstance().setCurrentState(StateManager.State.REQUESTINGREFRESH));
-        refresh.setId("refresh-button");
+        refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> System.out.println());
+        refresh.getStyleClass().add("lobby-button");
 
-        buttons.getChildren().addAll(refresh);
+        JFXButton create = new JFXButton("Create");
+        create.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> System.out.println());
+        create.getStyleClass().add("lobby-button");
+
+        buttons.getChildren().addAll(refresh, create);
         this.getChildren().addAll(sessions, buttons);
     }
 }

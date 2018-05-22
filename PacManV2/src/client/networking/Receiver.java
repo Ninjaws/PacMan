@@ -10,7 +10,6 @@ public class Receiver implements Runnable {
             try {
                 Conversation tempConv = (Conversation) Storage.getInstance().getObjectFromServer().readObject();
                 Storage.getInstance().setConversation(tempConv);
-
             } catch (Exception e) {
                 e.printStackTrace();
             }

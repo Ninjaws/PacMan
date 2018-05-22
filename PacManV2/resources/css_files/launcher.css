@@ -38,7 +38,7 @@
     -fx-min-width: 700px;
 }
 
-#refresh-button {
+.lobby-button {
     -fx-background-color: orange;
     -fx-text-fill: whitesmoke;
     -fx-font-family: monospace;

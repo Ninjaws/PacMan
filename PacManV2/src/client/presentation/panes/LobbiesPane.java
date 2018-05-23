@@ -36,13 +36,14 @@ public class LobbiesPane extends HBox {
         refresh.getStyleClass().add("lobby-button");
 
         JFXButton create = new JFXButton("Create");
+
         create.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             Stage dialog = new Stage();
-            dialog.initStyle(StageStyle.DECORATED);
+            dialog.initStyle(StageStyle.UTILITY);
             TextField lobbyName = new TextField();
             Button confirmCreate = new Button("create");
             confirmCreate.addEventHandler(MouseEvent.MOUSE_CLICKED, event1 -> {
-                LauncherPane.setNewCenter(new LobbyPane());
+                LauncherPane.setNewCenter(new LobbyPane(lobbyName.getText()));
                 dialog.close();
             });
             Scene scene = new Scene(new Group(lobbyName,confirmCreate));

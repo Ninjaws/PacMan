@@ -87,9 +87,15 @@
 
 
 #lobby-pane .text-field {
-    -fx-background-color: #23272a;
+    -fx-background-color: #2c2f33;
     -fx-text-fill: whitesmoke;
     -fx-min-width: 700px;
     -fx-font-family: monospace;
     -fx-font-size: 15px;
+}
+
+#lobby-title {
+    -fx-fill: whitesmoke;
+    -fx-font-size: 30px;
+    -fx-font-family: monospace;
 }

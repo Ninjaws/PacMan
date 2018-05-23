@@ -1,5 +1,8 @@
 package client.presentation.entities;
 
+import client.presentation.panes.LauncherPane;
+import client.presentation.panes.LobbiesPane;
+import client.presentation.panes.LobbyPane;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -27,9 +30,8 @@ public class Lobby extends VBox {
         playerCountText.getStyleClass().add("lobby-text");
         JFXButton join = new JFXButton("Join");
         join.setId("join-button");
-        join.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-        });
-
+        join.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> LauncherPane.setNewCenter(new LobbyPane(name)));
+        
         this.getChildren().addAll(nameText, playerCountText, join);
     }
 

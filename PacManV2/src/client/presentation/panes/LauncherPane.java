@@ -6,9 +6,17 @@ import javafx.scene.layout.BorderPane;
 
 public class LauncherPane extends BorderPane {
 
-    private static LauncherPane instace;
-    public LauncherPane() {
-        instace = this;
+    private static LauncherPane instance;
+
+    public static LauncherPane getInstance(){
+        if (instance == null)
+            instance = new LauncherPane();
+
+        return instance;
+    }
+
+    private LauncherPane() {
+        instance = this;
         StateManager.getInstance();
 
         setId("launcher-pane");
@@ -18,7 +26,7 @@ public class LauncherPane extends BorderPane {
     }
 
     public static void setNewCenter(Node node){
-        instace.setCenter(node);
+        instance.setCenter(node);
     }
 }
 

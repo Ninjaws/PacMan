@@ -15,7 +15,7 @@ public class ClientMain extends Application {
     private static ClientMain instance;
     public ClientMain() {
         instance = this;
-        mainScene = new Scene(new LauncherPane(),0,0);
+        mainScene = new Scene(LauncherPane.getInstance(),0,0);
         addStyle("css_files/launcher.css");
     }
 

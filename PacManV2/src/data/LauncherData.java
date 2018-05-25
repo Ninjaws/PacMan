@@ -17,4 +17,8 @@ public class LauncherData {
     public List<LobbyData> getLobbies() {
         return lobbies;
     }
+
+    public void addLobby(LobbyData lobby){
+        lobbies.add(lobby);
+    }
 }

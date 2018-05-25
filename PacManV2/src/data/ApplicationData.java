@@ -7,6 +7,7 @@ public class ApplicationData {
 
     private List<User> users;
 
+
     public ApplicationData() {
         users = new ArrayList<>();
     }

@@ -26,6 +26,7 @@ public class LobbiesPane extends HBox {
         //test values
         lobbies.add(new Lobby("IAN"));
         lobbies.add(new Lobby("JORDY"));
+        sessions.refresh();
 
         sessions.getItems().addAll(lobbies);
 

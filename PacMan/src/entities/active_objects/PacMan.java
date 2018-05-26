@@ -5,6 +5,7 @@ import business.SpriteSheet;
 import data.Game;
 import data.Loop;
 import data.pathfinding.Target;
+import entities.active_objects.ghosts.Ghost;
 import entities.pickups.Pickup;
 
 import javax.sound.sampled.Clip;

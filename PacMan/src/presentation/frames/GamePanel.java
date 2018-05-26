@@ -17,6 +17,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.Point2D;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.security.Key;
 
 /**
@@ -34,6 +37,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     private long endTime;
     private long deltaTime;
 
+    private boolean pacManHasWon = false;
+    private boolean ghostHasWon = false;
+
+    private Font pacManFont;
+
 
     public GamePanel() {
         game = Game.getInstance();
@@ -41,6 +49,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         debugDraw = new DebugDraw(this);
         controls = new Controls();
 
+
+        try {
+            pacManFont = Font.createFont(Font.TRUETYPE_FONT, new File(getClass().getResource("/fonts/crackmanfront.ttf").toURI()));
+            GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            graphicsEnvironment.registerFont(pacManFont);
+        } catch (FontFormatException | IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         setBackground(Color.BLACK);
 
@@ -50,7 +66,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         new Timer(1000 / 60, this).start();
         startTime = System.currentTimeMillis();
 
+
+
         Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.GAME_MUSIC).start();
+
+
     }
 
     @Override
@@ -66,6 +86,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         for (GameObject gameObject : game.getGameObjects()) {
             gameObject.draw(g2d);
         }
+
+        if(ghostHasWon){
+            g2d.setFont(pacManFont.deriveFont(70f));
+            g2d.setColor(Color.yellow);
+            g2d.drawString("Ghosts has won!", 0, getHeight()/2);
+        }
+        else if(pacManHasWon){
+            g2d.setFont(pacManFont.deriveFont(70f));
+            g2d.setColor(Color.yellow);
+            g2d.drawString("Pacman has won!", 0, getHeight()/2);
+        }
+
+
 
     }
 
@@ -91,6 +124,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
         game.getPacMan().move(deltaTime);
         game.getGhosts().forEach(ghost -> ghost.move(deltaTime));
+
+        if(game.isAllPicksUpPickedUp()){
+            pacManHasWon = true;
+            game.setPaused(true);
+        }
+        else if(game.hasGhostWon()){
+            ghostHasWon = true;
+            game.setPaused(true);
+        }
+
 
         repaint();
     }
@@ -119,4 +162,5 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
+
 }

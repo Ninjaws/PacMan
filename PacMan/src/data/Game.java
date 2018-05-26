@@ -8,10 +8,7 @@ import data.pathfinding.Target;
 import entities.active_objects.ActiveGameObject;
 import entities.GameObject;
 import entities.active_objects.PacMan;
-import entities.active_objects.ghosts.Blinky;
-import entities.active_objects.ghosts.Clyde;
-import entities.active_objects.ghosts.Inky;
-import entities.active_objects.ghosts.Pinky;
+import entities.active_objects.ghosts.*;
 import entities.pickups.Coin;
 import entities.pickups.Pickup;
 import entities.pickups.Powerup;
@@ -59,6 +56,7 @@ public class Game {
 
     private boolean paused;
     private int lives;
+
 
 
     private Game() {
@@ -160,7 +158,7 @@ public class Game {
         g2d.drawImage(deadImage, new AffineTransform(), null);
         g2d.dispose();
         gameObjects.add(new Inky(combined, deadImage, objLayer.getStartPosGhosts().get(3),
-                28, 28, 56, 56, ghostAnimations, 100, 0.16));
+                28, 28, 56, 56, ghostAnimations, 100, 0.1));
 
         recoloredImage = Recoloring.colorImage(image, ghostColors[2]);
         combined = new BufferedImage(recoloredImage.getWidth(), recoloredImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
@@ -234,6 +232,31 @@ public class Game {
         float decibelVolume = 20f * (float) Math.log10(volume);
 
         return decibelVolume;
+    }
+
+
+    public boolean isAllPicksUpPickedUp(){
+        ArrayList<Pickup> pickups = new ArrayList<>();
+        gameObjects.forEach(gameObject -> {
+            if(gameObject instanceof Pickup)
+                pickups.add((Pickup)gameObject);
+        });
+
+        for (Pickup pickup : pickups){
+            if(pickup.isActive()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean hasGhostWon(){
+       for(Ghost ghost : getGhosts()){
+           if(ghost.getPosition().distance(getPacMan().getPosition()) < 25){
+               return true;
+           }
+       }
+       return false;
     }
 
     public void setScreenDimensions(int width, int height) {

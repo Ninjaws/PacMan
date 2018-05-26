@@ -9,7 +9,7 @@ public class LauncherData {
 
     private List<LobbyData> lobbies = new ArrayList<>();
 
-    public LauncherData(){
+    public LauncherData() {
 
     }
 
@@ -18,7 +18,17 @@ public class LauncherData {
         return lobbies;
     }
 
-    public void addLobby(LobbyData lobby){
+    public void addLobby(LobbyData lobby) {
         lobbies.add(lobby);
     }
+
+
+    public LobbyData getLobby(String lobbyName) {
+        return lobbies.stream()
+                .filter(lobby -> lobby.getLobbyName().equals(lobbyName))
+                .findFirst()
+                .orElse(null);
+
+    }
+
 }

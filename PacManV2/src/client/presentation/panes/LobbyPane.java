@@ -1,7 +1,6 @@
 package client.presentation.panes;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.event.EventHandler;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -42,5 +41,7 @@ public class LobbyPane extends VBox {
 
         top.getChildren().addAll(title,launch, leave);
         this.getChildren().addAll(top,textArea,chatField);
+
+
     }
 }

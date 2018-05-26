@@ -25,4 +25,8 @@ public class LobbyData {
             String t = it.next();
         }
     }
+
+    public String getLobbyName() {
+        return lobbyName;
+    }
 }

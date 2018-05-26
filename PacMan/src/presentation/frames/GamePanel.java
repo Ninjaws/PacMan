@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.Key;
+import java.util.TimerTask;
 
 /**
  * @author Ian Vink
@@ -97,15 +98,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
             g2d.setColor(Color.yellow);
             g2d.drawString("Pacman has won!", 0, getHeight()/2);
         }
-
-
-
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if (game.isPaused()) {
             deltaTime = System.currentTimeMillis() - startTime;
             //3 Seconds  before you can start
@@ -128,10 +125,29 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         if(game.isAllPicksUpPickedUp()){
             pacManHasWon = true;
             game.setPaused(true);
+            java.util.Timer timer = new java.util.Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    game.reset();
+                    pacManHasWon = false;
+                    repaint();
+                }
+            }, 5000);
         }
         else if(game.hasGhostWon()){
             ghostHasWon = true;
             game.setPaused(true);
+            java.util.Timer timer = new java.util.Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Game.getInstance().reset();
+                    ghostHasWon = false;
+                    repaint();
+                }
+            }, 5000);
+
         }
 
 

@@ -12,6 +12,8 @@ import entities.active_objects.ghosts.*;
 import entities.pickups.Coin;
 import entities.pickups.Pickup;
 import entities.pickups.Powerup;
+import presentation.frames.PacManFrame;
+import presentation.frames.startingscreen.StartUpScreen;
 import sun.audio.AudioPlayer;
 import tiled.Map;
 import tiled.ObjectLayer;
@@ -70,6 +72,15 @@ public class Game {
         return instance;
     }
 
+    public void reset() {
+        instance = new Game();
+        instance.setScreenDimensions(screenWidth, screenHeight);
+        instance.setMap(new Map("/maps/testMap.json"));
+        instance.setSounds();
+        instance.setGameObjects();
+        paused = false;
+        PacManFrame.setNextPanel(new StartUpScreen());
+    }
 
     public void setGameObjects() {
 

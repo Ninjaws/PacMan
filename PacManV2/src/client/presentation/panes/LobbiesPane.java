@@ -2,7 +2,6 @@ package client.presentation.panes;
 
 import client.presentation.entities.Lobby;
 import com.jfoenix.controls.JFXButton;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,7 +26,6 @@ public class LobbiesPane extends HBox {
         lobbies.add(new Lobby("IAN"));
         lobbies.add(new Lobby("JORDY"));
         sessions.refresh();
-
         sessions.getItems().addAll(lobbies);
 
         VBox buttons = new VBox();
@@ -54,6 +52,7 @@ public class LobbiesPane extends HBox {
         });
         create.getStyleClass().add("lobby-button");
 
+        sessions.
         buttons.getChildren().addAll(refresh, create);
         this.getChildren().addAll(sessions, buttons);
     }

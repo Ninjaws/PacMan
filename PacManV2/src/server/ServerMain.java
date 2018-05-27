@@ -1,31 +1,36 @@
 package server;
 
+import data.ApplicationData;
+import data.Conversation;
 import server.data.UserThread;
-import server.networking.ThreadManager;
 
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerMain {
-    public static void main(String[] args) {
-        ThreadManager threadManager = ThreadManager.getInstance();
+    private static ApplicationData applicationData;
 
-        new Thread(threadManager).start();
+    public static void main(String[] args) {
+        applicationData = new ApplicationData();
 
         try {
             ServerSocket serverSocket = new ServerSocket(8313);
-
+int count = 0;
             while (true) {
                 Socket socket = serverSocket.accept();
                 UserThread thread = new UserThread(socket);
                 thread.start();
-                threadManager.addUserThread(thread);
-                System.out.println("Amount of clients: " + threadManager.getAmountOfThreads());
+              count++;
+                System.out.println("Count: " +count);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public synchronized static ApplicationData getApplicationData() {
+        return applicationData;
     }
 }
 

@@ -2,7 +2,7 @@ package client.networking;
 
 import client.data.Storage;
 
-public class Sender implements Runnable {
+public class Sender extends Thread {
     @Override
     public void run() {
         while (true) {

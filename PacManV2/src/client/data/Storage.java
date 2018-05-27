@@ -2,6 +2,7 @@ package client.data;
 
 import client.networking.Receiver;
 import client.networking.Sender;
+import data.ApplicationData;
 import data.Conversation;
 
 import java.io.ObjectInputStream;
@@ -21,21 +22,22 @@ public class Storage {
 
     private String username;
     private Conversation conversation;
+    private ApplicationData applicationData;
 
     private Sender sender;
     private Receiver receiver;
 
 
-    public static Storage getInstance(){
-        if(instance == null)
+    public static Storage getInstance() {
+        if (instance == null)
             instance = new Storage();
 
         return instance;
     }
 
-    private Storage(){
+    private Storage() {
 
-        conversation = new Conversation();
+        applicationData = new ApplicationData();
 
         try {
             socket = new Socket("localhost", 8313);
@@ -47,19 +49,17 @@ public class Storage {
             receiver = new Receiver();
 
 
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-
-
-
     }
 
-    public void startThreads(){
+    public void startThreads() {
         //   sender.run();
-        receiver.run();
+        receiver.start();
     }
 
 
@@ -81,6 +81,15 @@ public class Storage {
 
     public synchronized void setConversation(Conversation conversation) {
         this.conversation = conversation;
+    }
+
+    public ApplicationData getApplicationData() {
+        return applicationData;
+    }
+
+    public synchronized void setApplicationData(ApplicationData applicationData) {
+
+        this.applicationData = applicationData;
     }
 
     public String getUsername() {

@@ -1,23 +1,50 @@
 package server.networking;
 
+import data.ApplicationData;
+import data.LobbyData;
 import data.Message;
-import server.data.UserThread;
+import data.User;
+import server.ServerMain;
+
+import java.io.ObjectInputStream;
 
 public class ClientThreadReceiver extends Thread {
 
-    private UserThread thread;
+    private ObjectInputStream objectFromClient;
 
-    public ClientThreadReceiver(UserThread thread) {
-        this.thread = thread;
+    public ClientThreadReceiver(ObjectInputStream objectFromClient) {
+
+        this.objectFromClient = objectFromClient;
     }
 
     @Override
     public void run() {
         while (true) {
             try {
-                Message message = (Message) thread.getObjectFromClient().readObject();
-                System.out.println(message);
-                ThreadManager.getInstance().getConversation().addMessage(message);
+                String command = (String) objectFromClient.readObject();
+                if (command.equals("message")) {
+
+                    String string = (String) objectFromClient.readObject();
+                    System.out.println("Message: " + string);
+                //    Message message = (Message) objectFromClient.readObject();
+
+                  //  ServerMain.getConversation().addMessage(message);
+                }
+                else if(command.equals("user")){
+                    String string = (String) objectFromClient.readObject();
+                    ServerMain.getApplicationData().addUser(new User(string));
+                    System.out.println("User: " + string);
+                }
+                else if(command.equals("lobby")){
+                    String string = (String) objectFromClient.readObject();
+                    ServerMain.getApplicationData().getLauncherData().addLobby(new LobbyData(string));
+                    System.out.println("Lobby: " + string);
+                  //  System.out.println(ServerMain.getApplicationData().getLauncherData().getLobbies().size());
+                }
+                else if(command.equals("test")){
+                    String string = (String) objectFromClient.readObject();
+                    System.out.println(string);
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();

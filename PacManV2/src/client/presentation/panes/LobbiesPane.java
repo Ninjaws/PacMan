@@ -1,7 +1,9 @@
 package client.presentation.panes;
 
-import client.presentation.entities.Lobby;
+import client.data.Storage;
+import client.presentation.listview.LobbyListViewItem;
 import com.jfoenix.controls.JFXButton;
+import data.ApplicationData;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,25 +15,32 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 public class LobbiesPane extends HBox {
-    private ArrayList<Lobby> lobbies = new ArrayList<>();
+    // private ArrayList<LobbyListViewItem> lobbies = new ArrayList<>();
     private ListView sessions;
-    private Lobby selectedLobby = null;
+
+    // private LobbyListViewItem selectedLobby = null;
     public LobbiesPane() {
         sessions = new ListView();
 
-        //test values
-        lobbies.add(new Lobby("IAN"));
-        lobbies.add(new Lobby("JORDY"));
-        sessions.refresh();
-        sessions.getItems().addAll(lobbies);
+        Storage.getInstance().getApplicationData().getLauncherData().getLobbies().forEach(lobbyData -> {
+            sessions.getItems().add(new LobbyListViewItem(lobbyData.getLobbyName()));
+        });
 
         VBox buttons = new VBox();
-
         JFXButton refresh = new JFXButton("Refresh");
-        refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> System.out.println());
+
+        //   refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> System.out.println());
+        refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            sessions.getItems().clear();
+            Storage.getInstance().getApplicationData().getLauncherData().getLobbies().forEach(lobbyData -> {
+                sessions.getItems().add(new LobbyListViewItem(lobbyData.getLobbyName()));
+            });
+
+        });
+
         refresh.getStyleClass().add("lobby-button");
 
         JFXButton create = new JFXButton("Create");
@@ -42,10 +51,21 @@ public class LobbiesPane extends HBox {
             TextField lobbyName = new TextField();
             Button confirmCreate = new Button("create");
             confirmCreate.addEventHandler(MouseEvent.MOUSE_CLICKED, event1 -> {
-                LauncherPane.setNewCenter(new LobbyPane(lobbyName.getText()));
-                dialog.close();
+
+                try {
+                    Storage.getInstance().getObjectToServer().writeObject("lobby");
+                    Storage.getInstance().getObjectToServer().writeObject(lobbyName.getText());
+                    LauncherPane.setNewCenter(new LobbyPane(lobbyName.getText()));
+                    dialog.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                // ApplicationData.getInstance().getLauncherData().addLobby(new LobbyData(lobbyName.getText()));
+
+
             });
-            Scene scene = new Scene(new Group(lobbyName,confirmCreate));
+            Scene scene = new Scene(new Group(lobbyName, confirmCreate));
             dialog.setWidth(200);
             dialog.setScene(scene);
             dialog.show();
@@ -55,5 +75,11 @@ public class LobbiesPane extends HBox {
         sessions.
         buttons.getChildren().addAll(refresh, create);
         this.getChildren().addAll(sessions, buttons);
+
+//        Timeline timeline = new Timeline(new KeyFrame(
+//                Duration.millis(1000),
+//                ae -> sessions.getItems().addAll(LauncherData.getInstance().getLobbies())));//sessions.refresh()));
+//        timeline.setCycleCount(Animation.INDEFINITE);
+//        timeline.play();
     }
 }

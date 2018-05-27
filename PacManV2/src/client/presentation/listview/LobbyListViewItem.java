@@ -1,26 +1,18 @@
-package client.presentation.entities;
+package client.presentation.listview;
 
 import client.presentation.panes.LauncherPane;
-import client.presentation.panes.LobbiesPane;
 import client.presentation.panes.LobbyPane;
 import com.jfoenix.controls.JFXButton;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 
-public class Lobby extends VBox {
+public class LobbyListViewItem extends VBox {
     private String name;
     private int playerCount;
 
-    public Lobby(String name) {
+    public LobbyListViewItem(String name) {
         this.name = name;
         this.playerCount = 0;
 

@@ -28,6 +28,13 @@ public class LoginPane extends HBox {
 
         JFXButton connect = new JFXButton("Connect");
         connect.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            try {
+                Storage.getInstance().getObjectToServer().writeObject("user");
+                Storage.getInstance().getObjectToServer().writeObject((String)textField.getText());
+                Storage.getInstance().startThreads();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             LauncherPane.setNewCenter(new LobbiesPane());
         });
         connect.setId("connect-button");

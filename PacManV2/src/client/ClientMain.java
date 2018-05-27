@@ -1,5 +1,6 @@
 package client;
 
+import client.data.Storage;
 import client.presentation.panes.LauncherPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -17,7 +18,10 @@ public class ClientMain extends Application {
         instance = this;
         mainScene = new Scene(LauncherPane.getInstance(),0,0);
         addStyle("css_files/launcher.css");
+
+        Storage.getInstance();
     }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {

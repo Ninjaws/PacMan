@@ -1,11 +1,10 @@
 package data;
 
-import client.presentation.entities.Lobby;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LauncherData {
+public class LauncherData implements Serializable {
 
     private List<LobbyData> lobbies = new ArrayList<>();
 
@@ -18,7 +17,7 @@ public class LauncherData {
         return lobbies;
     }
 
-    public void addLobby(LobbyData lobby) {
+    public synchronized void addLobby(LobbyData lobby) {
         lobbies.add(lobby);
     }
 

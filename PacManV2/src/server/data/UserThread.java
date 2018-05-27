@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class UserThread extends Thread {
 
-    private String username;
+   // private String username;
 
     private Socket socket;
 
@@ -24,11 +24,9 @@ public class UserThread extends Thread {
         ObjectOutputStream objectToClient = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream objectFromClient = new ObjectInputStream(socket.getInputStream());
 
-
-        this.username = (String) objectFromClient.readObject();
-
         sender = new ClientThreadSender(objectToClient);
         receiver = new ClientThreadReceiver(objectFromClient);
+
         sender.start();
         receiver.start();
 
@@ -38,11 +36,6 @@ public class UserThread extends Thread {
         while (true) {
 
         }
-    }
-
-
-    public String getUserName() {
-        return username;
     }
 
     public ClientThreadSender getSender() {

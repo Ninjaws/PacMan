@@ -1,10 +1,11 @@
 package data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class LobbyData {
+public class LobbyData implements Serializable {
     private String lobbyName;
     private List<String> userNames;
     private Conversation conversation;

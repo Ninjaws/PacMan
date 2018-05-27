@@ -1,6 +1,7 @@
 package server.networking;
 
 import data.ApplicationData;
+import data.LobbyData;
 import data.Message;
 import data.User;
 import server.ServerMain;
@@ -21,16 +22,24 @@ public class ClientThreadReceiver extends Thread {
         while (true) {
             try {
                 String command = (String) objectFromClient.readObject();
-
                 if (command.equals("message")) {
-                    Message message = (Message) objectFromClient.readObject();
-                    //  System.out.println(message);
-                    // ThreadManager.getInstance().getConversation().addMessage(message);
-                    ServerMain.getConversation().addMessage(message);
+
+                    String string = (String) objectFromClient.readObject();
+                    System.out.println("Message: " + string);
+                //    Message message = (Message) objectFromClient.readObject();
+
+                  //  ServerMain.getConversation().addMessage(message);
                 }
                 else if(command.equals("user")){
                     String string = (String) objectFromClient.readObject();
-                    ApplicationData.getInstance().getUsers().add(new User(string));
+                    ServerMain.getApplicationData().addUser(new User(string));
+                    System.out.println("User: " + string);
+                }
+                else if(command.equals("lobby")){
+                    String string = (String) objectFromClient.readObject();
+                    ServerMain.getApplicationData().getLauncherData().addLobby(new LobbyData(string));
+                    System.out.println("Lobby: " + string);
+                  //  System.out.println(ServerMain.getApplicationData().getLauncherData().getLobbies().size());
                 }
                 else if(command.equals("test")){
                     String string = (String) objectFromClient.readObject();

@@ -1,5 +1,6 @@
 package server;
 
+import data.ApplicationData;
 import data.Conversation;
 import server.data.UserThread;
 
@@ -7,22 +8,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerMain {
-    public static Conversation conversation;
+    private static ApplicationData applicationData;
 
     public static void main(String[] args) {
-        //  ThreadManager threadManager = ThreadManager.getInstance();
-        conversation = new Conversation();
-        //   new Thread(threadManager).start();
+        applicationData = new ApplicationData();
 
         try {
             ServerSocket serverSocket = new ServerSocket(8313);
-
+int count = 0;
             while (true) {
                 Socket socket = serverSocket.accept();
                 UserThread thread = new UserThread(socket);
                 thread.start();
-                //  threadManager.addUserThread(thread);
-                //       System.out.println("Amount of clients: " + threadManager.getAmountOfThreads());
+              count++;
+                System.out.println("Count: " +count);
             }
 
         } catch (Exception e) {
@@ -30,8 +29,8 @@ public class ServerMain {
         }
     }
 
-    public synchronized static Conversation getConversation() {
-        return conversation;
+    public synchronized static ApplicationData getApplicationData() {
+        return applicationData;
     }
 }
 

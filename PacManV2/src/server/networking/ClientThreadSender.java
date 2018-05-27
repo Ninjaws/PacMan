@@ -1,5 +1,6 @@
 package server.networking;
 
+import data.ApplicationData;
 import data.Conversation;
 import server.ServerMain;
 
@@ -20,9 +21,9 @@ public class ClientThreadSender extends Thread {
         while (true) {
             try {
                 objectToClient.reset();
-                Conversation conversation = ServerMain.getConversation();
-                synchronized (conversation ) {
-                    objectToClient.writeObject(conversation);
+                ApplicationData applicationData = ServerMain.getApplicationData();
+                synchronized (applicationData ) {
+                    objectToClient.writeObject(applicationData);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

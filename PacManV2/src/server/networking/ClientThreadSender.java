@@ -27,6 +27,7 @@ public class ClientThreadSender extends Thread {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                break;
             }
         }
     }

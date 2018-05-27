@@ -24,8 +24,8 @@ public class UserThread extends Thread {
         ObjectOutputStream objectToClient = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream objectFromClient = new ObjectInputStream(socket.getInputStream());
 
-        sender = new ClientThreadSender(objectToClient);
-        receiver = new ClientThreadReceiver(objectFromClient);
+        sender = new ClientThreadSender(objectToClient, socket);
+        receiver = new ClientThreadReceiver(objectFromClient, socket);
 
         sender.start();
         receiver.start();
@@ -34,7 +34,7 @@ public class UserThread extends Thread {
 
     public void run() {
         while (true) {
-
+            System.out.println(socket.isConnected());
         }
     }
 

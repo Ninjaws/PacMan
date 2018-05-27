@@ -23,6 +23,7 @@ public class LauncherPane extends BorderPane {
 
         this.setTop(new TopPane());
         this.setCenter(new LoginPane());
+
     }
 
     public static void setNewCenter(Node node){

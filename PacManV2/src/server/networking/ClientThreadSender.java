@@ -6,14 +6,16 @@ import server.ServerMain;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 
 public class ClientThreadSender extends Thread {
 
     private ObjectOutputStream objectToClient;
+    private Socket socket;
 
-    public ClientThreadSender(ObjectOutputStream objectToClient) {
-
+    public ClientThreadSender(ObjectOutputStream objectToClient, Socket socket) {
         this.objectToClient = objectToClient;
+        this.socket = socket;
     }
 
     @Override
@@ -26,7 +28,12 @@ public class ClientThreadSender extends Thread {
                     objectToClient.writeObject(applicationData);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                try {
+                    socket.close();
+                } catch (IOException e1) {
+                    //e1.printStackTrace();
+                }
                 break;
             }
         }

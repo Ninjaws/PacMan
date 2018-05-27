@@ -12,7 +12,6 @@ public class ServerMain {
 
     public static void main(String[] args) {
         applicationData = new ApplicationData();
-
         try {
             ServerSocket serverSocket = new ServerSocket(8313);
             int count = 0;
@@ -20,6 +19,7 @@ public class ServerMain {
                 Socket socket = serverSocket.accept();
                 UserThread thread = new UserThread(socket);
                 thread.start();
+
               count++;
                 System.out.println("Count: " +count);
             }

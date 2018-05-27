@@ -3,8 +3,11 @@ package client;
 import client.data.Storage;
 import client.presentation.panes.LauncherPane;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ClientMain extends Application {
 
@@ -30,6 +33,14 @@ public class ClientMain extends Application {
         primaryStage.setHeight(800);
         primaryStage.setScene(mainScene);
         primaryStage.show();
+
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     }
 
     public static void clearStyles() {

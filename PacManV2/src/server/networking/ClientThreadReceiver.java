@@ -6,15 +6,18 @@ import data.Message;
 import data.User;
 import server.ServerMain;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.net.Socket;
 
 public class ClientThreadReceiver extends Thread {
 
     private ObjectInputStream objectFromClient;
+    private Socket socket;
 
-    public ClientThreadReceiver(ObjectInputStream objectFromClient) {
-
+    public ClientThreadReceiver(ObjectInputStream objectFromClient, Socket socket) {
         this.objectFromClient = objectFromClient;
+        this.socket = socket;
     }
 
     @Override
@@ -47,7 +50,12 @@ public class ClientThreadReceiver extends Thread {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                try {
+                    socket.close();
+                } catch (IOException e1) {
+                    //e1.printStackTrace();
+                }
                 break;
             }
         }

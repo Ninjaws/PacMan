@@ -99,3 +99,27 @@
     -fx-font-size: 30px;
     -fx-font-family: monospace;
 }
+
+#create-button {
+    -fx-background-color: orange;
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: monospace;
+    -fx-font-size: 11px;
+    -fx-min-width: 150px;
+    -fx-max-width: 150px;
+    -fx-min-height: 50px;
+    -fx-max-height: 50px;
+
+}
+
+#lobby-field {
+    -fx-background-color: #2c2f33;
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: monospace;
+    -fx-font-size: 11px;
+    -fx-min-width: 150px;
+    -fx-max-width: 150px;
+    -fx-min-height: 50px;
+    -fx-max-height: 50px;
+
+}

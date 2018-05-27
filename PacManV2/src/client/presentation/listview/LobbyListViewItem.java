@@ -16,15 +16,17 @@ public class LobbyListViewItem extends VBox {
         this.name = name;
         this.playerCount = 0;
 
-        Text nameText = new Text(name);
-        nameText.getStyleClass().add("lobby-text");
+        Text lobbyName = new Text(name);
+        lobbyName.getStyleClass().add("lobby-text");
+
         Text playerCountText = new Text("Playercount: " + playerCount +  "/5");
         playerCountText.getStyleClass().add("lobby-text");
+
         JFXButton join = new JFXButton("Join");
         join.setId("join-button");
         join.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> LauncherPane.setNewCenter(new LobbyPane(name)));
         
-        this.getChildren().addAll(nameText, playerCountText, join);
+        this.getChildren().addAll(lobbyName, playerCountText, join);
     }
 
     public String getName() {

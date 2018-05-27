@@ -3,8 +3,6 @@ package client.presentation.panes;
 import client.data.Storage;
 import client.presentation.listview.LobbyListViewItem;
 import com.jfoenix.controls.JFXButton;
-import data.ApplicationData;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -30,7 +28,9 @@ public class LobbiesPane extends HBox {
         });
 
         VBox buttons = new VBox();
+
         JFXButton refresh = new JFXButton("Refresh");
+        refresh.getStyleClass().add("lobby-button");
 
         //   refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> System.out.println());
         refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -41,17 +41,19 @@ public class LobbiesPane extends HBox {
 
         });
 
-        refresh.getStyleClass().add("lobby-button");
+
 
         JFXButton create = new JFXButton("Create");
+        create.getStyleClass().add("lobby-button");
 
         create.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             Stage dialog = new Stage();
             dialog.initStyle(StageStyle.UTILITY);
             TextField lobbyName = new TextField();
+            lobbyName.setId("lobby-field");
             Button confirmCreate = new Button("create");
+            confirmCreate.setId("create-button");
             confirmCreate.addEventHandler(MouseEvent.MOUSE_CLICKED, event1 -> {
-
                 try {
                     Storage.getInstance().getObjectToServer().writeObject("lobby");
                     Storage.getInstance().getObjectToServer().writeObject(lobbyName.getText());
@@ -65,14 +67,17 @@ public class LobbiesPane extends HBox {
 
 
             });
-            Scene scene = new Scene(new Group(lobbyName, confirmCreate));
-            dialog.setWidth(200);
+            //adds styles
+            HBox hBox = new HBox(lobbyName, confirmCreate);
+            hBox.getStylesheets().add(getClass().getResource("/css_files/launcher.css").toExternalForm());
+
+            Scene scene = new Scene(hBox);
+            dialog.setWidth(300);
+            dialog.setHeight(90);
             dialog.setScene(scene);
             dialog.show();
         });
-        create.getStyleClass().add("lobby-button");
 
-        sessions.
         buttons.getChildren().addAll(refresh, create);
         this.getChildren().addAll(sessions, buttons);
 

@@ -15,7 +15,7 @@ public class ServerMain {
 
         try {
             ServerSocket serverSocket = new ServerSocket(8313);
-int count = 0;
+            int count = 0;
             while (true) {
                 Socket socket = serverSocket.accept();
                 UserThread thread = new UserThread(socket);

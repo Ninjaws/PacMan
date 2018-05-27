@@ -41,7 +41,5 @@ public class LobbyPane extends VBox {
 
         top.getChildren().addAll(title,launch, leave);
         this.getChildren().addAll(top,textArea,chatField);
-
-
     }
 }

@@ -13,4 +13,11 @@ public class User implements Serializable {
     public String getUserName() {
         return userName;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userName='" + userName + '\'' +
+                '}';
+    }
 }

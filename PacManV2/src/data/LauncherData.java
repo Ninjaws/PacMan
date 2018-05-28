@@ -20,6 +20,9 @@ public class LauncherData implements Serializable {
         lobbies.add(lobby);
     }
 
+    public synchronized void removeLobby (String lobbyName){
+        lobbies.removeIf(lobby -> lobby.getLobbyName().equals(lobbyName));
+    }
 
     public synchronized LobbyData getLobby(String lobbyName) {
         return lobbies.stream()

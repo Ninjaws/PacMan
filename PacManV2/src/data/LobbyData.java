@@ -20,14 +20,14 @@ public class LobbyData implements Serializable {
         userNames.add(user.getUserName());
     }
 
-    public void removePlayer(User user) {
+    public synchronized void removePlayer(User user) {
         Iterator<String> it = userNames.iterator();
         while (it.hasNext()) {
             String t = it.next();
         }
     }
 
-    public Conversation getConversation() {
+    public synchronized Conversation getConversation() {
         return conversation;
     }
 
@@ -35,16 +35,8 @@ public class LobbyData implements Serializable {
         conversation.addMessage(message);
     }
 
-    public String getLobbyName() {
+    public synchronized String getLobbyName() {
         return lobbyName;
     }
 
-    @Override
-    public String toString() {
-        return "LobbyData{" +
-                "lobbyName='" + lobbyName + '\'' +
-                ", userNames=" + userNames +
-                ", conversation=" + conversation +
-                '}';
-    }
 }

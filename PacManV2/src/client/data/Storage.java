@@ -83,7 +83,7 @@ public class Storage {
         this.conversation = conversation;
     }
 
-    public ApplicationData getApplicationData() {
+    public synchronized ApplicationData getApplicationData() {
         return applicationData;
     }
 
@@ -92,7 +92,7 @@ public class Storage {
         this.applicationData = applicationData;
     }
 
-    public String getUsername() {
+    public synchronized String getUsername() {
         return username;
     }
 

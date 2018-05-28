@@ -37,6 +37,7 @@ public class LobbyPane extends VBox {
 
         JFXButton leave = new JFXButton("Leave");
         leave.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
             LauncherPane.setNewCenter(new LobbiesPane());
         });
 

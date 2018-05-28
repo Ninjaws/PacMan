@@ -31,11 +31,14 @@ public class LoginPane extends HBox {
         JFXButton connect = new JFXButton("Connect");
         connect.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
-                if(!Storage.getInstance().getApplicationData().userExists(userNameTextField.getText())){
-                    Storage.getInstance().getObjectToServer().writeObject((String)userNameTextField.getText());
+                if (!Storage.getInstance().getApplicationData().userExists(userNameTextField.getText())) {
+
+                    Storage.getInstance().setUsername(userNameTextField.getText());
+                    Storage.getInstance().getObjectToServer().writeObject("user_add");
+                    Storage.getInstance().getObjectToServer().writeObject(userNameTextField.getText());
                     LauncherPane.setNewCenter(new LobbiesPane());
-                }
-                else{
+
+                } else {
 
                 }
             } catch (IOException e) {

@@ -34,7 +34,7 @@ public class ClientThreadReceiver extends Thread {
 
                     case "user_remove":
                         String userToRemove = (String) objectFromClient.readObject();
-                        //TODO: Remove user
+                        ServerMain.getApplicationData().removeUser(userToRemove);
                         break;
 
                     case "lobby_create":
@@ -44,14 +44,14 @@ public class ClientThreadReceiver extends Thread {
 
                     case "lobby_remove":
                         String lobbyToRemove = (String) objectFromClient.readObject();
-                        //TODO: Remove lobby
+                        ServerMain.getApplicationData().getLauncherData().removeLobby(lobbyToRemove);
                         break;
+
                     case "message_send":
                         Message messageToAdd = (Message) objectFromClient.readObject();
                         String lobbyName = (String) objectFromClient.readObject();
                         ServerMain.getApplicationData().getLauncherData().getLobby(lobbyName).addMessage(messageToAdd);
                         break;
-                        
                 }
 
             } catch (Exception e) {

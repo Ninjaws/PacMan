@@ -9,7 +9,7 @@ public class Conversation implements Serializable {
     public Conversation(){
     }
 
-    public void addMessage(Message message){
+    public synchronized void addMessage(Message message){
         messages.add(message);
     }
 
@@ -18,7 +18,7 @@ public class Conversation implements Serializable {
     }
 
     @Override
-    public String toString() {
+    public synchronized String toString() {
         return "Conversation{" +
                 "messages=\n" + messages +
                 '}';

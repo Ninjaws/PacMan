@@ -46,7 +46,11 @@ public class ClientThreadReceiver extends Thread {
                         String lobbyToRemove = (String) objectFromClient.readObject();
                         //TODO: Remove lobby
                         break;
-
+                    case "message_send":
+                        Message messageToAdd = (Message) objectFromClient.readObject();
+                        String lobbyName = (String) objectFromClient.readObject();
+                        ServerMain.getApplicationData().getLauncherData().getLobby(lobbyName).addMessage(messageToAdd);
+                        
                 }
 
             } catch (Exception e) {

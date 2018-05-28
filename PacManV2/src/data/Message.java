@@ -15,7 +15,7 @@ public class Message implements Serializable {
     }
 
     @Override
-    public String toString() {
+    public synchronized String toString() {
         return "Message{" +
                 "author='" + author + '\'' +
                 ", dateTime=" + dateTime +

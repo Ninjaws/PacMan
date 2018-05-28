@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.IOException;
+
 public class ClientMain extends Application {
 
     public static void main(String[] args) throws Exception {
@@ -37,6 +39,14 @@ public class ClientMain extends Application {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent t) {
+
+                try {
+                    Storage.getInstance().getObjectToServer().writeObject("user_remove");
+                    Storage.getInstance().getObjectToServer().writeObject(Storage.getInstance().getUsername());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Platform.exit();
                 System.exit(0);
             }

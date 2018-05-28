@@ -22,7 +22,7 @@ public class LauncherData implements Serializable {
     }
 
 
-    public LobbyData getLobby(String lobbyName) {
+    public synchronized LobbyData getLobby(String lobbyName) {
         return lobbies.stream()
                 .filter(lobby -> lobby.getLobbyName().equals(lobbyName))
                 .findFirst()

@@ -30,6 +30,10 @@ public class ApplicationData implements Serializable {
                 .orElse(null);
     }
 
+    public boolean userExists(String userName){
+        return users.stream().anyMatch(user -> user.getUserName().equals(userName));
+    }
+
     public synchronized LauncherData getLauncherData() {
         return launcherData;
     }

@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class UserThread extends Thread {
+public class UserThread {
 
    // private String username;
 
@@ -32,11 +32,6 @@ public class UserThread extends Thread {
 
     }
 
-    public void run() {
-        while (true) {
-            System.out.println(socket.isConnected());
-        }
-    }
 
     public ClientThreadSender getSender() {
         return sender;

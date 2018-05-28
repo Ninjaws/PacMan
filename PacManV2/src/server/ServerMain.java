@@ -18,9 +18,8 @@ public class ServerMain {
             while (true) {
                 Socket socket = serverSocket.accept();
                 UserThread thread = new UserThread(socket);
-                thread.start();
 
-              count++;
+                count++;
                 System.out.println("Count: " +count);
             }
 

@@ -27,6 +27,10 @@ public class LobbyData implements Serializable {
         }
     }
 
+    public Conversation getConversation() {
+        return conversation;
+    }
+
     public synchronized void addMessage(Message message){
         conversation.addMessage(message);
     }

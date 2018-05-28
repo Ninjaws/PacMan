@@ -12,7 +12,6 @@ public class LauncherData implements Serializable {
 
     }
 
-
     public List<LobbyData> getLobbies() {
         return lobbies;
     }

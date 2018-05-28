@@ -1,4 +1,4 @@
-package client.presentation.launcher.panes;
+package client.presentation.panes;
 
 import managers.StateManager;
 import javafx.scene.Node;

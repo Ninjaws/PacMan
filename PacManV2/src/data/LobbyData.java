@@ -1,7 +1,8 @@
-package data.launcher;
+package data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class LobbyData implements Serializable {
@@ -19,12 +20,11 @@ public class LobbyData implements Serializable {
         userNames.add(user.getUserName());
     }
 
-    public synchronized void addPlayer(String userName){
-        userNames.add(userName);
-    }
-
-    public synchronized void removePlayer(String userName) {
-        userNames.remove(userName);
+    public synchronized void removePlayer(User user) {
+        Iterator<String> it = userNames.iterator();
+        while (it.hasNext()) {
+            String t = it.next();
+        }
     }
 
     public synchronized Conversation getConversation() {
@@ -39,7 +39,4 @@ public class LobbyData implements Serializable {
         return lobbyName;
     }
 
-    public synchronized List<String> getPlayers(){
-        return userNames;
-    }
 }

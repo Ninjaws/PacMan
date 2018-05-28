@@ -1,7 +1,9 @@
-package client.presentation.launcher.panes;
+package client.presentation.panes;
 
 import client.data.Storage;
 import com.jfoenix.controls.JFXButton;
+import data.Message;
+import managers.StateManager;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;

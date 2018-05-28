@@ -1,4 +1,4 @@
-package client.presentation.launcher.panes;
+package client.presentation.panes;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

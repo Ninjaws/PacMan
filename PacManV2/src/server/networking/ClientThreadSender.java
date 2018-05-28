@@ -1,6 +1,7 @@
 package server.networking;
 
 import data.ApplicationData;
+import data.Conversation;
 import server.ServerMain;
 
 import java.io.IOException;

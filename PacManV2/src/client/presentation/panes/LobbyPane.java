@@ -1,9 +1,10 @@
-package client.presentation.launcher.panes;
+package client.presentation.panes;
 
 import client.data.Storage;
 import com.jfoenix.controls.JFXButton;
-import data.launcher.Conversation;
-import data.launcher.Message;
+import data.Conversation;
+import data.LobbyData;
+import data.Message;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -39,16 +40,8 @@ public class LobbyPane extends VBox {
 
         JFXButton leave = new JFXButton("Leave");
         leave.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            try {
-                Storage.getInstance().getObjectToServer().writeObject("lobby_leave");
-                Storage.getInstance().getObjectToServer().writeObject(Storage.getInstance().getUsername());
-                Storage.getInstance().getObjectToServer().writeObject(name);
 
-                LauncherPane.setNewCenter(new LobbiesPane());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            LauncherPane.setNewCenter(new LobbiesPane());
         });
 
         sendButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {

@@ -25,7 +25,7 @@ public class ClientThreadReceiver extends Thread {
         while (true) {
             try {
                 String command = (String) objectFromClient.readObject();
-
+                System.out.println(command);
                 switch (command) {
                     case "user_add":
                         String userToAdd = (String) objectFromClient.readObject();

@@ -7,6 +7,8 @@ import data.LobbyData;
 import data.Message;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -27,6 +29,7 @@ public class LobbyPane extends VBox {
         this.name = name;
         this.setId("lobby-pane");
         HBox top = new HBox();
+        textArea.setEditable(false);
 
         JFXButton launch = new JFXButton("Launch");
         launch.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -46,10 +49,27 @@ public class LobbyPane extends VBox {
                 Storage.getInstance().getObjectToServer().writeObject("message_send");
                 Storage.getInstance().getObjectToServer().writeObject(new Message(Storage.getInstance().getUsername(), textField.getText()));
                 Storage.getInstance().getObjectToServer().writeObject(name);
+                textField.clear();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
+
+        textField.addEventHandler(KeyEvent.ANY, event -> {
+            if(KeyCode.ENTER.equals(event.getCode())){
+                try {
+                    if(!textField.getText().equals("")){
+                        Storage.getInstance().getObjectToServer().writeObject("message_send");
+                        Storage.getInstance().getObjectToServer().writeObject(new Message(Storage.getInstance().getUsername(), textField.getText()));
+                        Storage.getInstance().getObjectToServer().writeObject(name);
+                        textField.clear();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
 
         Text title = new Text("Name: " + name);
         title.setId("lobby-title");
@@ -65,8 +85,15 @@ public class LobbyPane extends VBox {
             @Override
             public void run() {
                 try{
+                    double top = textArea.getScrollTop();
+                    StringBuilder stringBuilder = new StringBuilder();
                     Conversation conversation = Storage.getInstance().getApplicationData().getLauncherData().getLobby(name).getConversation();
-                    textArea.setText(conversation.toString());
+                    conversation.getMessages().forEach(message -> {
+                        stringBuilder.append("[" + message.getDateTime().getHour() + ":" + message.getDateTime().getMinute() + "] " +
+                                message.getAuthor() + ": " + message.getText() + "\n");
+                    });
+                    textArea.setText(stringBuilder.toString());
+                    textArea.setScrollTop(top + textArea.getHeight());
                 }
                 catch (Exception e){
                     e.printStackTrace();

@@ -62,6 +62,7 @@ public class LobbiesPane extends HBox {
                         confirmCreate.addEventHandler(MouseEvent.MOUSE_CLICKED, event1 -> {
                             try {
                                 Storage.getInstance().getObjectToServer().writeObject("lobby_create");
+                                Storage.getInstance().getObjectToServer().writeObject(Storage.getInstance().getUsername());
                                 Storage.getInstance().getObjectToServer().writeObject(lobbyName.getText());
                                 LauncherPane.setNewCenter(new LobbyPane(lobbyName.getText()));
                                 dialog.close();

@@ -8,11 +8,8 @@ public class Receiver extends Thread {
     public void run() {
         while (true) {
             try {
-             //   System.out.println("Checking");
-                Object obj = Storage.getInstance().getObjectFromServer().readObject();
 
-                System.out.println(obj);
-                ApplicationData tempApp = (ApplicationData) obj;//Storage.getInstance().getObjectFromServer().readObject();
+                ApplicationData tempApp = (ApplicationData) Storage.getInstance().getObjectFromServer().readObject();
                 Storage.getInstance().setApplicationData(tempApp);
               //  System.out.println("New");
                 //System.out.println(Storage.getInstance());

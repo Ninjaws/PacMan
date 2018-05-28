@@ -25,29 +25,28 @@ public class ClientThreadReceiver extends Thread {
         while (true) {
             try {
                 String command = (String) objectFromClient.readObject();
-                if (command.equals("message")) {
 
-                    String string = (String) objectFromClient.readObject();
-                    System.out.println("Message: " + string);
-                //    Message message = (Message) objectFromClient.readObject();
+                switch (command) {
+                    case "user_add":
+                        String userToAdd = (String) objectFromClient.readObject();
+                        ServerMain.getApplicationData().addUser(new User(userToAdd));
+                        break;
 
-                  //  ServerMain.getConversation().addMessage(message);
-                }
-                else if(command.equals("user")){
-                    String string = (String) objectFromClient.readObject();
-                    ServerMain.getApplicationData().addUser(new User(string));
-                    System.out.println(ServerMain.getApplicationData().getUsers());
-                    System.out.println("User: " + string);
-                }
-                else if(command.equals("lobby")){
-                    String string = (String) objectFromClient.readObject();
-                    ServerMain.getApplicationData().getLauncherData().addLobby(new LobbyData(string));
-                    System.out.println("Lobby: " + string);
-                  //  System.out.println(ServerMain.getApplicationData().getLauncherData().getLobbies().size());
-                }
-                else if(command.equals("test")){
-                    String string = (String) objectFromClient.readObject();
-                    System.out.println(string);
+                    case "user_remove":
+                        String userToRemove = (String) objectFromClient.readObject();
+                        //TODO: Remove user
+                        break;
+
+                    case "lobby_create":
+                        String lobbyToCreate = (String) objectFromClient.readObject();
+                        ServerMain.getApplicationData().getLauncherData().addLobby(new LobbyData(lobbyToCreate));
+                        break;
+
+                    case "lobby_remove":
+                        String lobbyToRemove = (String) objectFromClient.readObject();
+                        //TODO: Remove lobby
+                        break;
+
                 }
 
             } catch (Exception e) {

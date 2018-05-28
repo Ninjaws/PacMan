@@ -3,6 +3,8 @@ package client.presentation.panes;
 import client.data.Storage;
 import com.jfoenix.controls.JFXButton;
 import data.Conversation;
+import data.LobbyData;
+import data.Message;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -40,8 +42,9 @@ public class LobbyPane extends VBox {
 
         sendButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
-                Storage.getInstance().getObjectToServer().writeObject("");
-                Storage.getInstance().getObjectToServer().writeObject(textField.getText());
+                Storage.getInstance().getObjectToServer().writeObject("message_send");
+                Storage.getInstance().getObjectToServer().writeObject(new Message(Storage.getInstance().getUsername(), textField.getText()));
+                Storage.getInstance().getObjectToServer().writeObject(name);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -60,8 +63,13 @@ public class LobbyPane extends VBox {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                Conversation conversation = Storage.getInstance().getApplicationData().getLauncherData().getLobby(name).getConversation();
-                textArea.setText(conversation.toString());
+                try{
+                    Conversation conversation = Storage.getInstance().getApplicationData().getLauncherData().getLobby(name).getConversation();
+                    textArea.setText(conversation.toString());
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }, 1000,1000);
     }

@@ -50,6 +50,7 @@ public class ClientThreadReceiver extends Thread {
                         Message messageToAdd = (Message) objectFromClient.readObject();
                         String lobbyName = (String) objectFromClient.readObject();
                         ServerMain.getApplicationData().getLauncherData().getLobby(lobbyName).addMessage(messageToAdd);
+                        break;
                         
                 }
 

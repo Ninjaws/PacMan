@@ -38,4 +38,13 @@ public class LobbyData implements Serializable {
     public String getLobbyName() {
         return lobbyName;
     }
+
+    @Override
+    public String toString() {
+        return "LobbyData{" +
+                "lobbyName='" + lobbyName + '\'' +
+                ", userNames=" + userNames +
+                ", conversation=" + conversation +
+                '}';
+    }
 }

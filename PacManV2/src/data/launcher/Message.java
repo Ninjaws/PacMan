@@ -14,6 +14,18 @@ public class Message implements Serializable {
         this.text = text;
     }
 
+    public synchronized String getAuthor() {
+        return author;
+    }
+
+    public synchronized LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public synchronized String getText() {
+        return text;
+    }
+
     @Override
     public synchronized String toString() {
         return "Message{" +

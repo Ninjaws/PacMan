@@ -13,7 +13,7 @@ public class Conversation implements Serializable {
         messages.add(message);
     }
 
-    public ArrayList<Message> getMessages() {
+    public synchronized ArrayList<Message> getMessages() {
         return messages;
     }
 

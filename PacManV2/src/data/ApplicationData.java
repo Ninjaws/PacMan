@@ -19,9 +19,9 @@ public class ApplicationData implements Serializable {
         users.add(user);
     }
 
-//    public List<User> getUsers() {
-//        return users;
-//    }
+    public List<User> getUsers() {
+        return users;
+   }
 
     public User getUser(String userName){
         return users.stream()
@@ -30,8 +30,16 @@ public class ApplicationData implements Serializable {
                 .orElse(null);
     }
 
-    public boolean userExists(String userName){
+    public synchronized boolean userExists(String userName){
+        System.out.println("user: " +userName);
+        System.out.println("users: " + users);
         return users.stream().anyMatch(user -> user.getUserName().equals(userName));
+    }
+
+
+
+    public synchronized void removeUser(String name){
+        users.removeIf(user -> user.getUserName().equals(name));
     }
 
     public synchronized LauncherData getLauncherData() {

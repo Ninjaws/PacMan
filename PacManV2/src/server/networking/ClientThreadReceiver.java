@@ -36,6 +36,7 @@ public class ClientThreadReceiver extends Thread {
                 else if(command.equals("user")){
                     String string = (String) objectFromClient.readObject();
                     ServerMain.getApplicationData().addUser(new User(string));
+                    System.out.println(ServerMain.getApplicationData().getUsers());
                     System.out.println("User: " + string);
                 }
                 else if(command.equals("lobby")){

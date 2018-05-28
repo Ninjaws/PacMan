@@ -40,7 +40,7 @@ public class Storage {
         applicationData = new ApplicationData();
 
         try {
-            socket = new Socket("localhost", 8313);
+            socket = new Socket("localhost", 666);
 
             objectToServer = new ObjectOutputStream(socket.getOutputStream());
             objectFromServer = new ObjectInputStream(socket.getInputStream());
@@ -49,7 +49,7 @@ public class Storage {
             receiver = new Receiver();
 
 
-
+            startThreads();
         } catch (Exception e) {
             e.printStackTrace();
         }

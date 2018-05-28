@@ -3,7 +3,7 @@ package client.data;
 import client.networking.Receiver;
 import client.networking.Sender;
 import data.ApplicationData;
-import data.Conversation;
+import data.launcher.Conversation;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

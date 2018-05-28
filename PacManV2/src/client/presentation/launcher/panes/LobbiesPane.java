@@ -1,7 +1,7 @@
-package client.presentation.panes;
+package client.presentation.launcher.panes;
 
 import client.data.Storage;
-import client.presentation.listview.LobbyListViewItem;
+import client.presentation.launcher.listview.LobbyListViewItem;
 import com.jfoenix.controls.JFXButton;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -56,6 +56,7 @@ public class LobbiesPane extends HBox {
             confirmCreate.addEventHandler(MouseEvent.MOUSE_CLICKED, event1 -> {
                 try {
                     Storage.getInstance().getObjectToServer().writeObject("lobby_create");
+                    Storage.getInstance().getObjectToServer().writeObject(Storage.getInstance().getUsername());
                     Storage.getInstance().getObjectToServer().writeObject(lobbyName.getText());
                     LauncherPane.setNewCenter(new LobbyPane(lobbyName.getText()));
                     dialog.close();

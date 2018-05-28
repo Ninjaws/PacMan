@@ -1,4 +1,4 @@
-package data;
+package data.launcher;
 
 import java.io.Serializable;
 
@@ -8,7 +8,6 @@ public class LoginData implements Serializable {
     public LoginData(String inputName) {
         this.inputName = inputName;
     }
-
 
     public String getInputName() {
         return inputName;

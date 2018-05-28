@@ -2,7 +2,6 @@ package client.networking;
 
 import client.data.Storage;
 import data.ApplicationData;
-import data.Conversation;
 
 public class Receiver extends Thread {
     @Override

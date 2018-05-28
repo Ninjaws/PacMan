@@ -1,7 +1,6 @@
 package server;
 
 import data.ApplicationData;
-import data.Conversation;
 import server.data.UserThread;
 
 import java.net.ServerSocket;

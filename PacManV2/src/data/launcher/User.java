@@ -1,4 +1,4 @@
-package data;
+package data.launcher;
 
 import java.io.Serializable;
 

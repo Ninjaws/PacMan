@@ -1,7 +1,7 @@
 package client;
 
 import client.data.Storage;
-import client.presentation.panes.LauncherPane;
+import client.presentation.launcher.panes.LauncherPane;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;

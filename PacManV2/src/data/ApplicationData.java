@@ -1,7 +1,7 @@
 package data;
 
 import data.launcher.LauncherData;
-import data.launcher.User;
+import data.launcher.UserData;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ApplicationData implements Serializable {
 
-    private List<User> users;
+    private List<UserData> users;
     private LauncherData launcherData;
 
     public ApplicationData() {
@@ -18,15 +18,15 @@ public class ApplicationData implements Serializable {
     }
 
 
-    public synchronized void addUser(User user) {
+    public synchronized void addUser(UserData user) {
         users.add(user);
     }
 
-    public List<User> getUsers() {
+    public List<UserData> getUsers() {
         return users;
     }
 
-    public User getUser(String userName) {
+    public UserData getUser(String userName) {
         return users.stream()
                 .filter(user -> user.getUserName().equals(userName))
                 .findFirst()

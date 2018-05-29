@@ -2,12 +2,14 @@ package client.presentation.launcher.panes;
 
 import client.data.Storage;
 import com.jfoenix.controls.JFXButton;
+import data.packets.Packet;
 import data.launcher.Conversation;
 import data.launcher.Message;
+import data.packets.lobby.PacketLobbyLeave;
+import data.packets.message.PacketMessageSend;
+import enums.Command;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,6 +19,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -41,9 +44,8 @@ public class LobbyPane extends VBox {
         JFXButton leave = new JFXButton("Leave");
         leave.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
-                Storage.getInstance().getObjectToServer().writeObject("lobby_leave");
-                Storage.getInstance().getObjectToServer().writeObject(Storage.getInstance().getUsername());
-                Storage.getInstance().getObjectToServer().writeObject(name);
+
+                Storage.getInstance().getObjectToServer().writeObject(new PacketLobbyLeave(name,Storage.getInstance().getUsername()));
 
                 LauncherPane.setNewCenter(new LobbiesPane());
             } catch (IOException e) {
@@ -60,9 +62,9 @@ public class LobbyPane extends VBox {
                 ObjectOutputStream oos = Storage.getInstance().getObjectToServer();
 
                 synchronized (oos) {
-                    Storage.getInstance().getObjectToServer().writeObject("message_send");
-                    Storage.getInstance().getObjectToServer().writeObject(new Message(Storage.getInstance().getUsername(), textField.getText()));
-                    Storage.getInstance().getObjectToServer().writeObject(name);
+
+                    Storage.getInstance().getObjectToServer().writeObject(new PacketMessageSend(name, new Message(Storage.getInstance().getUsername(),textField.getText())));
+
                     textField.clear();
                 }
 

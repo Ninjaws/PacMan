@@ -2,6 +2,7 @@ package client;
 
 import client.data.Storage;
 import client.presentation.launcher.panes.LauncherPane;
+import data.packets.user.PacketUserRemove;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -41,8 +42,7 @@ public class ClientMain extends Application {
             public void handle(WindowEvent t) {
 
                 try {
-                    Storage.getInstance().getObjectToServer().writeObject("user_remove");
-                    Storage.getInstance().getObjectToServer().writeObject(Storage.getInstance().getUsername());
+                    Storage.getInstance().getObjectToServer().writeObject(new PacketUserRemove(Storage.getInstance().getUsername()));
 
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -12,19 +12,19 @@ public class LauncherData implements Serializable {
 
     }
 
-    public synchronized List<LobbyData> getLobbies() {
+    public List<LobbyData> getLobbies() {
         return lobbies;
     }
 
-    public synchronized void addLobby(LobbyData lobby) {
+    public void addLobby(LobbyData lobby) {
         lobbies.add(lobby);
     }
 
-    public synchronized void removeLobby (String lobbyName){
+    public void removeLobby (String lobbyName){
         lobbies.removeIf(lobby -> lobby.getLobbyName().equals(lobbyName));
     }
 
-    public synchronized LobbyData getLobby(String lobbyName) {
+    public LobbyData getLobby(String lobbyName) {
         return lobbies.stream()
                 .filter(lobby -> lobby.getLobbyName().equals(lobbyName))
                 .findFirst()

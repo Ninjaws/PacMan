@@ -9,16 +9,16 @@ public class Conversation implements Serializable {
     public Conversation(){
     }
 
-    public synchronized void addMessage(Message message){
+    public void addMessage(Message message){
         messages.add(message);
     }
 
-    public synchronized ArrayList<Message> getMessages() {
+    public  ArrayList<Message> getMessages() {
         return messages;
     }
 
     @Override
-    public synchronized String toString() {
+    public  String toString() {
         return "Conversation{" +
                 "messages=\n" + messages +
                 '}';

@@ -24,7 +24,7 @@ public class Storage {
     private Conversation conversation;
     private ApplicationData applicationData;
 
-    private Sender sender;
+    //private Sender sender;
     private Receiver receiver;
 
 
@@ -45,7 +45,7 @@ public class Storage {
             objectToServer = new ObjectOutputStream(socket.getOutputStream());
             objectFromServer = new ObjectInputStream(socket.getInputStream());
 
-            sender = new Sender();
+           // sender = new Sender();
             receiver = new Receiver();
 
 

@@ -15,31 +15,31 @@ public class LobbyData implements Serializable {
         conversation = new Conversation();
     }
 
-    public void addPlayer(User user) {
+    public void addPlayer(UserData user) {
         userNames.add(user.getUserName());
     }
 
-    public synchronized void addPlayer(String userName){
+    public void addPlayer(String userName){
         userNames.add(userName);
     }
 
-    public synchronized void removePlayer(String userName) {
+    public void removePlayer(String userName) {
         userNames.remove(userName);
     }
 
-    public synchronized Conversation getConversation() {
+    public Conversation getConversation() {
         return conversation;
     }
 
-    public synchronized void addMessage(Message message){
+    public void addMessage(Message message){
         conversation.addMessage(message);
     }
 
-    public synchronized String getLobbyName() {
+    public String getLobbyName() {
         return lobbyName;
     }
 
-    public synchronized List<String> getPlayers(){
+    public List<String> getPlayers(){
         return userNames;
     }
 }

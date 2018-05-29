@@ -1,0 +1,22 @@
+package data.packets.lobby;
+
+import data.packets.Packet;
+
+public class PacketLobbyJoin implements Packet {
+
+    private String lobbyName;
+    private String userName;
+
+    public PacketLobbyJoin(String lobbyName, String userName) {
+        this.lobbyName = lobbyName;
+        this.userName = userName;
+    }
+
+    public String getLobbyName() {
+        return lobbyName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+}

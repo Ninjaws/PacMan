@@ -4,6 +4,7 @@ import client.data.Storage;
 import client.presentation.launcher.panes.LauncherPane;
 import client.presentation.launcher.panes.LobbyPane;
 import com.jfoenix.controls.JFXButton;
+import data.packets.lobby.PacketLobbyJoin;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -32,9 +33,7 @@ public class LobbyListViewItem extends VBox {
                 if(Storage.getInstance().getApplicationData().getLauncherData().getLobby(name).getPlayers().size() >= 5)
                     return;
 
-                Storage.getInstance().getObjectToServer().writeObject("lobby_join");
-                Storage.getInstance().getObjectToServer().writeObject(Storage.getInstance().getUsername());
-                Storage.getInstance().getObjectToServer().writeObject(name);
+                Storage.getInstance().getObjectToServer().writeObject(new PacketLobbyJoin(name, Storage.getInstance().getUsername()));
 
             } catch (IOException e) {
                 e.printStackTrace();

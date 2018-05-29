@@ -45,7 +45,7 @@ public class LobbyPane extends VBox {
         leave.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
 
-                Storage.getInstance().getObjectToServer().writeObject(new PacketLobbyLeave(name,Storage.getInstance().getUsername()));
+                Storage.getInstance().getObjectToServer().writeObject(new PacketLobbyLeave(name, Storage.getInstance().getUsername()));
 
                 LauncherPane.setNewCenter(new LobbiesPane());
             } catch (IOException e) {
@@ -59,14 +59,10 @@ public class LobbyPane extends VBox {
                 if (textField.getText().equals(""))
                     return;
 
-                ObjectOutputStream oos = Storage.getInstance().getObjectToServer();
+                Storage.getInstance().getObjectToServer().writeObject(new PacketMessageSend(name, new Message(Storage.getInstance().getUsername(), textField.getText())));
 
-                synchronized (oos) {
+                textField.clear();
 
-                    Storage.getInstance().getObjectToServer().writeObject(new PacketMessageSend(name, new Message(Storage.getInstance().getUsername(),textField.getText())));
-
-                    textField.clear();
-                }
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -111,14 +107,14 @@ public class LobbyPane extends VBox {
 
                     Conversation conversation = Storage.getInstance().getApplicationData().getLauncherData().getLobby(name).getConversation();
                     //   textArea.setText(conversation.toString());
-                    synchronized (conversation) {
-                        conversation.getMessages().forEach(message -> {
-                            stringBuilder.append("[" + message.getDateTime().getHour() + ":" + message.getDateTime().getMinute() + "] " +
-                                    message.getAuthor() + ": " + message.getText() + "\n");
-                        });
-                        textArea.setText(stringBuilder.toString());
-                        textArea.setScrollTop(top + textArea.getHeight());
-                    }
+
+                    conversation.getMessages().forEach(message -> {
+                        stringBuilder.append("[" + message.getDateTime().getHour() + ":" + message.getDateTime().getMinute() + "] " +
+                                message.getAuthor() + ": " + message.getText() + "\n");
+                    });
+                    textArea.setText(stringBuilder.toString());
+                    textArea.setScrollTop(top + textArea.getHeight());
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -1,9 +1,7 @@
 package client.data;
 
 import client.networking.Receiver;
-import client.networking.Sender;
 import data.ApplicationData;
-import data.launcher.Conversation;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -21,10 +19,8 @@ public class Storage {
     private ObjectInputStream objectFromServer;
 
     private String username;
-    private Conversation conversation;
     private ApplicationData applicationData;
 
-    //private Sender sender;
     private Receiver receiver;
 
 
@@ -45,7 +41,6 @@ public class Storage {
             objectToServer = new ObjectOutputStream(socket.getOutputStream());
             objectFromServer = new ObjectInputStream(socket.getInputStream());
 
-           // sender = new Sender();
             receiver = new Receiver();
 
 
@@ -58,7 +53,6 @@ public class Storage {
     }
 
     public void startThreads() {
-        //   sender.run();
         receiver.start();
     }
 
@@ -67,32 +61,25 @@ public class Storage {
         return socket;
     }
 
-    public synchronized ObjectOutputStream getObjectToServer() {
+    public ObjectOutputStream getObjectToServer() {
         return objectToServer;
     }
 
-    public synchronized ObjectInputStream getObjectFromServer() {
+    public ObjectInputStream getObjectFromServer() {
         return objectFromServer;
     }
 
-    public synchronized Conversation getConversation() {
-        return conversation;
-    }
 
-    public synchronized void setConversation(Conversation conversation) {
-        this.conversation = conversation;
-    }
-
-    public synchronized ApplicationData getApplicationData() {
+    public ApplicationData getApplicationData() {
         return applicationData;
     }
 
-    public synchronized void setApplicationData(ApplicationData applicationData) {
+    public void setApplicationData(ApplicationData applicationData) {
 
         this.applicationData = applicationData;
     }
 
-    public synchronized String getUsername() {
+    public String getUsername() {
         return username;
     }
 

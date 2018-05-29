@@ -2,7 +2,9 @@ package data.packets.user;
 
 import data.packets.Packet;
 
-public class PacketUserRemove implements Packet {
+import java.io.Serializable;
+
+public class PacketUserRemove implements Packet, Serializable {
     private String userName;
 
     public PacketUserRemove(String userName) {

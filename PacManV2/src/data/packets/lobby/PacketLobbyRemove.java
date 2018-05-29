@@ -2,7 +2,9 @@ package data.packets.lobby;
 
 import data.packets.Packet;
 
-public class PacketLobbyRemove implements Packet {
+import java.io.Serializable;
+
+public class PacketLobbyRemove implements Packet, Serializable {
 
     private String lobbyName;
 

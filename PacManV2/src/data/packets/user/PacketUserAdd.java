@@ -2,7 +2,9 @@ package data.packets.user;
 
 import data.packets.Packet;
 
-public class PacketUserAdd implements Packet{
+import java.io.Serializable;
+
+public class PacketUserAdd implements Packet, Serializable{
     private String userName;
 
     public PacketUserAdd(String userName) {

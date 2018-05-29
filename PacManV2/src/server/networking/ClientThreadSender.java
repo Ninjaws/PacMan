@@ -27,11 +27,9 @@ public class ClientThreadSender extends Thread {
                     objectToClient.writeObject(applicationData);
                 }
             } catch (IOException e) {
-                //e.printStackTrace();
                 try {
                     socket.close();
                 } catch (IOException e1) {
-                    //e1.printStackTrace();
                 }
                 break;
             }

@@ -22,6 +22,9 @@ public class User {
     ObjectOutputStream objectToClient;
     ObjectInputStream objectFromClient;
 
+    private Queue<Packet> packets = new LinkedList<>();
+
+    private boolean markedForDeletion = false;
 
     public User(Socket socket) throws Exception {
         this.socket = socket;
@@ -29,9 +32,8 @@ public class User {
         objectToClient = new ObjectOutputStream(socket.getOutputStream());
         objectFromClient = new ObjectInputStream(socket.getInputStream());
 
-        receiver = new ClientThreadReceiver(objectFromClient, socket);
+        receiver = new ClientThreadReceiver(objectFromClient, socket, this);
 
-        receiver.start();
 
     }
 
@@ -56,5 +58,17 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Queue<Packet> getPackets() {
+        return packets;
+    }
+
+    public boolean isMarkedForDeletion() {
+        return markedForDeletion;
+    }
+
+    public void setMarkedForDeletion(boolean markedForDeletion) {
+        this.markedForDeletion = markedForDeletion;
     }
 }

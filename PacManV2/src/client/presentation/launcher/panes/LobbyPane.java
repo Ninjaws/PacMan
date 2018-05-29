@@ -10,6 +10,8 @@ import data.packets.message.PacketMessageSend;
 import enums.Command;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -53,38 +55,32 @@ public class LobbyPane extends VBox {
             }
 
         });
-
+        //Click button
         sendButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
                 if (textField.getText().equals(""))
                     return;
 
                 Storage.getInstance().getObjectToServer().writeObject(new PacketMessageSend(name, new Message(Storage.getInstance().getUsername(), textField.getText())));
-
                 textField.clear();
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
-
-        /*textField.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+        //Enter key
+        textField.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
             if (KeyCode.ENTER.equals(event.getCode())) {
                 try {
                     if (textField.getText().equals(""))
                         return;
 
-                    Storage.getInstance().getObjectToServer().writeObject("message_send");
-                    Storage.getInstance().getObjectToServer().writeObject(new Message(Storage.getInstance().getUsername(), textField.getText()));
-                    Storage.getInstance().getObjectToServer().writeObject(name);
+                    Storage.getInstance().getObjectToServer().writeObject(new PacketMessageSend(name, new Message(Storage.getInstance().getUsername(), textField.getText())));
                     textField.clear();
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-        });*/
+        });
 
         Text title = new Text("Name: " + name);
         title.setId("lobby-title");

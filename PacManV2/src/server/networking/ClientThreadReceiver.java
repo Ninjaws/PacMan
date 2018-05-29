@@ -1,6 +1,7 @@
 package server.networking;
 
 import data.packets.Packet;
+import server.data.User;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,35 +13,37 @@ public class ClientThreadReceiver extends Thread {
 
     private ObjectInputStream objectFromClient;
     private Socket socket;
-    private Queue<Packet> packets = new LinkedList<>();
+    private User user;
 
-    public ClientThreadReceiver(ObjectInputStream objectFromClient, Socket socket) {
+    private boolean alive = true;
+
+
+    public ClientThreadReceiver(ObjectInputStream objectFromClient, Socket socket, User user) {
         this.objectFromClient = objectFromClient;
         this.socket = socket;
+        this.user = user;
     }
 
     @Override
     public void run() {
-        while (true) {
+        while (alive) {
             try {
 
                 Packet packet = (Packet) objectFromClient.readObject();
-                packets.offer(packet);
+                user.getPackets().offer(packet);
 
 
             } catch (Exception e) {
-                //e.printStackTrace();
                 try {
                     socket.close();
                 } catch (IOException e1) {
-                    //e1.printStackTrace();
                 }
                 break;
             }
         }
     }
 
-    public Queue<Packet> getPackets() {
-        return packets;
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 }

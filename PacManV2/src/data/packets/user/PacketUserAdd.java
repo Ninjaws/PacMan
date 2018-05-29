@@ -11,7 +11,7 @@ public class PacketUserAdd implements Packet, Serializable{
         this.userName = userName;
     }
 
-    public String getUderName() {
+    public String getUserName() {
         return userName;
     }
 }

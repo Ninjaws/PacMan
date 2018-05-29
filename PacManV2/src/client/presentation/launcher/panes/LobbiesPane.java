@@ -3,6 +3,7 @@ package client.presentation.launcher.panes;
 import client.data.Storage;
 import client.presentation.launcher.listview.LobbyListViewItem;
 import com.jfoenix.controls.JFXButton;
+import data.launcher.Conversation;
 import data.packets.Packet;
 import data.packets.lobby.PacketLobbyCreate;
 import javafx.event.EventHandler;
@@ -18,6 +19,8 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LobbiesPane extends HBox {
     // private ArrayList<LobbyListViewItem> lobbies = new ArrayList<>();
@@ -33,19 +36,31 @@ public class LobbiesPane extends HBox {
         });
 
         VBox buttons = new VBox();
-
+/*
         JFXButton refresh = new JFXButton("Refresh");
         refresh.getStyleClass().add("lobby-button");
 
         //   refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> System.out.println());
         refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            sessions.getItems().clear();
-            Storage.getInstance().getApplicationData().getLauncherData().getLobbies().forEach(lobbyData -> {
-                sessions.getItems().add(new LobbyListViewItem(lobbyData.getLobbyName()));
-            });
 
-        });
 
+        });*/
+        //Refreshes the list of games
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    sessions.getItems().clear();
+                    Storage.getInstance().getApplicationData().getLauncherData().getLobbies().forEach(lobbyData -> {
+                        sessions.getItems().add(new LobbyListViewItem(lobbyData.getLobbyName()));
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 1000, 1000);
 
         JFXButton create = new JFXButton("Create");
         create.getStyleClass().add("lobby-button");
@@ -71,7 +86,6 @@ public class LobbiesPane extends HBox {
                         e.printStackTrace();
                     }
 
-                    // ApplicationData.getInstance().getLauncherData().addLobby(new LobbyData(lobbyName.getText()));
 
 
                 });
@@ -94,7 +108,7 @@ public class LobbiesPane extends HBox {
             }
 
         });
-        buttons.getChildren().addAll(refresh, create);
+        buttons.getChildren().addAll(create);
         this.getChildren().addAll(sessions, buttons);
 
     }

@@ -18,7 +18,7 @@ public class ApplicationData implements Serializable {
     }
 
 
-    public synchronized void addUser(UserData user) {
+    public void addUser(UserData user) {
         users.add(user);
     }
 
@@ -33,18 +33,18 @@ public class ApplicationData implements Serializable {
                 .orElse(null);
     }
 
-    public synchronized boolean userExists(String userName) {
+    public boolean userExists(String userName) {
         System.out.println("user: " + userName);
         System.out.println("users: " + users);
         return users.stream().anyMatch(user -> user.getUserName().equals(userName));
     }
 
 
-    public synchronized void removeUser(String name) {
+    public void removeUser(String name) {
         users.removeIf(user -> user.getUserName().equals(name));
     }
 
-    public synchronized LauncherData getLauncherData() {
+    public LauncherData getLauncherData() {
         return launcherData;
     }
 }

@@ -1,5 +1,0 @@
-package enums;
-
-     public enum Command{USER_ADD, USER_REMOVE, LOBBY_CREATE, LOBBY_REMOVE, LOBBY_JOIN, LOBBY_LEAVE, MESSAGE_SEND }
-
-

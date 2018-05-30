@@ -5,7 +5,6 @@ import application.game.business.SoundPlayer;
 import application.game.data.Game;
 import application.game.presentation.frames.GamePanel;
 import application.game.presentation.frames.PacManFrame;
-import application.game.presentation.frames.multiplayer.serverlist.ServerPanel;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
@@ -47,6 +46,13 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
      */
     private BufferedImage[] frames = new BufferedImage[16];
 
+    private long startTime = System.currentTimeMillis();
+    private int nextTime = 1;
+    private double currentTime = System.currentTimeMillis();
+
+
+    private boolean isGameLoading = false;
+
     /**
      * The constructor of the StartUpScreen loads the standard pacman font. Also it loads the the spritesheet of the pacman.
      */
@@ -75,10 +81,6 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
                 1));
         menuTexts.add(new MenuText("Singleplayer", standardPacManFont.deriveFont(76f),
                 2));
-        menuTexts.add(new MenuText("Multiplayer", standardPacManFont.deriveFont(76f),
-                3));
-        menuTexts.add(new MenuText("Options", standardPacManFont.deriveFont(76f),
-                4));
 
 
         addMouseListener(this);
@@ -123,6 +125,31 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
 
         if(random.nextInt(1000) >= 995)
             animatedPacMans.add(new AnimatedPacMan(new Point2D.Double(spawnX,spawnY),frames));
+
+
+    }
+
+    public void countDown(int n){
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if(n == 0){
+                Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).stop();
+                PacManFrame.setNextPanel(new GamePanel());
+                animatedPacMans.clear();
+        }
+        else if(currentTime/1000 > nextTime){
+            nextTime++;
+            currentTime = System.currentTimeMillis() - startTime;
+            countDown(n - 1);
+        }
+        else{
+            currentTime = System.currentTimeMillis() - startTime;
+            countDown(n);
+        }
     }
 
     @Override
@@ -149,6 +176,12 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
         ifPassedBorder();
         randomlySpawn();
 
+        if(!isGameLoading){
+            isGameLoading = true;
+            new Thread(() -> {
+                countDown(10);
+            }).start();
+        }
         repaint();
     }
 
@@ -159,11 +192,6 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
                 if(menuText.getText().equals("Singleplayer")) {
                     Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).stop();
                     PacManFrame.setNextPanel(new GamePanel());
-                    animatedPacMans.clear();
-                }
-                else if(menuText.getText().equals("Multiplayer")) {
-                    Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).stop();
-                    PacManFrame.setNextPanel(new ServerPanel());
                     animatedPacMans.clear();
                 }
             }

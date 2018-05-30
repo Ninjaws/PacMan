@@ -36,7 +36,7 @@ public class LobbiesPane extends HBox {
         });
 
         VBox buttons = new VBox();
-/*
+
         JFXButton refresh = new JFXButton("Refresh");
         refresh.getStyleClass().add("lobby-button");
 
@@ -44,7 +44,8 @@ public class LobbiesPane extends HBox {
         refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
 
-        });*/
+        });
+  /*
         //Refreshes the list of games
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -61,6 +62,8 @@ public class LobbiesPane extends HBox {
                 }
             }
         }, 1000, 1000);
+*/
+
 
         JFXButton create = new JFXButton("Create");
         create.getStyleClass().add("lobby-button");
@@ -77,8 +80,15 @@ public class LobbiesPane extends HBox {
                 confirmCreate.setId("create-button");
                 confirmCreate.addEventHandler(MouseEvent.MOUSE_CLICKED, event1 -> {
                     try {
-
+                        System.out.println(lobbyName.getText());
                         Storage.getInstance().getObjectToServer().writeObject(new PacketLobbyCreate(lobbyName.getText(), Storage.getInstance().getUsername()));
+
+                        while(Storage.getInstance().getApplicationData().getLauncherData().getLobby(lobbyName.getText()) == null){
+                            //Wait
+                            System.out.println("Waiting");
+                        }
+                        System.out.println("Lobby received");
+
 
                         LauncherPane.setNewCenter(new LobbyPane(lobbyName.getText()));
                         dialog.close();

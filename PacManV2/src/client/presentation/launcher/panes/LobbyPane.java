@@ -1,6 +1,7 @@
 package client.presentation.launcher.panes;
 
 import client.data.Storage;
+import client.presentation.launcher.listview.LobbyListViewItem;
 import com.jfoenix.controls.JFXButton;
 import data.packets.Packet;
 import data.launcher.Conversation;
@@ -8,6 +9,9 @@ import data.launcher.Message;
 import data.packets.lobby.PacketLobbyLeave;
 import data.packets.message.PacketMessageSend;
 import enums.Command;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -16,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import javax.swing.*;
 import java.awt.*;
@@ -92,11 +97,12 @@ public class LobbyPane extends VBox {
 
         top.getChildren().addAll(title, launch, leave);
         this.getChildren().addAll(top, textArea, chatBox);
-
+/*
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+
                 try {
                     double top = textArea.getScrollTop();
                     StringBuilder stringBuilder = new StringBuilder();
@@ -116,6 +122,32 @@ public class LobbyPane extends VBox {
                 }
             }
         }, 1000, 1000);
+*/
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+            try {
+
+                double top1 = textArea.getScrollTop();
+                StringBuilder stringBuilder = new StringBuilder();
+
+                Conversation conversation = Storage.getInstance().getApplicationData().getLauncherData().getLobby(name).getConversation();
+                //   textArea.setText(conversation.toString());
+
+                conversation.getMessages().forEach(message -> {
+                    stringBuilder.append("[" + message.getDateTime().getHour() + ":" + message.getDateTime().getMinute() + "] " +
+                            message.getAuthor() + ": " + message.getText() + "\n");
+                });
+                textArea.setText(stringBuilder.toString());
+                textArea.setScrollTop(top1 + textArea.getHeight());
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+
     }
 
 

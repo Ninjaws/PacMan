@@ -34,7 +34,7 @@ public class User {
 
         receiver = new ClientThreadReceiver(objectFromClient, socket, this);
 
-
+        receiver.start();
     }
 
     public void sendApplication() {

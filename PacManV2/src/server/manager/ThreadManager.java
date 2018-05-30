@@ -46,8 +46,9 @@ public class ThreadManager extends Thread {
     }
 
 
-    public void addUser(User thread) {
-        tempUsers.add(thread);
+    public void addUser(User user) {
+        tempUsers.add(user);
+        System.out.println("User added to temp: " + user);
     }
 
     private void processPackets() {
@@ -55,7 +56,7 @@ public class ThreadManager extends Thread {
             Queue<Packet> packets = user.getPackets();
 
             while (!packets.isEmpty()) {
-                System.out.println(packets.peek());
+                System.out.println("Processing packet: " + packets.peek());
                 chooseAction(user,packets.poll());
             }
         }
@@ -68,12 +69,27 @@ public class ThreadManager extends Thread {
 
     private void addNewUsers() {
       //  tempUsers.forEach(user -> users.add(user));
+      //  System.out.println(tempUsers.size());
+        /*
         for (User tempUser : tempUsers) {
-            tempUser.getReceiver().start();
+            System.out.println(tempUsers.size());
+            System.out.println("tempUser: " + tempUser);
             users.add(tempUser);
+            System.out.println("New user: " + tempUser);
+        }
+        */
+
+        Iterator<User> it = tempUsers.iterator();
+        while (it.hasNext()) {
+            User user = it.next();
+
+            users.add(user);
+            System.out.println("New user: " + user);
+            it.remove();
         }
 
-        tempUsers.clear();
+
+      //  tempUsers.clear();
     }
 
     private void removeMarkedUsers() {

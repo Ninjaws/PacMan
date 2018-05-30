@@ -22,14 +22,17 @@ public class ClientThreadReceiver extends Thread {
         this.objectFromClient = objectFromClient;
         this.socket = socket;
         this.user = user;
+        System.out.println("Receiver " + user + " created");
     }
 
     @Override
     public void run() {
+        System.out.println("Receiver " + user + " running");
         while (alive) {
             try {
-
+                System.out.println("waiting");
                 Packet packet = (Packet) objectFromClient.readObject();
+                System.out.println("Packet received: " + packet);
                 user.getPackets().offer(packet);
 
 

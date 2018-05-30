@@ -14,7 +14,7 @@ public class Receiver extends Thread {
                 Storage.getInstance().setApplicationData(tempApp);
 
                 application.testgame.data.ApplicationData tempAppTest = (application.testgame.data.ApplicationData) Storage.getInstance().getObjectFromServer().readObject();
-                Storage.getInstance().setAppDataTest(tempAppTest);
+             //   Storage.getInstance().setAppDataTest(tempAppTest);
 
 
             } catch (Exception e) {

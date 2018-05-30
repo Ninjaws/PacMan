@@ -9,11 +9,13 @@ import application.networking.packets.lobby.PacketLobbyJoin;
 import application.networking.packets.lobby.PacketLobbyLeave;
 import application.networking.packets.lobby.PacketLobbyRemove;
 import application.networking.packets.message.PacketMessageSend;
+import application.networking.packets.player.PacketPlayerUpdate;
 import application.networking.packets.user.PacketUserAdd;
 import application.networking.packets.user.PacketUserRemove;
 import application.networking.server.ServerMain;
 import application.networking.server.data.User;
 
+import java.awt.geom.Point2D;
 import java.util.*;
 
 public class ThreadManager extends Thread {
@@ -114,6 +116,8 @@ public class ThreadManager extends Thread {
 
     private void chooseAction(User user, Packet packet) {
 
+        //-----LAUNCHER------//
+
         //User Added
         if (packet instanceof PacketUserAdd) {
             String userToAdd = ((PacketUserAdd) packet).getUserName();
@@ -161,6 +165,17 @@ public class ThreadManager extends Thread {
             Message message = ((PacketMessageSend) packet).getMessage();
             ServerMain.getApplicationData().getLauncherData().getLobby(lobby).addMessage(message);
         }
+
+        //----GAME-----//
+
+        else if (packet instanceof PacketPlayerUpdate){
+            String playerName = ((PacketPlayerUpdate) packet).getUserName();
+            Point2D position = ((PacketPlayerUpdate) packet).getPosition();
+            ServerMain.getAppDataTest().getGameObject(playerName).setPosition(position);
+        }
+
+
+
     }
 
 

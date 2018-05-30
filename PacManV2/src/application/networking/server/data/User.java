@@ -51,8 +51,7 @@ public class User {
     public void sendAppDatTest() {
         try {
             objectToClient.reset();
-
-            objectToClient.writeObject(ServerMain.);
+            objectToClient.writeObject(ServerMain.getAppDataTest());
         } catch (IOException e) {
             e.printStackTrace();
         }

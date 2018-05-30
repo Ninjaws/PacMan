@@ -8,7 +8,7 @@ public class Receiver extends Thread {
     public void run() {
         while (true) {
             try {
-             //   System.out.println("Checking");
+
                 ApplicationData tempApp = (ApplicationData) Storage.getInstance().getObjectFromServer().readObject();
                 Storage.getInstance().setApplicationData(tempApp);
               //  System.out.println("New");

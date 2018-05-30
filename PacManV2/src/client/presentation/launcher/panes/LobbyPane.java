@@ -1,17 +1,17 @@
 package client.presentation.launcher.panes;
 
 import client.data.Storage;
+import client.presentation.launcher.listview.LobbyListViewItem;
 import com.jfoenix.controls.JFXButton;
-<<<<<<< Updated upstream:PacManV2/src/client/presentation/launcher/panes/LobbyPane.java
+import data.packets.Packet;
 import data.launcher.Conversation;
 import data.launcher.Message;
-=======
-import data.Conversation;
-import data.LobbyData;
-import data.Message;
-import javafx.event.EventHandler;
-import javafx.scene.control.ScrollPane;
->>>>>>> Stashed changes:PacManV2/src/client/presentation/panes/LobbyPane.java
+import data.packets.lobby.PacketLobbyLeave;
+import data.packets.message.PacketMessageSend;
+import enums.Command;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -21,11 +21,13 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
+import javafx.util.Duration;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,6 +36,7 @@ public class LobbyPane extends VBox {
     private TextArea textArea = new TextArea();
     private TextField textField = new TextField();
     private JFXButton sendButton = new JFXButton("Send");
+
     public LobbyPane(String name) {
         this.name = name;
         this.setId("lobby-pane");
@@ -42,16 +45,15 @@ public class LobbyPane extends VBox {
         JFXButton launch = new JFXButton("Launch");
         launch.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             JFrame frame = new JFrame("PacMan");
-            frame.setSize(new Dimension(800,800));
+            frame.setSize(new Dimension(800, 800));
             frame.setVisible(true);
         });
 
         JFXButton leave = new JFXButton("Leave");
         leave.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
-                Storage.getInstance().getObjectToServer().writeObject("lobby_leave");
-                Storage.getInstance().getObjectToServer().writeObject(Storage.getInstance().getUsername());
-                Storage.getInstance().getObjectToServer().writeObject(name);
+
+                Storage.getInstance().getObjectToServer().writeObject(new PacketLobbyLeave(name, Storage.getInstance().getUsername()));
 
                 LauncherPane.setNewCenter(new LobbiesPane());
             } catch (IOException e) {
@@ -59,29 +61,27 @@ public class LobbyPane extends VBox {
             }
 
         });
-
+        //Click button
         sendButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
-                if(!textField.getText().equals("")){
-                    Storage.getInstance().getObjectToServer().writeObject("message_send");
-                    Storage.getInstance().getObjectToServer().writeObject(new Message(Storage.getInstance().getUsername(), textField.getText()));
-                    Storage.getInstance().getObjectToServer().writeObject(name);
-                    textField.clear();
-                }
-            } catch (IOException e) {
+                if (textField.getText().equals(""))
+                    return;
+
+                Storage.getInstance().getObjectToServer().writeObject(new PacketMessageSend(name, new Message(Storage.getInstance().getUsername(), textField.getText())));
+                textField.clear();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
-
-        textField.addEventHandler(KeyEvent.ANY, event -> {
-            if(KeyCode.ENTER.equals(event.getCode())){
+        //Enter key
+        textField.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            if (KeyCode.ENTER.equals(event.getCode())) {
                 try {
-                    if(!textField.getText().equals("")){
-                        Storage.getInstance().getObjectToServer().writeObject("message_send");
-                        Storage.getInstance().getObjectToServer().writeObject(new Message(Storage.getInstance().getUsername(), textField.getText()));
-                        Storage.getInstance().getObjectToServer().writeObject(name);
-                        textField.clear();
-                    }
+                    if (textField.getText().equals(""))
+                        return;
+
+                    Storage.getInstance().getObjectToServer().writeObject(new PacketMessageSend(name, new Message(Storage.getInstance().getUsername(), textField.getText())));
+                    textField.clear();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -92,33 +92,38 @@ public class LobbyPane extends VBox {
         title.setId("lobby-title");
 
         HBox chatBox = new HBox();
-        chatBox.getChildren().addAll(textField,sendButton);
+        chatBox.getChildren().addAll(textField, sendButton);
 
         textArea.setEditable(false);
 
-        top.getChildren().addAll(title,launch, leave);
-        this.getChildren().addAll(top,textArea,chatBox);
+        top.getChildren().addAll(title, launch, leave);
+        this.getChildren().addAll(top, textArea, chatBox);
 
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                try{
-                    double top = textArea.getScrollTop();
-                    StringBuilder stringBuilder = new StringBuilder();
-                    Conversation conversation = Storage.getInstance().getApplicationData().getLauncherData().getLobby(name).getConversation();
-                    conversation.getMessages().forEach(message -> {
-                        stringBuilder.append("[" + message.getDateTime().getHour() + ":" + message.getDateTime().getMinute() + "] " +
-                                message.getAuthor() + ": " + message.getText() + "\n");
-                    });
-                    textArea.setText(stringBuilder.toString());
-                    textArea.setScrollTop(top + textArea.getHeight());
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            try {
+
+                double top1 = textArea.getScrollTop();
+                StringBuilder stringBuilder = new StringBuilder();
+
+                Conversation conversation = Storage.getInstance().getApplicationData().getLauncherData().getLobby(name).getConversation();
+                //   textArea.setText(conversation.toString());
+
+                conversation.getMessages().forEach(message -> {
+                    stringBuilder.append("[" + message.getDateTime().getHour() + ":" + message.getDateTime().getMinute() + "] " +
+                            message.getAuthor() + ": " + message.getText() + "\n");
+                });
+                textArea.setText(stringBuilder.toString());
+                textArea.setScrollTop(top1 + textArea.getHeight());
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }, 1000,1000);
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+
     }
 
 

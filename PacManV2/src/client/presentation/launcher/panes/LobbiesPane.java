@@ -3,6 +3,12 @@ package client.presentation.launcher.panes;
 import client.data.Storage;
 import client.presentation.launcher.listview.LobbyListViewItem;
 import com.jfoenix.controls.JFXButton;
+import data.launcher.Conversation;
+import data.packets.Packet;
+import data.packets.lobby.PacketLobbyCreate;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,8 +20,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LobbiesPane extends HBox {
     // private ArrayList<LobbyListViewItem> lobbies = new ArrayList<>();
@@ -32,17 +41,33 @@ public class LobbiesPane extends HBox {
 
         VBox buttons = new VBox();
 
+
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            try {
+
+                sessions.getItems().clear();
+                Storage.getInstance().getApplicationData().getLauncherData().getLobbies().forEach(lobbyData -> {
+                    sessions.getItems().add(new LobbyListViewItem(lobbyData.getLobbyName()));
+                });
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+/*
         JFXButton refresh = new JFXButton("Refresh");
         refresh.getStyleClass().add("lobby-button");
 
         //   refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> System.out.println());
         refresh.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            sessions.getItems().clear();
-            Storage.getInstance().getApplicationData().getLauncherData().getLobbies().forEach(lobbyData -> {
-                sessions.getItems().add(new LobbyListViewItem(lobbyData.getLobbyName()));
-            });
+
 
         });
+        */
 
 
 
@@ -50,39 +75,9 @@ public class LobbiesPane extends HBox {
         create.getStyleClass().add("lobby-button");
 
         create.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-<<<<<<< Updated upstream:PacManV2/src/client/presentation/launcher/panes/LobbiesPane.java
-            Stage dialog = new Stage();
-            dialog.initStyle(StageStyle.UTILITY);
-            TextField lobbyName = new TextField();
-            lobbyName.setId("lobby-field");
-            Button confirmCreate = new Button("create");
-            confirmCreate.setId("create-button");
-            confirmCreate.addEventHandler(MouseEvent.MOUSE_CLICKED, event1 -> {
-                try {
-                    Storage.getInstance().getObjectToServer().writeObject("lobby_create");
-                    Storage.getInstance().getObjectToServer().writeObject(Storage.getInstance().getUsername());
-                    Storage.getInstance().getObjectToServer().writeObject(lobbyName.getText());
-                    LauncherPane.setNewCenter(new LobbyPane(lobbyName.getText()));
-                    dialog.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                // ApplicationData.getInstance().getLauncherData().addLobby(new LobbyData(lobbyName.getText()));
 
 
-            });
-            //adds styles
-            HBox hBox = new HBox(lobbyName, confirmCreate);
-            hBox.getStylesheets().add(getClass().getResource("/css_files/launcher.css").toExternalForm());
-
-            Scene scene = new Scene(hBox);
-            dialog.setWidth(300);
-            dialog.setHeight(90);
-            dialog.setScene(scene);
-            dialog.show();
-=======
-            if(!createIsPressed){
+            if (!createIsPressed) {
                 Stage dialog = new Stage();
                 dialog.initStyle(StageStyle.UTILITY);
                 TextField lobbyName = new TextField();
@@ -91,15 +86,22 @@ public class LobbiesPane extends HBox {
                 confirmCreate.setId("create-button");
                 confirmCreate.addEventHandler(MouseEvent.MOUSE_CLICKED, event1 -> {
                     try {
-                        Storage.getInstance().getObjectToServer().writeObject("lobby_create");
-                        Storage.getInstance().getObjectToServer().writeObject(lobbyName.getText());
+                        System.out.println(lobbyName.getText());
+                        Storage.getInstance().getObjectToServer().writeObject(new PacketLobbyCreate(lobbyName.getText(), Storage.getInstance().getUsername()));
+
+                        while(Storage.getInstance().getApplicationData().getLauncherData().getLobby(lobbyName.getText()) == null){
+                            //Wait
+                           // System.out.println("Waiting");
+                        }
+                        System.out.println("Lobby received");
+
+
                         LauncherPane.setNewCenter(new LobbyPane(lobbyName.getText()));
                         dialog.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
 
-                    // ApplicationData.getInstance().getLauncherData().addLobby(new LobbyData(lobbyName.getText()));
 
 
                 });
@@ -120,16 +122,10 @@ public class LobbiesPane extends HBox {
                 dialog.show();
                 createIsPressed = true;
             }
->>>>>>> Stashed changes:PacManV2/src/client/presentation/panes/LobbiesPane.java
-        });
 
-        buttons.getChildren().addAll(refresh, create);
+        });
+        buttons.getChildren().addAll(create);
         this.getChildren().addAll(sessions, buttons);
 
-//        Timeline timeline = new Timeline(new KeyFrame(
-//                Duration.millis(1000),
-//                ae -> sessions.getItems().addAll(LauncherData.getInstance().getLobbies())));//sessions.refresh()));
-//        timeline.setCycleCount(Animation.INDEFINITE);
-//        timeline.play();
     }
 }

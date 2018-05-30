@@ -19,22 +19,18 @@ public class ClientThreadSender extends Thread {
 
     @Override
     public void run() {
-        while (true) {
-            try {
-                objectToClient.reset();
-                ApplicationData applicationData = ServerMain.getApplicationData();
-                synchronized (applicationData ) {
-                    objectToClient.writeObject(applicationData);
-                }
-            } catch (IOException e) {
-                //e.printStackTrace();
-                try {
-                    socket.close();
-                } catch (IOException e1) {
-                    //e1.printStackTrace();
-                }
-                break;
+        try {
+            objectToClient.reset();
+            ApplicationData applicationData = ServerMain.getApplicationData();
+            synchronized (applicationData) {
+                objectToClient.writeObject(applicationData);
             }
+        } catch (IOException e) {
+            try {
+                socket.close();
+            } catch (IOException e1) {
+            }
+
         }
     }
 }

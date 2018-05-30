@@ -2,11 +2,11 @@ package data.launcher;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class UserData implements Serializable {
 
     private final String userName;
 
-    public User(String userName) {
+    public UserData(String userName) {
         this.userName = userName;
     }
 
@@ -16,7 +16,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserData{" +
                 "userName='" + userName + '\'' +
                 '}';
     }

@@ -1,6 +1,5 @@
 package client.presentation.launcher.panes;
 
-import managers.StateManager;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
@@ -17,7 +16,6 @@ public class LauncherPane extends BorderPane {
 
     private LauncherPane() {
         instance = this;
-        StateManager.getInstance();
 
         setId("launcher-pane");
 

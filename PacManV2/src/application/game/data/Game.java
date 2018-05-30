@@ -27,6 +27,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -36,18 +37,18 @@ import java.util.stream.Collectors;
  * @author Ian Vink
  */
 
-public class Game {
+public class Game implements Serializable {
 
     private static Game instance;
 
-    private Map map;
+    private transient Map map;
 
-    private SoundPlayer soundPlayer;
+    private transient SoundPlayer soundPlayer;
 
     private ArrayList<GameObject> gameObjects = new ArrayList<>();
 
-    private int screenWidth;
-    private int screenHeight;
+    private transient int screenWidth;
+    private transient int screenHeight;
 
     private int maxScore;
     private int currentScore;

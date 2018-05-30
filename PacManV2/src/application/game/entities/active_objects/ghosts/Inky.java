@@ -8,6 +8,7 @@ import application.game.tiled.ObjectLayer;
 import java.awt.event.ActionEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
@@ -15,11 +16,11 @@ import java.util.Random;
 /**
  * Inky walks to random places and charges pacman if he is in a specific range.
  */
-public class Inky extends Ghost{
+public class Inky extends Ghost implements Serializable{
 
     private Target scatterdTarget = Game.getInstance().getScatterCorners().get(3);
     private int index = 3;
-    private ArrayList<Target> targets;
+    private transient ArrayList<Target> targets;
     public Inky(BufferedImage image, BufferedImage deadImage, Point2D position, int objectWidth, int objectHeight, int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations, int animationDelayMillis, double moveSpeed) {
         super(image, deadImage, position, objectWidth, objectHeight, spriteWidth, spriteHeight, animations, animationDelayMillis, moveSpeed);
         target = Game.getInstance().getPacMan().getTarget();

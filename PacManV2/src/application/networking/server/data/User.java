@@ -1,5 +1,6 @@
 package application.networking.server.data;
 
+import application.game.data.Game;
 import application.networking.packets.Packet;
 import application.networking.server.ServerMain;
 import application.networking.server.listeners.ClientThreadReceiver;
@@ -42,6 +43,16 @@ public class User {
             objectToClient.writeObject(ServerMain.getApplicationData());
 
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendAppDatTest() {
+        try {
+            objectToClient.reset();
+
+            objectToClient.writeObject(ServerMain.);
         } catch (IOException e) {
             e.printStackTrace();
         }

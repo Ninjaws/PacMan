@@ -7,9 +7,10 @@ import application.game.data.pathfinding.Target;
 import java.awt.event.ActionEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.Map;
 
-public class Clyde extends Ghost {
+public class Clyde extends Ghost implements Serializable {
 
     private Target scatterdTarget = Game.getInstance().getScatterCorners().get(2);
     public Clyde(BufferedImage image, BufferedImage deadImage, Point2D position, int objectWidth, int objectHeight, int spriteWidth, int spriteHeight, Map<SpriteSheet.Animation, Integer> animations, int animationDelayMillis, double moveSpeed) {

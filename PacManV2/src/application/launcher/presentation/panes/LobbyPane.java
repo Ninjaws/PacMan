@@ -1,11 +1,13 @@
 package application.launcher.presentation.panes;
 
+import application.game.Main;
 import application.networking.client.data.Storage;
-import com.jfoenix.controls.JFXButton;
 import application.launcher.data.Conversation;
 import application.launcher.data.Message;
 import application.networking.packets.lobby.PacketLobbyLeave;
 import application.networking.packets.message.PacketMessageSend;
+import application.testgame.presentation.frames.GameFrame;
+import com.jfoenix.controls.JFXButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -36,9 +38,15 @@ public class LobbyPane extends VBox {
 
         JFXButton launch = new JFXButton("Launch");
         launch.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            JFrame frame = new JFrame("PacMan");
-            frame.setSize(new Dimension(800, 800));
-            frame.setVisible(true);
+
+            GameFrame gameFrame = new GameFrame();
+
+
+          //  Main main = new Main();
+
+       //     JFrame frame = new JFrame("PacMan");
+       //     frame.setSize(new Dimension(800, 800));
+       //     frame.setVisible(true);
         });
 
         JFXButton leave = new JFXButton("Leave");

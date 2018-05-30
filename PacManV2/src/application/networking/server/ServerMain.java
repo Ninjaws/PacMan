@@ -9,10 +9,12 @@ import java.net.Socket;
 
 public class ServerMain {
     private static ApplicationData applicationData;
+    private static application.testgame.data.ApplicationData appDataTest;
     private static ThreadManager threadManager;
 
     public static void main(String[] args) {
         applicationData = new ApplicationData();
+        appDataTest = new application.testgame.data.ApplicationData();
         threadManager = new ThreadManager();
         threadManager.start();
 
@@ -35,6 +37,10 @@ public class ServerMain {
 
     public synchronized static ApplicationData getApplicationData() {
         return applicationData;
+    }
+
+    public synchronized static application.testgame.data.ApplicationData getAppDataTest() {
+        return appDataTest;
     }
 }
 

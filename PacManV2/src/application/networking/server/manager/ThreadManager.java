@@ -31,6 +31,7 @@ public class ThreadManager extends Thread {
 
                 processPackets();
                 sendApplicationToClients();
+                sendAppDataTestToClients();
 
                 removeMarkedUsers();
 
@@ -54,7 +55,7 @@ public class ThreadManager extends Thread {
 
             while (!packets.isEmpty()) {
                 System.out.println("Processing packet: " + packets.peek());
-                chooseAction(user,packets.poll());
+                chooseAction(user, packets.poll());
             }
         }
     }
@@ -63,19 +64,11 @@ public class ThreadManager extends Thread {
         users.forEach(user -> user.sendApplication());
     }
 
+    private void sendAppDataTestToClients() {
+        users.forEach(user -> user.sendAppDatTest());
+    }
 
     private void addNewUsers() {
-      //  tempUsers.forEach(user -> users.add(user));
-      //  System.out.println(tempUsers.size());
-        /*
-        for (User tempUser : tempUsers) {
-            System.out.println(tempUsers.size());
-            System.out.println("tempUser: " + tempUser);
-            users.add(tempUser);
-            System.out.println("New user: " + tempUser);
-        }
-        */
-
         Iterator<User> it = tempUsers.iterator();
         while (it.hasNext()) {
             User user = it.next();
@@ -84,9 +77,6 @@ public class ThreadManager extends Thread {
             System.out.println("New user: " + user);
             it.remove();
         }
-
-
-      //  tempUsers.clear();
     }
 
     private void removeMarkedUsers() {
@@ -102,7 +92,7 @@ public class ThreadManager extends Thread {
         }
     }
 
-    private void removeUser(User user){
+    private void removeUser(User user) {
 
         //In case the user quits the program while still in a lobby
         //This will make sure the player that left is not occupying a spot
@@ -116,7 +106,7 @@ public class ThreadManager extends Thread {
 
         user.getReceiver().setAlive(false);
 
-        while(user.getReceiver().isAlive());
+        while (user.getReceiver().isAlive()) ;
 
         System.out.println("Dead");
 
@@ -135,7 +125,6 @@ public class ThreadManager extends Thread {
 
             //Useless now
             String userToRemove = ((PacketUserRemove) packet).getUserName();
-
 
 
             //User user = users.stream().filter(user1 -> user1.getUserName().equals(userToRemove)).findFirst().orElse(null);

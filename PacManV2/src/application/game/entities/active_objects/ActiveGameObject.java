@@ -16,13 +16,13 @@ import java.util.Map;
 
 public abstract class ActiveGameObject extends GameObject {
 
-    private BufferedImage spriteSheetImage;
-    private int spriteWidth;
-    private int spriteHeight;
+    private transient BufferedImage spriteSheetImage;
+    private transient int spriteWidth;
+    private transient int spriteHeight;
 
     private Point direction;
 
-    private SpriteSheet spriteSheet;
+    private transient SpriteSheet spriteSheet;
 
     private double moveSpeed;
 

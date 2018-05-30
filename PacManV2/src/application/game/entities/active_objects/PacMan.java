@@ -11,6 +11,7 @@ import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ import java.util.Map;
  * @author Ian Vink
  */
 
-public class PacMan extends ActiveGameObject {
+public class PacMan extends ActiveGameObject implements Serializable {
 
     private Target target;
     private SoundTimer timer;

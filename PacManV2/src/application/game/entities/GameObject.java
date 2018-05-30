@@ -4,17 +4,18 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 /**
  * @author Ian Vink
  */
 
-public abstract class GameObject {
-    private BufferedImage image;
+public abstract class GameObject implements Serializable {
+    private transient BufferedImage image;
     private Point2D position;
 
-    private int objectWidth;
-    private int objectHeight;
+    private transient int objectWidth;
+    private transient int objectHeight;
 
     private boolean active;
 

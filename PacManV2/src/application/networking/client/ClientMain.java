@@ -23,7 +23,7 @@ public class ClientMain extends Application {
     public ClientMain() {
         instance = this;
         mainScene = new Scene(LauncherPane.getInstance(),0,0);
-        addStyle("css_files/launcher.css");
+        addStyle("launcher/css_files/launcher.css");
 
         Storage.getInstance();
     }

@@ -103,7 +103,7 @@ public class LobbiesPane extends HBox {
                 });
                 //adds styles
                 HBox hBox = new HBox(lobbyName, confirmCreate);
-                hBox.getStylesheets().add(getClass().getResource("/css_files/launcher.css").toExternalForm());
+                hBox.getStylesheets().add(getClass().getResource("/launcher/css_files/launcher.css").toExternalForm());
 
                 Scene scene = new Scene(hBox);
                 dialog.setWidth(300);

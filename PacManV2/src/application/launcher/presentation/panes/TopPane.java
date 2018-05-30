@@ -11,7 +11,7 @@ public class TopPane extends FlowPane {
         setId("top-pane");
 
         ImageView imageView = new ImageView();
-        imageView.setImage(new Image(getClass().getResource("/presentation_images/pacman.png").toExternalForm(),128,128,false,false));
+        imageView.setImage(new Image(getClass().getResource("/launcher/presentation_images/pacman.png").toExternalForm(),128,128,false,false));
         this.getChildren().add(imageView);
 
         Text title = new Text("PacMan");

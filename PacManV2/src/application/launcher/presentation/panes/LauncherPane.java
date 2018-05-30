@@ -17,7 +17,7 @@ public class LauncherPane extends BorderPane {
     private LauncherPane() {
         instance = this;
 
-        setId("application.launcher-pane");
+        setId("launcher-pane");
 
         this.setTop(new TopPane());
         this.setCenter(new LoginPane());

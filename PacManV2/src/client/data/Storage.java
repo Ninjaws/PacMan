@@ -36,7 +36,7 @@ public class Storage {
         applicationData = new ApplicationData();
 
         try {
-            socket = new Socket("192.168.159.2", 666); //localhost
+            socket = new Socket("localhost", 666); //localhost
 
             objectToServer = new ObjectOutputStream(socket.getOutputStream());
             objectFromServer = new ObjectInputStream(socket.getInputStream());

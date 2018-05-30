@@ -6,6 +6,9 @@ import com.jfoenix.controls.JFXButton;
 import data.launcher.Conversation;
 import data.packets.Packet;
 import data.packets.lobby.PacketLobbyCreate;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -37,6 +41,24 @@ public class LobbiesPane extends HBox {
 
         VBox buttons = new VBox();
 
+
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            try {
+
+                sessions.getItems().clear();
+                Storage.getInstance().getApplicationData().getLauncherData().getLobbies().forEach(lobbyData -> {
+                    sessions.getItems().add(new LobbyListViewItem(lobbyData.getLobbyName()));
+                });
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+/*
         JFXButton refresh = new JFXButton("Refresh");
         refresh.getStyleClass().add("lobby-button");
 
@@ -45,24 +67,8 @@ public class LobbiesPane extends HBox {
 
 
         });
-  /*
-        //Refreshes the list of games
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                try {
-                    sessions.getItems().clear();
-                    Storage.getInstance().getApplicationData().getLauncherData().getLobbies().forEach(lobbyData -> {
-                        sessions.getItems().add(new LobbyListViewItem(lobbyData.getLobbyName()));
-                    });
+        */
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }, 1000, 1000);
-*/
 
 
         JFXButton create = new JFXButton("Create");
@@ -85,7 +91,7 @@ public class LobbiesPane extends HBox {
 
                         while(Storage.getInstance().getApplicationData().getLauncherData().getLobby(lobbyName.getText()) == null){
                             //Wait
-                            System.out.println("Waiting");
+                           // System.out.println("Waiting");
                         }
                         System.out.println("Lobby received");
 

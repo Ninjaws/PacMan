@@ -97,33 +97,8 @@ public class LobbyPane extends VBox {
 
         top.getChildren().addAll(title, launch, leave);
         this.getChildren().addAll(top, textArea, chatBox);
-/*
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
 
-                try {
-                    double top = textArea.getScrollTop();
-                    StringBuilder stringBuilder = new StringBuilder();
-
-                    Conversation conversation = Storage.getInstance().getApplicationData().getLauncherData().getLobby(name).getConversation();
-                    //   textArea.setText(conversation.toString());
-
-                    conversation.getMessages().forEach(message -> {
-                        stringBuilder.append("[" + message.getDateTime().getHour() + ":" + message.getDateTime().getMinute() + "] " +
-                                message.getAuthor() + ": " + message.getText() + "\n");
-                    });
-                    textArea.setText(stringBuilder.toString());
-                    textArea.setScrollTop(top + textArea.getHeight());
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }, 1000, 1000);
-*/
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             try {
 
                 double top1 = textArea.getScrollTop();

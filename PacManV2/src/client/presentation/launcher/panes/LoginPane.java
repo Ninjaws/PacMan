@@ -35,9 +35,9 @@ public class LoginPane extends HBox {
 
                     Storage.getInstance().setUsername(userNameTextField.getText());
 
-                    Packet packet = new PacketUserAdd(userNameTextField.getText());
-                    System.out.println(packet);
-                    Storage.getInstance().getObjectToServer().writeObject(packet);
+                    //Packet packet = new PacketUserAdd(userNameTextField.getText());
+                    //System.out.println(packet);
+                    Storage.getInstance().getObjectToServer().writeObject(new PacketUserAdd(userNameTextField.getText()));
 
                     LauncherPane.setNewCenter(new LobbiesPane());
 

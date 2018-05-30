@@ -34,8 +34,6 @@ public class ApplicationData implements Serializable {
     }
 
     public boolean userExists(String userName) {
-        System.out.println("user: " + userName);
-        System.out.println("users: " + users);
         return users.stream().anyMatch(user -> user.getUserName().equals(userName));
     }
 

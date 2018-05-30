@@ -119,8 +119,7 @@ public class ThreadManager extends Thread {
 
         user.getReceiver().setAlive(false);
 
-        while(user.getReceiver().isAlive())
-            System.out.println("Still Alive");
+        while(user.getReceiver().isAlive());
 
         System.out.println("Dead");
 

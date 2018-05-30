@@ -86,7 +86,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
         if(ghostHasWon){
             g2d.setFont(pacManFont.deriveFont(70f));
             g2d.setColor(Color.yellow);
-            g2d.drawString("Ghosts has won!", 0, getHeight()/2);
+            g2d.drawString("Ghosts have won!", 0, getHeight()/2);
         }
         else if(pacManHasWon){
             g2d.setFont(pacManFont.deriveFont(70f));

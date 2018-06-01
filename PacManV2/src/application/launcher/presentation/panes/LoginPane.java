@@ -3,6 +3,7 @@ package application.launcher.presentation.panes;
 import application.game.Main;
 import application.networking.client.data.Storage;
 import application.networking.packets.user.PacketUserAdd;
+import com.jfoenix.controls.JFXButton;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -49,7 +50,8 @@ public class LoginPane extends HBox {
 
         JFXButton solo = new JFXButton("Solo Game");
         solo.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            Main.launchGame();
+           // Main.launchGame();
+            Main main = new Main();
         });
         solo.setId("solo-button");
 

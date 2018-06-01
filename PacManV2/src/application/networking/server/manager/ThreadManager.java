@@ -11,6 +11,8 @@ import application.networking.packets.launcher.lobby.PacketLobbyLeave;
 import application.networking.packets.launcher.lobby.PacketLobbyRemove;
 import application.networking.packets.launcher.message.PacketMessageSend;
 import application.networking.packets.game.player.PacketPlayerUpdate;
+import application.networking.packets.user.PacketIsPacMan;
+import application.networking.packets.user.PacketIsReady;
 import application.networking.packets.user.PacketUserAdd;
 import application.networking.packets.user.PacketUserRemove;
 import application.networking.server.ServerMain;

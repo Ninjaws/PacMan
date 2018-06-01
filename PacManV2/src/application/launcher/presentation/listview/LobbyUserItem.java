@@ -3,7 +3,7 @@ package application.launcher.presentation.listview;
 import application.launcher.data.Conversation;
 import application.launcher.data.Message;
 import application.networking.client.data.Storage;
-import application.networking.packets.message.PacketMessageSend;
+import application.networking.packets.launcher.message.PacketMessageSend;
 import application.networking.packets.user.PacketIsPacMan;
 import application.networking.packets.user.PacketIsReady;
 import com.jfoenix.controls.JFXButton;

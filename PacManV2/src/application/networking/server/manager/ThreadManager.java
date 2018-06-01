@@ -9,6 +9,8 @@ import application.networking.packets.lobby.PacketLobbyJoin;
 import application.networking.packets.lobby.PacketLobbyLeave;
 import application.networking.packets.lobby.PacketLobbyRemove;
 import application.networking.packets.message.PacketMessageSend;
+import application.networking.packets.user.PacketIsPacMan;
+import application.networking.packets.user.PacketIsReady;
 import application.networking.packets.user.PacketUserAdd;
 import application.networking.packets.user.PacketUserRemove;
 import application.networking.server.ServerMain;
@@ -171,6 +173,20 @@ public class ThreadManager extends Thread {
             String lobby = ((PacketMessageSend) packet).getLobbyName();
             Message message = ((PacketMessageSend) packet).getMessage();
             ServerMain.getApplicationData().getLauncherData().getLobby(lobby).addMessage(message);
+        }
+        //sets if pacman is chosen.
+        else if(packet instanceof PacketIsPacMan) {
+            String userName = ((PacketIsPacMan) packet).getUser();
+            boolean isPacMan = ((PacketIsPacMan) packet).isPacMan();
+            ServerMain.getApplicationData().getUser(userName).setPacMan(isPacMan);
+        }
+        //sets if user is ready,
+        else if(packet instanceof PacketIsReady) {
+            String userName = ((PacketIsReady) packet).getUserName();
+            boolean isReady = ((PacketIsReady) packet).isReady();
+            System.out.println("username: " + userName + "\n" + "isReady: " + isReady + "\n") ;
+            ServerMain.getApplicationData().getUser(userName).setReady(isReady);
+            System.out.println(ServerMain.getApplicationData().getUser(userName));
         }
     }
 

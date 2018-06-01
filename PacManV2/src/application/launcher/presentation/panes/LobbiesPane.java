@@ -47,7 +47,6 @@ public class LobbiesPane extends HBox {
                     sessions.getItems().add(new LobbyListViewItem(lobbyData.getLobbyName()));
                 });
 
-
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -97,7 +97,7 @@ public class LobbyPane extends VBox {
 
         HBox hbox2 = new HBox();
         hbox2.getChildren().addAll(vBox,vBox2);
-        
+
         usersView.setId("user-listview");
 
         textArea.setEditable(false);
@@ -120,14 +120,14 @@ public class LobbyPane extends VBox {
                             message.getAuthor() + ": " + message.getText() + "\n");
                 });
 
-                usersView.getItems().clear();
                 textArea.setText(stringBuilder.toString());
                 textArea.setScrollTop(top1 + textArea.getHeight());
+
+                usersView.getItems().clear();
                 for(String userName : lobbyData.getPlayers()){
                     UserData userData = Storage.getInstance().getApplicationData().getUser(userName);
-                    usersView.getItems().addAll(new LobbyUserItem(userData.getUserName(), false));
+                    usersView.getItems().addAll(new LobbyUserItem(userData.getUserName(), userData.isPacMan(), userData.isReady()));
                 }
-
 
             } catch (Exception e) {
                 e.printStackTrace();

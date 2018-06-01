@@ -1,20 +1,27 @@
 package application.launcher.presentation.listview;
 
+import application.networking.client.data.Storage;
+import application.networking.packets.user.PacketIsPacMan;
+import application.networking.packets.user.PacketIsReady;
 import com.jfoenix.controls.JFXButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+
 
 public class LobbyUserItem extends VBox {
     private String name;
     private boolean isPacMan;
-    private boolean isReady = false;
+    private boolean isReady;
 
-    public LobbyUserItem(String name, boolean isPacMan) {
+    public LobbyUserItem(String name, boolean isPacMan, boolean isReady) {
         this.name = name;
         this.isPacMan = isPacMan;
+        this.isReady = isReady;
+
 
         Text nameText = new Text(name);
         nameText.setId("lobby-user-name");
@@ -29,35 +36,72 @@ public class LobbyUserItem extends VBox {
 
         JFXButton selectButton = new JFXButton("Ghost");
         selectButton.setId("select-button");
+        if(isPacMan)
+            selectButton.setText("PacMan");
+        else
+            selectButton.setText("Ghost");
+
         selectButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->{
-            if(isReady){
+            if(this.isReady){
 
             }
             else if(selectButton.getText().equals("Ghost")){
-                selectButton.setText("PacMan");
                 this.isPacMan = true;
+                try {
+                    Storage.getInstance().getObjectToServer().writeObject(new PacketIsPacMan(name, true));
+                    Storage.getInstance().getApplicationData().getUser(name).setPacMan(true);
+                    selectButton.setText("PacMan");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             else {
-                selectButton.setText("Ghost");
                 this.isPacMan = false;
+                try {
+                    Storage.getInstance().getApplicationData().getUser(name).setPacMan(false);
+                    Storage.getInstance().getObjectToServer().writeObject(new PacketIsPacMan(name,false));
+                    selectButton.setText("Ghost");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                };
+
             }
         });
 
 
         //ready button
         JFXButton readyButton = new JFXButton();
-        readyButton.getStyleClass().clear();
-        readyButton.getStyleClass().add("ready-button-red");
+        if(isReady){
+            readyButton.getStyleClass().removeAll("ready-button-red");
+            readyButton.getStyleClass().add("ready-button-green");
+            System.out.println(true);
+        }
+        else {
+            readyButton.getStyleClass().removeAll("ready-button-green");
+            readyButton.getStyleClass().add("ready-button-red");
+        }
         readyButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            if(readyButton.getStyleClass().get(0).equals("ready-button-red")){
-                isReady = true;
-                readyButton.getStyleClass().removeAll("ready-button-red");
-                readyButton.getStyleClass().add("ready-button-green");
+            if(!isReady){
+                this.isReady = true;
+                try {
+                    Storage.getInstance().getObjectToServer().writeObject(new PacketIsReady(name, true));
+                    Storage.getInstance().getApplicationData().getUser(name).setReady(true);
+                    readyButton.getStyleClass().removeAll("ready-button-red");
+                    readyButton.getStyleClass().add("ready-button-green");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             else{
-                isReady = false;
-                readyButton.getStyleClass().removeAll("ready-button-green");
-                readyButton.getStyleClass().add("ready-button-red");
+                this.isReady = false;
+                try {
+                    Storage.getInstance().getObjectToServer().writeObject(new PacketIsReady(name,false));
+                    Storage.getInstance().getApplicationData().getUser(name).setReady(false);
+                    readyButton.getStyleClass().removeAll("ready-button-green");
+                    readyButton.getStyleClass().add("ready-button-red");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

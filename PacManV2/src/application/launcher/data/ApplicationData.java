@@ -37,6 +37,17 @@ public class ApplicationData implements Serializable {
         return users.stream().anyMatch(user -> user.getUserName().equals(userName));
     }
 
+    public boolean everyUserIsReady(String name){
+        for(String user : launcherData.getLobby(name).getPlayers()){
+            UserData userData = getUser(user);
+            if(!userData.isReady())
+                return false;
+            else if(launcherData.getLobby(name).getPlayers().size() <= 1)
+                return false;
+        }
+        return true;
+    }
+
 
     public void removeUser(String name) {
         users.removeIf(user -> user.getUserName().equals(name));

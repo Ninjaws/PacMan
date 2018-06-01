@@ -71,7 +71,7 @@
     -fx-background-color: orange;
     -fx-font-family: monospace;
     -fx-text-fill: whitesmoke;
-    -fx-min-width: 300px;
+    -fx-min-width: 195px;
     -fx-font-size: 15px;
 }
 
@@ -79,7 +79,7 @@
     -fx-background-color: #23272a;
     -fx-control-inner-background: #23272a;
     -fx-text-fill: whitesmoke;
-    -fx-min-width: 1000px;
+    -fx-min-width: 700px;
     -fx-min-height: 500px;
     -fx-font-family: monospace;
     -fx-font-size: 15px;
@@ -89,7 +89,7 @@
 #lobby-pane .text-field {
     -fx-background-color: #2c2f33;
     -fx-text-fill: whitesmoke;
-    -fx-min-width: 700px;
+    -fx-min-width: 600px;
     -fx-font-family: monospace;
     -fx-font-size: 15px;
 }
@@ -121,5 +121,49 @@
     -fx-max-width: 150px;
     -fx-min-height: 50px;
     -fx-max-height: 50px;
+}
 
+#lobby-user-name {
+    -fx-fill: whitesmoke;
+    -fx-font-family: monospace;
+    -fx-font-size: 20px;
+}
+
+#is-pac-man-text {
+    -fx-fill: whitesmoke;
+    -fx-font-family: monospace;
+    -fx-font-size: 11px;
+}
+
+#user-listview #select-button {
+    -fx-background-color: deepskyblue;
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: monospace;
+    -fx-font-size: 11px;
+    -fx-max-width: 150px;
+    -fx-min-width: 150px;
+    -fx-max-height: 25px;
+    -fx-min-height: 25px;
+}
+
+#user-listview {
+    -fx-max-width: 200px;
+    -fx-min-height: 500px;
+    -fx-background-color: #2c2f33;
+}
+
+#user-listview .ready-button-red {
+    -fx-background-color: red;
+    -fx-max-width: 25px;
+    -fx-min-width: 25px;
+    -fx-max-height: 25px;
+    -fx-min-height: 25px;
+}
+
+#user-listview .ready-button-green {
+    -fx-background-color: green;
+    -fx-max-width: 25px;
+    -fx-min-width: 25px;
+    -fx-max-height: 25px;
+    -fx-min-height: 25px;
 }

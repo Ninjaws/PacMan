@@ -71,8 +71,6 @@ public class LobbiesPane extends HBox {
         create.getStyleClass().add("lobby-button");
 
         create.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-
-
             if (!createIsPressed) {
                 Stage dialog = new Stage();
                 dialog.initStyle(StageStyle.UTILITY);
@@ -97,9 +95,6 @@ public class LobbiesPane extends HBox {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-
-
                 });
                 //adds styles
                 HBox hBox = new HBox(lobbyName, confirmCreate);

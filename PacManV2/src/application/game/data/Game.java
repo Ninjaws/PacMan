@@ -80,7 +80,6 @@ public class Game implements Serializable {
     }
 
     public void setGameObjects() {
-
         ObjectLayer objLayer = (ObjectLayer) map.getLayers().stream()
                 .filter(layer -> layer instanceof ObjectLayer)
                 .findFirst()
@@ -219,7 +218,6 @@ public class Game implements Serializable {
 
         } catch (Exception e) {
             e.printStackTrace();
-
             return null;
         }
 

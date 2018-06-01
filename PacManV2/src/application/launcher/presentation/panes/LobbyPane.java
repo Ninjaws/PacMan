@@ -1,5 +1,8 @@
 package application.launcher.presentation.panes;
 
+import application.launcher.data.LobbyData;
+import application.launcher.data.UserData;
+import application.launcher.presentation.listview.LobbyUserItem;
 import application.networking.client.data.Storage;
 import application.launcher.data.Conversation;
 import application.launcher.data.Message;
@@ -11,6 +14,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -27,6 +31,7 @@ public class LobbyPane extends VBox {
     private String name;
     private TextArea textArea = new TextArea();
     private TextField textField = new TextField();
+    private ListView<LobbyUserItem> usersView = new ListView();
     private JFXButton sendButton = new JFXButton("Send");
 
     public LobbyPane(String name) {
@@ -34,18 +39,10 @@ public class LobbyPane extends VBox {
         this.setId("lobby-pane");
         HBox top = new HBox();
 
-        JFXButton launch = new JFXButton("Launch");
-        launch.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-
-
-        });
-
         JFXButton leave = new JFXButton("Leave");
         leave.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
-
                 Storage.getInstance().getObjectToServer().writeObject(new PacketLobbyLeave(name, Storage.getInstance().getUsername()));
-
                 LauncherPane.setNewCenter(new LobbiesPane());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -85,27 +82,46 @@ public class LobbyPane extends VBox {
         HBox chatBox = new HBox();
         chatBox.getChildren().addAll(textField, sendButton);
 
-        textArea.setEditable(false);
+        VBox vBox = new VBox();
+        vBox.getChildren().addAll(textArea, chatBox);
 
-        top.getChildren().addAll(title, launch, leave);
-        this.getChildren().addAll(top, textArea, chatBox);
+        VBox vBox2 = new VBox();
+        vBox2.getChildren().addAll(leave, usersView);
+
+        HBox hbox2 = new HBox();
+        hbox2.getChildren().addAll(vBox,vBox2);
+
+        usersView.setId("user-listview");
+
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+
+        top.getChildren().addAll(title);
+        this.getChildren().addAll(top, hbox2);
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             try {
 
                 double top1 = textArea.getScrollTop();
                 StringBuilder stringBuilder = new StringBuilder();
+                LobbyData lobbyData = Storage.getInstance().getApplicationData().getLauncherData().getLobby(name);
 
-                Conversation conversation = Storage.getInstance().getApplicationData().getLauncherData().getLobby(name).getConversation();
+                Conversation conversation = lobbyData.getConversation();
                 //   textArea.setText(conversation.toString());
 
                 conversation.getMessages().forEach(message -> {
                     stringBuilder.append("[" + message.getDateTime().getHour() + ":" + message.getDateTime().getMinute() + "] " +
                             message.getAuthor() + ": " + message.getText() + "\n");
                 });
+
                 textArea.setText(stringBuilder.toString());
                 textArea.setScrollTop(top1 + textArea.getHeight());
 
+                usersView.getItems().clear();
+                for(String userName : lobbyData.getPlayers()){
+                    UserData userData = Storage.getInstance().getApplicationData().getUser(userName);
+                    usersView.getItems().addAll(new LobbyUserItem(userData.getUserName(), name, userData.isPacMan(), userData.isReady()));
+                }
 
 
             } catch (Exception e) {
@@ -114,8 +130,9 @@ public class LobbyPane extends VBox {
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
     }
+
+
 
 
 }

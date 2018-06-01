@@ -1,6 +1,9 @@
 package application.launcher.presentation.listview;
 
+import application.launcher.data.Conversation;
+import application.launcher.data.Message;
 import application.networking.client.data.Storage;
+import application.networking.packets.message.PacketMessageSend;
 import application.networking.packets.user.PacketIsPacMan;
 import application.networking.packets.user.PacketIsReady;
 import com.jfoenix.controls.JFXButton;
@@ -14,13 +17,16 @@ import java.io.IOException;
 
 public class LobbyUserItem extends VBox {
     private String name;
+    private String lobbyName;
     private boolean isPacMan;
     private boolean isReady;
 
-    public LobbyUserItem(String name, boolean isPacMan, boolean isReady) {
+    public LobbyUserItem(String name, String lobbyName, boolean isPacMan, boolean isReady) {
         this.name = name;
+        this.lobbyName = lobbyName;
         this.isPacMan = isPacMan;
         this.isReady = isReady;
+
 
 
         Text nameText = new Text(name);
@@ -45,12 +51,22 @@ public class LobbyUserItem extends VBox {
             if(this.isReady){
 
             }
-            else if(selectButton.getText().equals("Ghost")){
+            else if(selectButton.getText().equals("Ghost") && !Storage.getInstance().getApplicationData().isThereAPacMan(lobbyName, name)){
                 this.isPacMan = true;
                 try {
                     Storage.getInstance().getObjectToServer().writeObject(new PacketIsPacMan(name, true));
                     Storage.getInstance().getApplicationData().getUser(name).setPacMan(true);
                     selectButton.setText("PacMan");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if(Storage.getInstance().getApplicationData().isThereAPacMan(lobbyName, name)){
+                try {
+                    Storage.getInstance().getObjectToServer().writeObject(new PacketMessageSend(lobbyName,
+                            new Message(
+                                    "SERVER",
+                                    "PACMAN IS ALREADY CHOSEN, LET THE PACMAN USER DESELECT PACMAN OR ACCEPT IT.")));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -74,7 +90,6 @@ public class LobbyUserItem extends VBox {
         if(isReady){
             readyButton.getStyleClass().removeAll("ready-button-red");
             readyButton.getStyleClass().add("ready-button-green");
-            System.out.println(true);
         }
         else {
             readyButton.getStyleClass().removeAll("ready-button-green");

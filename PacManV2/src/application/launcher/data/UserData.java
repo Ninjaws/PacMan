@@ -1,6 +1,7 @@
 package application.launcher.data;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class UserData implements Serializable {
 

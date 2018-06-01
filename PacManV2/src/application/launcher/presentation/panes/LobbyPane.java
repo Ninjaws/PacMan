@@ -39,13 +39,6 @@ public class LobbyPane extends VBox {
         this.setId("lobby-pane");
         HBox top = new HBox();
 
-        JFXButton launch = new JFXButton("Launch");
-        launch.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            JFrame frame = new JFrame("PacMan");
-            frame.setSize(new Dimension(800, 800));
-            frame.setVisible(true);
-        });
-
         JFXButton leave = new JFXButton("Leave");
         leave.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
@@ -101,6 +94,7 @@ public class LobbyPane extends VBox {
         usersView.setId("user-listview");
 
         textArea.setEditable(false);
+        textArea.setWrapText(true);
 
         top.getChildren().addAll(title);
         this.getChildren().addAll(top, hbox2);
@@ -126,8 +120,9 @@ public class LobbyPane extends VBox {
                 usersView.getItems().clear();
                 for(String userName : lobbyData.getPlayers()){
                     UserData userData = Storage.getInstance().getApplicationData().getUser(userName);
-                    usersView.getItems().addAll(new LobbyUserItem(userData.getUserName(), userData.isPacMan(), userData.isReady()));
+                    usersView.getItems().addAll(new LobbyUserItem(userData.getUserName(), name, userData.isPacMan(), userData.isReady()));
                 }
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -135,8 +130,9 @@ public class LobbyPane extends VBox {
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
     }
+
+
 
 
 }

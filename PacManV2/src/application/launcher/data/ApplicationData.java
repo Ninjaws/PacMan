@@ -34,18 +34,22 @@ public class ApplicationData implements Serializable {
     }
 
     public boolean userExists(String userName) {
+        for(UserData userData : users){
+
+        }
+
+
+
         return users.stream().anyMatch(user -> user.getUserName().equals(userName));
     }
 
-    public boolean everyUserIsReady(String name){
-        for(String user : launcherData.getLobby(name).getPlayers()){
-            UserData userData = getUser(user);
-            if(!userData.isReady())
-                return false;
-            else if(launcherData.getLobby(name).getPlayers().size() <= 1)
-                return false;
+    public boolean isThereAPacMan(String lobbyName, String name){
+        for(String userName : getLauncherData().getLobby(lobbyName).getPlayers()){
+            UserData userData = getUser(userName);
+            if(userData.isPacMan() && !userData.getUserName().equals(name))
+                return true;
         }
-        return true;
+        return false;
     }
 
 

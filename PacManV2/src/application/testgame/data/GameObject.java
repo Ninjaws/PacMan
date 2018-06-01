@@ -27,6 +27,10 @@ public class GameObject implements Serializable {
         g2d.drawImage(image, at, null);
     }
 
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
     public String getPlayerName() {
         return playerName;
     }

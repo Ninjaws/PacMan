@@ -7,18 +7,18 @@ import java.io.Serializable;
 public class PacketGameStart implements Packet, Serializable {
 
     private boolean inGame;
-    private int gameId;
+    private String gameName;
 
-    public PacketGameStart(boolean inGame, int gameId) {
+    public PacketGameStart(boolean inGame, String gameName) {
         this.inGame = inGame;
-        this.gameId = gameId;
+        this.gameName = gameName;
     }
 
     public boolean isInGame() {
         return inGame;
     }
 
-    public int getGameId() {
-        return gameId;
+    public String getGameName() {
+        return gameName;
     }
 }

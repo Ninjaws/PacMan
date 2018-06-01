@@ -41,7 +41,7 @@ public class Storage {
     private Storage() {
 
         applicationData = new ApplicationData();
-        appDataTest = new application.testgame.data.ApplicationData();
+        //appDataTest = new application.testgame.data.ApplicationData();
 
         try {
             socket = new Socket("localhost", 9595); //145.49.52.133
@@ -102,6 +102,7 @@ public class Storage {
     public void setAppDataTest(application.testgame.data.ApplicationData appDataTest) {
         this.appDataTest = appDataTest;
     }
+
 
     public String getUsername() {
         return username;

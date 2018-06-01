@@ -32,4 +32,11 @@ public class LauncherData implements Serializable {
 
     }
 
+    public LobbyData getLobbyThatHasUser(String userName){
+        return lobbies.stream()
+                .filter(lobbyData -> lobbyData.getPlayers().contains(userName))
+                .findFirst()
+                .orElse(null);
+    }
+
 }

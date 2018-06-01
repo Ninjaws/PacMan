@@ -39,15 +39,14 @@ public class LobbyPane extends VBox {
 
             try {
 
-                Storage.getInstance().setInGame(true);
-                Storage.getInstance().getObjectToServer().writeObject(new PacketGameStart(Storage.getInstance().isInGame(), 1));
+                Storage.getInstance().getObjectToServer().writeObject(new PacketGameStart(true, name));
 
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            GameFrame gameFrame = new GameFrame();
+            //GameFrame gameFrame = new GameFrame();
 
 
           //  Main main = new Main();

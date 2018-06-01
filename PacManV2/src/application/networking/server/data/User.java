@@ -2,6 +2,7 @@ package application.networking.server.data;
 
 import application.game.data.Game;
 import application.networking.packets.Packet;
+import application.networking.packets.game.PacketGame;
 import application.networking.packets.game.player.PacketPlayerUpdate;
 import application.networking.packets.launcher.PacketLauncher;
 import application.networking.server.ServerMain;
@@ -47,7 +48,6 @@ public class User {
 
             objectToClient.reset();
             objectToClient.writeObject(new PacketLauncher(ServerMain.getApplicationData()));
-          //  objectToClient.writeObject(ServerMain.getApplicationData());
 
 
         } catch (IOException e) {
@@ -58,9 +58,8 @@ public class User {
     public void sendGame() {
         try {
             objectToClient.reset();
-            objectToClient.writeObject(new PacketPlayerUpdate(ServerMain.getAppDataTest().getGameObjects().get(0).getPlayerName(),ServerMain.getAppDataTest().getGameObjects().get(0).getPosition()));
-        //    objectToClient.reset();
-      //      objectToClient.writeObject(ServerMain.getAppDataTest());
+            objectToClient.writeObject(new PacketGame(ServerMain.getGame(ServerMain.getApplicationData().getLauncherData().getLobbyThatHasUser(userName).getLobbyName())));
+
         } catch (IOException e) {
             e.printStackTrace();
         }

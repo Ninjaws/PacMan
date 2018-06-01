@@ -15,8 +15,10 @@ import application.networking.packets.user.PacketUserAdd;
 import application.networking.packets.user.PacketUserRemove;
 import application.networking.server.ServerMain;
 import application.networking.server.data.User;
+import application.testgame.data.ApplicationData;
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.*;
 
 public class ThreadManager extends Thread {
@@ -33,9 +35,10 @@ public class ThreadManager extends Thread {
             while (true) {
 
                 processPackets();
-                // sendApplicationToClients();
+
+                gameLogic();
+
                 sendDataToClients();
-                //  sendAppDataTestToClients();
 
                 removeMarkedUsers();
 
@@ -66,6 +69,10 @@ public class ThreadManager extends Thread {
 
     private void sendDataToClients() {
         for (User user : users) {
+
+            if (user.isMarkedForDeletion())
+                continue;
+
             if (user.isInGame())
                 user.sendGame();//sendGameToClient(User user);
             else
@@ -82,6 +89,28 @@ public class ThreadManager extends Thread {
             users.add(user);
             System.out.println("New user: " + user);
             it.remove();
+        }
+    }
+
+    private void gameLogic() {
+        for (LobbyData lobbyData : ServerMain.getApplicationData().getLauncherData().getLobbies()) {
+            boolean allPlayersReady = true;
+            for (String userName : lobbyData.getPlayers()) {
+
+                if (!getUser(userName).isInGame()) {
+                    allPlayersReady = false;
+                    break;
+                }
+
+            }
+
+            if (allPlayersReady) {
+
+                ServerMain.getGames().add(new ApplicationData(lobbyData.getLobbyName(),lobbyData.getPlayers().get(0), lobbyData.getPlayers().get(1)));
+
+                //Start game
+            }
+
         }
     }
 
@@ -116,6 +145,13 @@ public class ThreadManager extends Thread {
 
         System.out.println("Dead");
 
+    }
+
+    private User getUser(String userName){
+       return users.stream()
+               .filter(user->user.getUserName().equals(userName))
+               .findFirst()
+               .orElse(null);
     }
 
     private void choosePacket(User user, Packet packet) {
@@ -174,12 +210,12 @@ public class ThreadManager extends Thread {
 
         else if (packet instanceof PacketGameStart) {
             boolean inGame = ((PacketGameStart) packet).isInGame();
-            int gameId = ((PacketGameStart) packet).getGameId();
+          //  int gameId = ((PacketGameStart) packet).getGameId();
             user.setInGame(inGame);
         } else if (packet instanceof PacketPlayerUpdate) {
             String playerName = ((PacketPlayerUpdate) packet).getUserName();
             Point2D position = ((PacketPlayerUpdate) packet).getPosition();
-            ServerMain.getAppDataTest().getGameObject(playerName).setPosition(position);
+            ServerMain.getAppDataTest().getGameObject("1").setPosition(position);
         }
 
 

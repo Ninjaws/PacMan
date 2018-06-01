@@ -17,7 +17,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 
     public GamePanel() {
+
+
+        new Timer(1000/60,this).start();
+
         addKeyListener(this);
+        setFocusable(true);
     }
 
     public void paintComponent(Graphics g) {
@@ -34,8 +39,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+        System.out.println("key pressed");
         try {
-            Storage.getInstance().getObjectToServer().writeObject(new PacketPlayerUpdate(Storage.getInstance().getUsername(), new Point2D.Double(200, 200)));
+            Storage.getInstance().getObjectToServer().writeObject(new PacketPlayerUpdate(Storage.getInstance().getUsername(), new Point2D.Double(Storage.getInstance().getAppDataTest().getGameObjects().get(0).getPosition().getX(), Storage.getInstance().getAppDataTest().getGameObjects().get(0).getPosition().getY()-5)));
         } catch (IOException e1) {
             e1.printStackTrace();
         }

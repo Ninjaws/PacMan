@@ -22,7 +22,9 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -69,14 +71,11 @@ public class Game implements Serializable {
         return instance;
     }
 
-    public void reset() {
-        instance = new Game();
-        instance.setScreenDimensions(screenWidth, screenHeight);
-        instance.setMap(new Map("/game/maps/testMap.json"));
-        instance.setSounds();
-        instance.setGameObjects();
-        paused = false;
-        PacManFrame.setNextPanel(new StartUpScreen());
+    public void close() {
+        /*setGameObjects();
+        Game.instance.setPaused(true);
+        PacManFrame.getInstance().setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        PacManFrame.setNextPanel(new StartUpScreen());*/
     }
 
     public void setGameObjects() {
@@ -198,7 +197,6 @@ public class Game implements Serializable {
 
         java.util.Map<SoundPlayer.Sound, Clip> sounds = new HashMap<>();
 
-        sounds.put(SoundPlayer.Sound.MAIN_MENU, getClip("/game/sounds/testSound.wav", 0.5f));
         sounds.put(SoundPlayer.Sound.GAME_MUSIC, getClip("/game/sounds/pacman_startsound.wav", 0.1f));
         sounds.put(SoundPlayer.Sound.PACMAN_MOVEMENT, getClip("/game/sounds/pacman_eatingsound.wav", 0.1f));
 

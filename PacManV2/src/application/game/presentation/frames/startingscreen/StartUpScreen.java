@@ -66,7 +66,6 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
             for(int i = 0; i < 16; i++){
                 frames[i] = spritesheet.getSubimage(52 * (i % 4),52 * (i / 4), 52,52);
             }
-            Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).loop(Clip.LOOP_CONTINUOUSLY);
 
         }
         catch (Exception e) {
@@ -79,8 +78,6 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
         //adds menu items.
         menuTexts.add(new MenuText("Pac man", standardPacManFont.deriveFont(136f),
                 1));
-        menuTexts.add(new MenuText("Singleplayer", standardPacManFont.deriveFont(76f),
-                2));
 
 
         addMouseListener(this);
@@ -95,15 +92,6 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
      * Deletes AnimatedPacMans from the list animatedPacMans if the pacman is passed the screenborder.
      */
     private void ifPassedBorder(){
-        if(animatedPacMans.size() != 0){
-            Iterator<AnimatedPacMan> animatedPacManIterator = animatedPacMans.iterator();
-            while(animatedPacManIterator.hasNext()){
-                AnimatedPacMan animatedPacMan = animatedPacManIterator.next();
-                if(animatedPacMan.getPosition().getX() < -frames[0].getWidth() || animatedPacMan.getPosition().getX() > getWidth() + frames[0].getWidth()){
-                    animatedPacManIterator.remove();
-                }
-            }
-        }
     }
 
     /**
@@ -137,7 +125,6 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
         }
 
         if(n == 0){
-                Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).stop();
                 PacManFrame.setNextPanel(new GamePanel());
                 animatedPacMans.clear();
         }
@@ -187,15 +174,7 @@ public class StartUpScreen extends JPanel implements ActionListener, MouseListen
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        for(MenuText menuText : menuTexts) {
-            if(menuText.getBounds().contains(e.getPoint())) {
-                if(menuText.getText().equals("Singleplayer")) {
-                    Game.getInstance().getSoundPlayer().getClip(SoundPlayer.Sound.MAIN_MENU).stop();
-                    PacManFrame.setNextPanel(new GamePanel());
-                    animatedPacMans.clear();
-                }
-            }
-        }
+
     }
 
     @Override

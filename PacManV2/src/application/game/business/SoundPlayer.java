@@ -17,6 +17,6 @@ public class SoundPlayer {
 
 
     public enum Sound {
-        MAIN_MENU, GAME_MUSIC, PACMAN_MOVEMENT,
+        GAME_MUSIC, PACMAN_MOVEMENT,
     }
 }

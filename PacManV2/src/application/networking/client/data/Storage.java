@@ -4,6 +4,8 @@ import application.game.data.Game;
 import application.networking.client.networking.Receiver;
 import application.launcher.data.ApplicationData;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -20,6 +22,9 @@ public class Storage {
     private ObjectInputStream objectFromServer;
 
     private String username;
+
+    private boolean inGame = false;
+
     private ApplicationData applicationData;
     private application.testgame.data.ApplicationData appDataTest;
 
@@ -72,6 +77,14 @@ public class Storage {
         return objectFromServer;
     }
 
+
+    public boolean isInGame() {
+        return inGame;
+    }
+
+    public void setInGame(boolean inGame) {
+        this.inGame = inGame;
+    }
 
     public ApplicationData getApplicationData() {
         return applicationData;

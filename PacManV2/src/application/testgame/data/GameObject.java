@@ -34,4 +34,8 @@ public class GameObject implements Serializable {
     public void setPosition(Point2D position) {
         this.position = position;
     }
+
+    public Point2D getPosition() {
+        return position;
+    }
 }

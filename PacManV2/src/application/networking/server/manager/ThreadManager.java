@@ -4,12 +4,13 @@ import application.launcher.data.LobbyData;
 import application.launcher.data.Message;
 import application.launcher.data.UserData;
 import application.networking.packets.Packet;
-import application.networking.packets.lobby.PacketLobbyCreate;
-import application.networking.packets.lobby.PacketLobbyJoin;
-import application.networking.packets.lobby.PacketLobbyLeave;
-import application.networking.packets.lobby.PacketLobbyRemove;
-import application.networking.packets.message.PacketMessageSend;
-import application.networking.packets.player.PacketPlayerUpdate;
+import application.networking.packets.game.PacketGameStart;
+import application.networking.packets.launcher.lobby.PacketLobbyCreate;
+import application.networking.packets.launcher.lobby.PacketLobbyJoin;
+import application.networking.packets.launcher.lobby.PacketLobbyLeave;
+import application.networking.packets.launcher.lobby.PacketLobbyRemove;
+import application.networking.packets.launcher.message.PacketMessageSend;
+import application.networking.packets.game.player.PacketPlayerUpdate;
 import application.networking.packets.user.PacketUserAdd;
 import application.networking.packets.user.PacketUserRemove;
 import application.networking.server.ServerMain;
@@ -32,8 +33,9 @@ public class ThreadManager extends Thread {
             while (true) {
 
                 processPackets();
-                sendApplicationToClients();
-                sendAppDataTestToClients();
+                // sendApplicationToClients();
+                sendDataToClients();
+                //  sendAppDataTestToClients();
 
                 removeMarkedUsers();
 
@@ -57,18 +59,20 @@ public class ThreadManager extends Thread {
 
             while (!packets.isEmpty()) {
                 System.out.println("Processing packet: " + packets.peek());
-                chooseAction(user, packets.poll());
+                choosePacket(user, packets.poll());
             }
         }
     }
 
-    private void sendApplicationToClients() {
-        users.forEach(user -> user.sendApplication());
+    private void sendDataToClients() {
+        for (User user : users) {
+            if (user.isInGame())
+                user.sendGame();//sendGameToClient(User user);
+            else
+                user.sendLauncher();//sendApplicationToClient(User user);
+        }
     }
 
-    private void sendAppDataTestToClients() {
-        users.forEach(user -> user.sendAppDatTest());
-    }
 
     private void addNewUsers() {
         Iterator<User> it = tempUsers.iterator();
@@ -114,7 +118,7 @@ public class ThreadManager extends Thread {
 
     }
 
-    private void chooseAction(User user, Packet packet) {
+    private void choosePacket(User user, Packet packet) {
 
         //-----LAUNCHER------//
 
@@ -168,12 +172,15 @@ public class ThreadManager extends Thread {
 
         //----GAME-----//
 
-        else if (packet instanceof PacketPlayerUpdate){
+        else if (packet instanceof PacketGameStart) {
+            boolean inGame = ((PacketGameStart) packet).isInGame();
+            int gameId = ((PacketGameStart) packet).getGameId();
+            user.setInGame(inGame);
+        } else if (packet instanceof PacketPlayerUpdate) {
             String playerName = ((PacketPlayerUpdate) packet).getUserName();
             Point2D position = ((PacketPlayerUpdate) packet).getPosition();
             ServerMain.getAppDataTest().getGameObject(playerName).setPosition(position);
         }
-
 
 
     }

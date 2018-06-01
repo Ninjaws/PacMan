@@ -3,7 +3,7 @@ package application.launcher.presentation.panes;
 import application.networking.client.data.Storage;
 import application.launcher.presentation.listview.LobbyListViewItem;
 import com.jfoenix.controls.JFXButton;
-import application.networking.packets.lobby.PacketLobbyCreate;
+import application.networking.packets.launcher.lobby.PacketLobbyCreate;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

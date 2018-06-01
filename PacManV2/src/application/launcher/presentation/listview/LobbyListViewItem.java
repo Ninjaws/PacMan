@@ -4,7 +4,7 @@ import application.networking.client.data.Storage;
 import application.launcher.presentation.panes.LauncherPane;
 import application.launcher.presentation.panes.LobbyPane;
 import com.jfoenix.controls.JFXButton;
-import application.networking.packets.lobby.PacketLobbyJoin;
+import application.networking.packets.launcher.lobby.PacketLobbyJoin;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;

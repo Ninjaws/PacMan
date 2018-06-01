@@ -2,7 +2,7 @@ package application.testgame.presentation.frames;
 
 
 import application.networking.client.data.Storage;
-import application.networking.packets.player.PacketPlayerUpdate;
+import application.networking.packets.game.player.PacketPlayerUpdate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 
     public GamePanel() {
-
+        addKeyListener(this);
     }
 
     public void paintComponent(Graphics g) {
@@ -29,13 +29,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        repaint();
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
         try {
-            Storage.getInstance().getObjectToServer().writeObject(new PacketPlayerUpdate(Storage.getInstance().getUsername(),new Point2D.Double(200,200)));
+            Storage.getInstance().getObjectToServer().writeObject(new PacketPlayerUpdate(Storage.getInstance().getUsername(), new Point2D.Double(200, 200)));
         } catch (IOException e1) {
             e1.printStackTrace();
         }

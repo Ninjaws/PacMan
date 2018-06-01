@@ -1,11 +1,11 @@
 package application.launcher.presentation.panes;
 
-import application.game.Main;
 import application.networking.client.data.Storage;
 import application.launcher.data.Conversation;
 import application.launcher.data.Message;
-import application.networking.packets.lobby.PacketLobbyLeave;
-import application.networking.packets.message.PacketMessageSend;
+import application.networking.packets.game.PacketGameStart;
+import application.networking.packets.launcher.lobby.PacketLobbyLeave;
+import application.networking.packets.launcher.message.PacketMessageSend;
 import application.testgame.presentation.frames.GameFrame;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.Animation;
@@ -21,8 +21,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 
 public class LobbyPane extends VBox {
@@ -38,6 +36,16 @@ public class LobbyPane extends VBox {
 
         JFXButton launch = new JFXButton("Launch");
         launch.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+
+            try {
+
+                Storage.getInstance().setInGame(true);
+                Storage.getInstance().getObjectToServer().writeObject(new PacketGameStart(Storage.getInstance().isInGame(), 1));
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             GameFrame gameFrame = new GameFrame();
 

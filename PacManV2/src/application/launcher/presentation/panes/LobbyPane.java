@@ -37,23 +37,7 @@ public class LobbyPane extends VBox {
         JFXButton launch = new JFXButton("Launch");
         launch.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 
-            try {
 
-                Storage.getInstance().getObjectToServer().writeObject(new PacketGameStart(true, name));
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            //GameFrame gameFrame = new GameFrame();
-
-
-          //  Main main = new Main();
-
-       //     JFrame frame = new JFrame("PacMan");
-       //     frame.setSize(new Dimension(800, 800));
-       //     frame.setVisible(true);
         });
 
         JFXButton leave = new JFXButton("Leave");

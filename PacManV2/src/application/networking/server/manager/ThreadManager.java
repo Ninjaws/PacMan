@@ -36,7 +36,7 @@ public class ThreadManager extends Thread {
 
                 processPackets();
 
-                gameLogic();
+                //gameLogic();
 
                 sendDataToClients();
 
@@ -106,7 +106,8 @@ public class ThreadManager extends Thread {
 
             if (allPlayersReady) {
 
-                ServerMain.getGames().add(new ApplicationData(lobbyData.getLobbyName(),lobbyData.getPlayers().get(0), lobbyData.getPlayers().get(1)));
+                if (lobbyData.getPlayers().size() >= 2)
+                    ServerMain.getGames().add(new ApplicationData(lobbyData.getLobbyName(), lobbyData.getPlayers().get(0), lobbyData.getPlayers().get(1)));
 
                 //Start game
             }
@@ -147,11 +148,11 @@ public class ThreadManager extends Thread {
 
     }
 
-    private User getUser(String userName){
-       return users.stream()
-               .filter(user->user.getUserName().equals(userName))
-               .findFirst()
-               .orElse(null);
+    private User getUser(String userName) {
+        return users.stream()
+                .filter(user -> user.getUserName().equals(userName))
+                .findFirst()
+                .orElse(null);
     }
 
     private void choosePacket(User user, Packet packet) {
@@ -210,7 +211,7 @@ public class ThreadManager extends Thread {
 
         else if (packet instanceof PacketGameStart) {
             boolean inGame = ((PacketGameStart) packet).isInGame();
-          //  int gameId = ((PacketGameStart) packet).getGameId();
+            //  int gameId = ((PacketGameStart) packet).getGameId();
             user.setInGame(inGame);
         } else if (packet instanceof PacketPlayerUpdate) {
             String playerName = ((PacketPlayerUpdate) packet).getUserName();

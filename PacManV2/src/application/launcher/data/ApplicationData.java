@@ -34,13 +34,12 @@ public class ApplicationData implements Serializable {
     }
 
     public boolean userExists(String userName) {
+        UserData newUserData = new UserData(userName);
         for(UserData userData : users){
-
+            if(newUserData.compare(newUserData,userData) == 0)
+                return true;
         }
-
-
-
-        return users.stream().anyMatch(user -> user.getUserName().equals(userName));
+        return false;
     }
 
     public boolean isThereAPacMan(String lobbyName, String name){

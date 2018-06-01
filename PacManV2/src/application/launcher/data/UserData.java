@@ -3,7 +3,8 @@ package application.launcher.data;
 import java.io.Serializable;
 import java.util.Comparator;
 
-public class UserData implements Serializable {
+
+public class UserData implements Serializable, Comparator<UserData>{
 
     private final String userName;
     private boolean isPacMan = false;
@@ -40,5 +41,10 @@ public class UserData implements Serializable {
                 ", isPacMan=" + isPacMan +
                 ", isReady=" + isReady +
                 '}';
+    }
+
+    @Override
+    public int compare(UserData o1, UserData o2) {
+        return o1.userName.compareTo(o2.userName);
     }
 }

@@ -31,7 +31,19 @@
     -fx-text-fill: whitesmoke;
     -fx-font-family: monospace;
     -fx-font-size: 20px;
+    -fx-min-width: 200px;
 }
+
+#solo-button {
+    -fx-background-color: orange;
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: monospace;
+    -fx-font-size: 20px;
+    -fx-min-width: 200px;
+
+}
+
+
 
 .list-view {
     -fx-background: #23272a;

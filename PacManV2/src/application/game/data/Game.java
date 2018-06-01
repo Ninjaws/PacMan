@@ -69,7 +69,6 @@ public class Game {
     }
 
     public void reset() {
-        System.out.println();
         instance = new Game();
         instance.setScreenDimensions(screenWidth, screenHeight);
         instance.setMap(new Map("/game/maps/testMap.json"));
@@ -218,7 +217,6 @@ public class Game {
 
         } catch (Exception e) {
             e.printStackTrace();
-
             return null;
         }
 

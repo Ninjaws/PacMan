@@ -8,6 +8,10 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
+        launchGame();
+    }
+
+    public static void launchGame(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {

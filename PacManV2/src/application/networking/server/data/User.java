@@ -1,12 +1,14 @@
 package application.networking.server.data;
 
+import application.game.data.Game;
 import application.networking.packets.Packet;
+import application.networking.packets.game.PacketGame;
+import application.networking.packets.game.player.PacketPlayerUpdate;
+import application.networking.packets.launcher.PacketLauncher;
 import application.networking.server.ServerMain;
 import application.networking.server.listeners.ClientThreadReceiver;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -16,10 +18,14 @@ public class User {
     private Socket socket;
     private String userName;
 
+    private boolean inGame = false;
+
+
     private ClientThreadReceiver receiver;
 
     ObjectOutputStream objectToClient;
     ObjectInputStream objectFromClient;
+
 
     private Queue<Packet> packets = new LinkedList<>();
 
@@ -36,11 +42,23 @@ public class User {
         receiver.start();
     }
 
-    public void sendApplication() {
+    public void sendLauncher() {
+        try {
+
+
+            objectToClient.reset();
+            objectToClient.writeObject(new PacketLauncher(ServerMain.getApplicationData()));
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendGame() {
         try {
             objectToClient.reset();
-            objectToClient.writeObject(ServerMain.getApplicationData());
-
+            objectToClient.writeObject(new PacketGame(ServerMain.getGame(ServerMain.getApplicationData().getLauncherData().getLobbyThatHasUser(userName).getLobbyName())));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,6 +76,15 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public boolean isInGame() {
+        return inGame;
+    }
+
+    public void setInGame(boolean inGame) {
+        this.inGame = inGame;
+    }
+
 
     public Queue<Packet> getPackets() {
         return packets;

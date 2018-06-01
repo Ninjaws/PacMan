@@ -25,7 +25,7 @@ public class PacManFrame extends JFrame {
      */
     private PacManFrame() {
         super("PacMan");
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         buildPanel();
 

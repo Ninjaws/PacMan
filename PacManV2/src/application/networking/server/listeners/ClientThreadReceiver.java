@@ -37,6 +37,7 @@ public class ClientThreadReceiver extends Thread {
             } catch (Exception e) {
                 try {
                     socket.close();
+                    user.setMarkedForDeletion(true);
                 } catch (IOException e1) {
                 }
                 break;

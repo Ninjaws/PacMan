@@ -7,7 +7,8 @@ import application.game.tiled.Map;
 import javax.swing.*;
 
 public class Main {
-    public static void main(String[] args) {
+
+    public Main(){
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
@@ -22,4 +23,20 @@ public class Main {
 
         PacManFrame pacManFrame = PacManFrame.getInstance();
     }
+/*
+    public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        int screenWidth = 900;
+        int screenHeight = 900;
+        Game.getInstance().setScreenDimensions(screenWidth, screenHeight);
+        Game.getInstance().setMap(new Map("/game/maps/testMap.json"));
+        Game.getInstance().setSounds();
+        Game.getInstance().setGameObjects();
+
+        PacManFrame pacManFrame = PacManFrame.getInstance();
+    }*/
 }

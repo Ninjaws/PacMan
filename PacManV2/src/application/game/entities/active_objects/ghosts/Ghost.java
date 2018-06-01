@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,9 +19,9 @@ import java.util.Map;
  * @author Jordy van Raalte
  */
 
-public abstract class Ghost extends ActiveGameObject implements ActionListener {
+public abstract class Ghost extends ActiveGameObject implements ActionListener, Serializable {
 
-    private BufferedImage deadImage;
+    private transient BufferedImage deadImage;
 
     protected Target target;
     protected HashMap<Integer, Double> scatterdLevels = new HashMap<>();

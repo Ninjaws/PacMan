@@ -1,8 +1,11 @@
 package application.networking.client.data;
 
+import application.game.data.Game;
 import application.networking.client.networking.Receiver;
 import application.launcher.data.ApplicationData;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -19,7 +22,11 @@ public class Storage {
     private ObjectInputStream objectFromServer;
 
     private String username;
+
+    private boolean inGame = false;
+
     private ApplicationData applicationData;
+    private application.testgame.data.ApplicationData appDataTest;
 
     private Receiver receiver;
 
@@ -34,6 +41,7 @@ public class Storage {
     private Storage() {
 
         applicationData = new ApplicationData();
+        //appDataTest = new application.testgame.data.ApplicationData();
 
         try {
             socket = new Socket("localhost", 9595); //145.49.52.133
@@ -70,6 +78,14 @@ public class Storage {
     }
 
 
+    public boolean isInGame() {
+        return inGame;
+    }
+
+    public void setInGame(boolean inGame) {
+        this.inGame = inGame;
+    }
+
     public ApplicationData getApplicationData() {
         return applicationData;
     }
@@ -78,6 +94,15 @@ public class Storage {
 
         this.applicationData = applicationData;
     }
+
+    public application.testgame.data.ApplicationData getAppDataTest() {
+        return appDataTest;
+    }
+
+    public void setAppDataTest(application.testgame.data.ApplicationData appDataTest) {
+        this.appDataTest = appDataTest;
+    }
+
 
     public String getUsername() {
         return username;

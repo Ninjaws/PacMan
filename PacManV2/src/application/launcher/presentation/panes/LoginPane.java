@@ -1,8 +1,8 @@
 package application.launcher.presentation.panes;
 
 import application.networking.client.data.Storage;
-import com.jfoenix.controls.JFXButton;
 import application.networking.packets.user.PacketUserAdd;
+import com.jfoenix.controls.JFXButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -34,8 +34,6 @@ public class LoginPane extends HBox {
 
                     Storage.getInstance().setUsername(userNameTextField.getText());
 
-                    //Packet packet = new PacketUserAdd(userNameTextField.getText());
-                    //System.out.println(packet);
                     Storage.getInstance().getObjectToServer().writeObject(new PacketUserAdd(userNameTextField.getText()));
 
                     LauncherPane.setNewCenter(new LobbiesPane());

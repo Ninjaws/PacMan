@@ -4,16 +4,21 @@ import application.launcher.data.LobbyData;
 import application.launcher.data.Message;
 import application.launcher.data.UserData;
 import application.networking.packets.Packet;
-import application.networking.packets.lobby.PacketLobbyCreate;
-import application.networking.packets.lobby.PacketLobbyJoin;
-import application.networking.packets.lobby.PacketLobbyLeave;
-import application.networking.packets.lobby.PacketLobbyRemove;
-import application.networking.packets.message.PacketMessageSend;
+import application.networking.packets.game.PacketGameStart;
+import application.networking.packets.launcher.lobby.PacketLobbyCreate;
+import application.networking.packets.launcher.lobby.PacketLobbyJoin;
+import application.networking.packets.launcher.lobby.PacketLobbyLeave;
+import application.networking.packets.launcher.lobby.PacketLobbyRemove;
+import application.networking.packets.launcher.message.PacketMessageSend;
+import application.networking.packets.game.player.PacketPlayerUpdate;
 import application.networking.packets.user.PacketUserAdd;
 import application.networking.packets.user.PacketUserRemove;
 import application.networking.server.ServerMain;
 import application.networking.server.data.User;
+import application.testgame.data.ApplicationData;
 
+import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.*;
 
 public class ThreadManager extends Thread {
@@ -30,7 +35,10 @@ public class ThreadManager extends Thread {
             while (true) {
 
                 processPackets();
-                sendApplicationToClients();
+
+                //gameLogic();
+
+                sendDataToClients();
 
                 removeMarkedUsers();
 
@@ -54,28 +62,26 @@ public class ThreadManager extends Thread {
 
             while (!packets.isEmpty()) {
                 System.out.println("Processing packet: " + packets.peek());
-                chooseAction(user,packets.poll());
+                choosePacket(user, packets.poll());
             }
         }
     }
 
-    private void sendApplicationToClients() {
-        users.forEach(user -> user.sendApplication());
+    private void sendDataToClients() {
+        for (User user : users) {
+
+            if (user.isMarkedForDeletion())
+                continue;
+
+            if (user.isInGame())
+                user.sendGame();//sendGameToClient(User user);
+            else
+                user.sendLauncher();//sendApplicationToClient(User user);
+        }
     }
 
 
     private void addNewUsers() {
-      //  tempUsers.forEach(user -> users.add(user));
-      //  System.out.println(tempUsers.size());
-        /*
-        for (User tempUser : tempUsers) {
-            System.out.println(tempUsers.size());
-            System.out.println("tempUser: " + tempUser);
-            users.add(tempUser);
-            System.out.println("New user: " + tempUser);
-        }
-        */
-
         Iterator<User> it = tempUsers.iterator();
         while (it.hasNext()) {
             User user = it.next();
@@ -84,9 +90,29 @@ public class ThreadManager extends Thread {
             System.out.println("New user: " + user);
             it.remove();
         }
+    }
 
+    private void gameLogic() {
+        for (LobbyData lobbyData : ServerMain.getApplicationData().getLauncherData().getLobbies()) {
+            boolean allPlayersReady = true;
+            for (String userName : lobbyData.getPlayers()) {
 
-      //  tempUsers.clear();
+                if (!getUser(userName).isInGame()) {
+                    allPlayersReady = false;
+                    break;
+                }
+
+            }
+
+            if (allPlayersReady) {
+
+                if (lobbyData.getPlayers().size() >= 2)
+                    ServerMain.getGames().add(new ApplicationData(lobbyData.getLobbyName(), lobbyData.getPlayers().get(0), lobbyData.getPlayers().get(1)));
+
+                //Start game
+            }
+
+        }
     }
 
     private void removeMarkedUsers() {
@@ -102,7 +128,7 @@ public class ThreadManager extends Thread {
         }
     }
 
-    private void removeUser(User user){
+    private void removeUser(User user) {
 
         //In case the user quits the program while still in a lobby
         //This will make sure the player that left is not occupying a spot
@@ -116,13 +142,22 @@ public class ThreadManager extends Thread {
 
         user.getReceiver().setAlive(false);
 
-        while(user.getReceiver().isAlive());
+        while (user.getReceiver().isAlive()) ;
 
         System.out.println("Dead");
 
     }
 
-    private void chooseAction(User user, Packet packet) {
+    private User getUser(String userName) {
+        return users.stream()
+                .filter(user -> user.getUserName().equals(userName))
+                .findFirst()
+                .orElse(null);
+    }
+
+    private void choosePacket(User user, Packet packet) {
+
+        //-----LAUNCHER------//
 
         //User Added
         if (packet instanceof PacketUserAdd) {
@@ -135,7 +170,6 @@ public class ThreadManager extends Thread {
 
             //Useless now
             String userToRemove = ((PacketUserRemove) packet).getUserName();
-
 
 
             //User user = users.stream().filter(user1 -> user1.getUserName().equals(userToRemove)).findFirst().orElse(null);
@@ -172,6 +206,20 @@ public class ThreadManager extends Thread {
             Message message = ((PacketMessageSend) packet).getMessage();
             ServerMain.getApplicationData().getLauncherData().getLobby(lobby).addMessage(message);
         }
+
+        //----GAME-----//
+
+        else if (packet instanceof PacketGameStart) {
+            boolean inGame = ((PacketGameStart) packet).isInGame();
+            //  int gameId = ((PacketGameStart) packet).getGameId();
+            user.setInGame(inGame);
+        } else if (packet instanceof PacketPlayerUpdate) {
+            String playerName = ((PacketPlayerUpdate) packet).getUserName();
+            Point2D position = ((PacketPlayerUpdate) packet).getPosition();
+            ServerMain.getAppDataTest().getGameObject("1").setPosition(position);
+        }
+
+
     }
 
 

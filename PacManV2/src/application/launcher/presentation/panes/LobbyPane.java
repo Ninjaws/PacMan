@@ -46,6 +46,7 @@ public class LobbyPane extends VBox {
     private TargetDataLine targetDataLine;
     private AudioInputStream audioInputStream;
     private SourceDataLine sourceDataLine;
+    private boolean micIsNotPossible = false;
 
 
     public LobbyPane(String name) {
@@ -164,86 +165,94 @@ public class LobbyPane extends VBox {
 
     //works
     private void captureAudio() {
-        try{
-            Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();
-            System.out.println("Available mixers: ");
-            for(int cnt = 0; cnt < mixerInfo.length; cnt++){
-                System.out.println(mixerInfo[cnt].getName());
+        if (!micIsNotPossible) {
+            try {
+                Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();
+                System.out.println("Available mixers: ");
+                for (int cnt = 0; cnt < mixerInfo.length; cnt++) {
+                    System.out.println(mixerInfo[cnt].getName());
+                }
+
+                audioFormat = getAudioFormat();
+                if (!isStarted) {
+                    isStarted = true;
+                    Mixer mixer = AudioSystem.getMixer(mixerInfo[3]);
+                    DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
+                    targetDataLine = (TargetDataLine) mixer.getLine(dataLineInfo);
+                }
+                targetDataLine.open(audioFormat);
+                targetDataLine.start();
+                CaptureThread captureThread = new CaptureThread();
+                captureThread.start();
+
+            } catch (Exception e) {
+                try {
+                    Storage.getInstance().getObjectToServer().writeObject(new PacketMessageSend(name, new Message("SERVER", "MIC FOR USER: " + Storage.getInstance().getUsername() + " IS NOT AVAILABLE")));
+                    micIsNotPossible = true;
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+
             }
-
-            audioFormat = getAudioFormat();
-            if(!isStarted){
-                isStarted = true;
-                Mixer mixer = AudioSystem.getMixer(mixerInfo[3]);
-                DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
-                targetDataLine = (TargetDataLine) mixer.getLine(dataLineInfo);
-            }
-
-
-            targetDataLine.open(audioFormat);
-            targetDataLine.start();
-            CaptureThread captureThread = new CaptureThread();
-            captureThread.start();
-        }
-        catch (Exception e){
-            e.printStackTrace();
         }
     }
 
-    class CaptureThread extends Thread{
-        byte tempBuffer[] = new byte[10000];
-        public void run(){
-            byteArrayOutputStream = new ByteArrayOutputStream();
-            try{
-                while (!stopCapture) {
-                    System.out.println("capturing");
-                    int cnt = targetDataLine.read(tempBuffer, 0, tempBuffer.length);
-                    if (cnt > 0) {
-                        byteArrayOutputStream.write(tempBuffer, 0, cnt);
+        class CaptureThread extends Thread{
+            byte tempBuffer[] = new byte[10000];
+            public void run(){
+                byteArrayOutputStream = new ByteArrayOutputStream();
+                try{
+                    while (!stopCapture) {
+                        System.out.println("capturing");
+                        int cnt = targetDataLine.read(tempBuffer, 0, tempBuffer.length);
+                        if (cnt > 0) {
+                            byteArrayOutputStream.write(tempBuffer, 0, cnt);
+                        }
                     }
+                    Storage.getInstance().getObjectToServer().writeObject(new PacketLobbySound(Storage.getInstance().getUsername(),name, byteArrayOutputStream.toByteArray()));
+                    byteArrayOutputStream.close();
                 }
-                Storage.getInstance().getObjectToServer().writeObject(new PacketLobbySound(Storage.getInstance().getUsername(),name, byteArrayOutputStream.toByteArray()));
-                byteArrayOutputStream.close();
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
         }
     }
 
     private void playAudio() {
-        try{
-            new Thread(() ->{
-                while (stopCapture){
-                    try {
-                        Thread.sleep(1000);
-                        AudioData audioData = Storage.getInstance().getApplicationData().getLauncherData().getLobby(name).getAudioData();
-                        for (byte[] bytes : audioData.getAudioMap().keySet()) {
-                            if(!audioData.getAudioMap().get(bytes).equals(Storage.getInstance().getUsername())){
-                                ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+        if(!micIsNotPossible){
+            try{
+                new Thread(() ->{
+                    while (stopCapture){
+                        try {
+                            Thread.sleep(1000);
+                            AudioData audioData = Storage.getInstance().getApplicationData().getLauncherData().getLobby(name).getAudioData();
+                            for (byte[] bytes : audioData.getAudioMap().keySet()) {
+                                if(!audioData.getAudioMap().get(bytes).equals(Storage.getInstance().getUsername())){
+                                    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
 
-                                audioInputStream = new AudioInputStream(byteArrayInputStream, audioFormat, bytes.length / audioFormat.getFrameSize());
-                                AudioFormat audioFormat = getAudioFormat();
-                                //is going to play the data
-                                DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, audioFormat);
-                                sourceDataLine = (SourceDataLine) AudioSystem.getLine(dataLineInfo);
-                                sourceDataLine.open(audioFormat);
-                                sourceDataLine.start();
+                                    audioInputStream = new AudioInputStream(byteArrayInputStream, audioFormat, bytes.length / audioFormat.getFrameSize());
+                                    AudioFormat audioFormat = getAudioFormat();
+                                    //is going to play the data
+                                    DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, audioFormat);
+                                    sourceDataLine = (SourceDataLine) AudioSystem.getLine(dataLineInfo);
+                                    sourceDataLine.open(audioFormat);
+                                    sourceDataLine.start();
 
-                                Storage.getInstance().getObjectToServer().writeObject(new PacketSoundPlayed(name));
-                                PlayThread playThread = new PlayThread();
-                                playThread.start();
+                                    Storage.getInstance().getObjectToServer().writeObject(new PacketSoundPlayed(name));
+                                    PlayThread playThread = new PlayThread();
+                                    playThread.start();
+                                }
                             }
                         }
+                        catch(InterruptedException | LineUnavailableException | IOException e){
+                            e.printStackTrace();
+                        }
                     }
-                    catch(InterruptedException | LineUnavailableException | IOException e){
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-        }
-        catch (Exception e){
-            e.printStackTrace();
+                }).start();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

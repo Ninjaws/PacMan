@@ -1,6 +1,7 @@
 package application.launcher.presentation.panes;
 
 import application.game.Main;
+import application.game.presentation.frames.PacManFrame;
 import application.networking.client.data.Storage;
 import application.networking.packets.user.PacketUserAdd;
 import com.jfoenix.controls.JFXButton;
@@ -50,7 +51,7 @@ public class LoginPane extends HBox {
 
         JFXButton solo = new JFXButton("Solo Game");
         solo.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-           // Main.launchGame();
+            PacManFrame.setInstance(null);
             Main main = new Main();
         });
         solo.setId("solo-button");

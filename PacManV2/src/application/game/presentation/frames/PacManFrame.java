@@ -88,4 +88,8 @@ public class PacManFrame extends JFrame {
             return instance.getSize();
         }
     }
+
+    public static void setInstance(PacManFrame instance) {
+        PacManFrame.instance = instance;
+    }
 }

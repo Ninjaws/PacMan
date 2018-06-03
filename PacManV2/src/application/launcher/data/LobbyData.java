@@ -8,6 +8,7 @@ public class LobbyData implements Serializable {
     private String lobbyName;
     private List<String> userNames;
     private Conversation conversation;
+    private AudioData audioData = new AudioData();
 
     public LobbyData(String lobbyName) {
         this.lobbyName = lobbyName;
@@ -41,5 +42,17 @@ public class LobbyData implements Serializable {
 
     public List<String> getPlayers(){
         return userNames;
+    }
+
+    public List<String> getUserNames() {
+        return userNames;
+    }
+
+    public AudioData getAudioData() {
+        return audioData;
+    }
+
+    public void setAudioData(AudioData audioData) {
+        this.audioData = audioData;
     }
 }

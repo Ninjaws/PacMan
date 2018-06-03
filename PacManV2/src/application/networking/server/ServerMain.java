@@ -30,9 +30,7 @@ public class ServerMain {
                 threadManager.addUser(new User(socket));
 
                 count++;
-                System.out.println("Count: " +count);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -72,10 +72,8 @@ public class Game implements Serializable {
     }
 
     public void close() {
-        /*setGameObjects();
-        Game.instance.setPaused(true);
-        PacManFrame.getInstance().setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        PacManFrame.setNextPanel(new StartUpScreen());*/
+        Game.setInstance(null);
+        PacManFrame.setInstance(null);
     }
 
     public void setGameObjects() {
@@ -358,5 +356,9 @@ public class Game implements Serializable {
 
     public List<Target> getScatterCorners() {
         return getObjectsLayer().getScatterCorners();
+    }
+
+    public static void setInstance(Game instance) {
+        Game.instance = instance;
     }
 }

@@ -1,14 +1,12 @@
 package application.networking.server.manager;
 
+import application.launcher.data.AudioData;
 import application.launcher.data.LobbyData;
 import application.launcher.data.Message;
 import application.launcher.data.UserData;
 import application.networking.packets.Packet;
 import application.networking.packets.game.PacketGameStart;
-import application.networking.packets.launcher.lobby.PacketLobbyCreate;
-import application.networking.packets.launcher.lobby.PacketLobbyJoin;
-import application.networking.packets.launcher.lobby.PacketLobbyLeave;
-import application.networking.packets.launcher.lobby.PacketLobbyRemove;
+import application.networking.packets.launcher.lobby.*;
 import application.networking.packets.launcher.message.PacketMessageSend;
 import application.networking.packets.game.player.PacketPlayerUpdate;
 import application.networking.packets.user.PacketIsPacMan;
@@ -18,8 +16,10 @@ import application.networking.packets.user.PacketUserRemove;
 import application.networking.server.ServerMain;
 import application.networking.server.data.User;
 import application.testgame.data.ApplicationData;
+import com.sun.security.ntlm.Server;
 
 import java.awt.geom.Point2D;
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.*;
 
@@ -218,9 +218,17 @@ public class ThreadManager extends Thread {
         else if(packet instanceof PacketIsReady) {
             String userName = ((PacketIsReady) packet).getUserName();
             boolean isReady = ((PacketIsReady) packet).isReady();
-            System.out.println("username: " + userName + "\n" + "isReady: " + isReady + "\n") ;
             ServerMain.getApplicationData().getUser(userName).setReady(isReady);
-            System.out.println(ServerMain.getApplicationData().getUser(userName));
+        }
+        else if(packet instanceof PacketLobbySound){
+            String lobbyName = ((PacketLobbySound) packet).getLobbyName();
+            String name = ((PacketLobbySound)packet).getUser();
+            byte audioBytes[] = ((PacketLobbySound) packet).getAudioBytes();
+            ServerMain.getApplicationData().getLauncherData().getLobby(lobbyName).getAudioData().addAudioBytes(name, audioBytes);
+        }
+        else if(packet instanceof PacketSoundPlayed){
+            String lobbyName = ((PacketSoundPlayed)packet).getLobbyName();
+            ServerMain.getApplicationData().getLauncherData().getLobby(lobbyName).getAudioData().removeAudioBytes();
         }
 
         //----GAME-----//

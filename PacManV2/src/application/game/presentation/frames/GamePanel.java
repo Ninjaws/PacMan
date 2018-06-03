@@ -137,7 +137,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    Game.getInstance().close();
+                    game.close();
                     ghostHasWon = false;
                     repaint();
                 }

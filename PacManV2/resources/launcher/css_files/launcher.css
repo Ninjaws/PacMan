@@ -40,7 +40,6 @@
     -fx-font-family: monospace;
     -fx-font-size: 20px;
     -fx-min-width: 200px;
-
 }
 
 
@@ -178,4 +177,26 @@
     -fx-min-width: 25px;
     -fx-max-height: 25px;
     -fx-min-height: 25px;
+
+}
+
+.record-button-green {
+    -fx-text-alignment: center;
+    -fx-background-color: green;
+    -fx-max-width: 195px;
+    -fx-min-width: 195px;
+    -fx-max-height: 25px;
+    -fx-min-height: 25px;
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: monospace;
+}
+.record-button-red {
+    -fx-text-alignment: center;
+    -fx-background-color: red;
+    -fx-max-width: 195px;
+    -fx-min-width: 195px;
+    -fx-max-height: 25px;
+    -fx-min-height: 25px;
+    -fx-text-fill: whitesmoke;
+    -fx-font-family: monospace;
 }

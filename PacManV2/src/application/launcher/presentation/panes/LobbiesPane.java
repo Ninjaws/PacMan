@@ -112,7 +112,6 @@ public class LobbiesPane extends HBox {
                 dialog.show();
                 createIsPressed = true;
             }
-
         });
         buttons.getChildren().addAll(create);
         this.getChildren().addAll(sessions, buttons);
